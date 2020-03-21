@@ -1,13 +1,19 @@
 # 2019-2020-ps6-rendu-cri-staline
-#PolyQuiz
+## PolyQuiz
+#### Groupe
+   "Cri-Staline"
+#### Auteurs 
+   -   Kévin Ushaka Kubwawe
+   -   Alexis Merienne
+   -   Alexandre Ngai
+   -   Sana DIBE  
+#### Structure du projet
 
-#2019 - 2020
+#### Descrption du projet
+
+#### Outils utilisés
 
 
-#Auteurs
 
-Kévin Ushaka Kubwawe
-Alexis Merienne
-Alexandre Ngai
-Sana Dibe
+
 
