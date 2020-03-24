@@ -37,6 +37,7 @@ router.post('/', (req, res) => {
   try {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
     const answer = Answer.create({ ...req.body, questionId: question.id })
+    question.answers.push(answer)
     res.status(201).json(answer)
   } catch (err) {
     if (err.name === 'NotFoundError') {

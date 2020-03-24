@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-const { Quiz, Question } = require('../../../models')
+const { Quiz, Question, Answer } = require('../../../models')
 const manageAllErrors = require('../../../utils/routes/error-management')
 const AnswersRouter = require('./answers')
 const { filterQuestionsFromQuizz, getQuestionFromQuiz } = require('./manager')
@@ -26,21 +26,31 @@ router.get('/:questionId', (req, res) => {
   }
 })
 
+router.get('/', (req, res) => {
+  try {
+    const question = filterQuestionsFromQuizz(req.params.quizId)
+    res.status(200).json(question)
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
 router.post('/', (req, res) => {
   try {
     // Check if quizId exists, if not it will throw a NotFoundError
-    const quiz=Quiz.getById(req.params.quizId)
+    const quiz = Quiz.getById(req.params.quizId)
     const quizId = parseInt(req.params.quizId, 10)
-    const questionBody={ label: req.body.label, quizId }
-    const question = Question.create(questionBody)
+    let answers = []
+    const questionBody = { label: req.body.label, quizId, answers }
+    let question = Question.create(questionBody)
+    quiz.questions.push(question)
     // If answers have been provided in the request, we create the answer and update the response to send.
-     if (req.body.answers && req.body.answers.length > 0) {
-      const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }))
-      question = {...question, answers}
-    } 
+    if (req.body.answers && req.body.answers.length > 0) {
+      answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }))
+      question = { ...question, answers }
+    }
     res.status(201).json(question)
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })

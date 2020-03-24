@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    const quiz = Quiz.create({ ...req.body })
+    const questions = []
+    const quiz = Quiz.create({ ...req.body, questions })
     res.status(201).json(quiz)
   } catch (err) {
     if (err.name === 'ValidationError') {

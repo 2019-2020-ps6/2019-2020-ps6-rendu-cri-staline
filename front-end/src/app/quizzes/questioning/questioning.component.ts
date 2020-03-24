@@ -16,16 +16,20 @@ export class QuestioningComponent implements OnInit {
   public quiz: Quiz ;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
-    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+    this.quizService.quizSelected$.subscribe((quiz) => {
+      this.quiz = quiz;
+      console.log(this.quiz);
+      this.questions = this.quiz.questions;
+      console.log(this.questions);
+      this.currentQuestion = this.questions[0];
+      console.log(this.currentQuestion);
+    });
+
   }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     this.quizService.setSelectedQuiz(id);
-
-    this.currentQuestion = this.questions[0];
-
   }
 
   answerSelected(answer: Answer) {
