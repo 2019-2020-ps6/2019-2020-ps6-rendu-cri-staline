@@ -8,21 +8,10 @@
     <div class="col-md-12 d-flex justify-content-center">Information..</div>
   </div>
   <div class="row">
-    <div class="col-md-12 d-flex justify-content-center">Question..</div>
+    <div class="col-md-12 d-flex justify-content-center">{{quiz.label}}</div>
   </div>
-  <div class="row">
-    <div class="col-md-4 d-flex justify-content-center">Checkbox..</div>
-    <div class="col-md-8 d-flex justify-content-start">Réponse 1..</div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 d-flex justify-content-center">Checkbox..</div>
-    <div class="col-md-8 d-flex justify-content-start">Réponse 1..</div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 d-flex justify-content-center">Checkbox..</div>
-    <div class="col-md-8 d-flex justify-content-start">Réponse 1..</div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 d-flex justify-content-center">Checkbox..</div>
-    <div class="col-md-8 d-flex justify-content-start">Réponse 1..</div>
-  </div>
+  <div class="answer" *ngFor="let answer of currentQuestion.answers">
+    <!--Inputs & Output allow communication between parent & child components.-->
+    <!--More information: https://angular.io/guide/component-interaction-->
+    <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>
+</div>

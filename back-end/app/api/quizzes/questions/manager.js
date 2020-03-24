@@ -1,5 +1,5 @@
 const { Quiz, Question } = require('../../../models')
-const { NotFoundError } = require('../../../utils/errors/not-found-error')
+const  NotFoundError  = require('../../../utils/errors/not-found-error')
 /**
  * Questions Manager.
  * This file contains all the logic needed to by the question routes.
