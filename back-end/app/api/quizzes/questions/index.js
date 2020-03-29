@@ -38,16 +38,18 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   try {
     // Check if quizId exists, if not it will throw a NotFoundError
-    const quiz = Quiz.getById(req.params.quizId)
     const quizId = parseInt(req.params.quizId, 10)
-    let answers = []
-    const questionBody = { label: req.body.label, quizId, answers }
+    const questionBody = { label: req.body.label, quizId }
     let question = Question.create(questionBody)
-    quiz.questions.push(question)
     // If answers have been provided in the request, we create the answer and update the response to send.
     if (req.body.answers && req.body.answers.length > 0) {
-      answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }))
+      const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }))
       question = { ...question, answers }
+    }
+    // If image have been provided in the request, we add the image and update the response to send.
+    if (req.body.image && req.body.image.length > 0) {
+      const { image } = req.body
+      question = { ...question, image }
     }
     res.status(201).json(question)
   } catch (err) {
@@ -70,6 +72,20 @@ router.delete('/:questionId', (req, res) => {
     // Check if the question id exists & if the question has the same quizId as the one provided in the url.
     getQuestionFromQuiz(req.params.quizId, req.params.questionId)
     Question.delete(req.params.questionId)
+    res.status(204).end()
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
+router.delete('/', (req, res) => {
+  try {
+    // Check if the question id exists & if the question has the same quizId as the one provided in the url.
+    const questions = filterQuestionsFromQuizz(req.params.quizId)
+    Question.delete(req.params.questionId)
+    questions.array.forEach((element) => {
+      Question.delete(element)
+    })
     res.status(204).end()
   } catch (err) {
     manageAllErrors(res, err)

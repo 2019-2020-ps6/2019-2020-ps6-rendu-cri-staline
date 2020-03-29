@@ -1,17 +1,34 @@
 <div class="row">
-    <div class="col-md-12 ">Button..</div>
+    <div class="col-md-12 ">
+      <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+      (click)="quitQuiz()" routerLink="/quiz-list">Quitter</a>
+    </div>
   </div>
   <div class="row">
-    <div class="col-md-12  d-flex justify-content-center">Image..</div>
+    <ng-container *ngIf="this.questions[currentQuestion].image.length>0">
+      <div class="col-md-12  d-flex justify-content-center text-center">
+        <img src="assets/images/{{this.questions[currentQuestion].image}}" alt="..." class="img-thumbnail">
+      </div>
+    </ng-container>
   </div>
   <div class="row">
-    <div class="col-md-12 d-flex justify-content-center">Information..</div>
+    <div class="col-md-12 d-flex justify-content-center text-center">Choisir une ou plusieurs réponses 
+      en cochant la ou les cases et valide ta réponse avec Valider.</div>
   </div>
   <div class="row">
-    <div class="col-md-12 d-flex justify-content-center">{{currentQuestion.label}}</div>
+    <div class="col-md-12 d-flex justify-content-center text-question">{{this.questions[currentQuestion].label}}</div>
   </div>
-  <div class="answer" *ngFor="let answer of currentQuestion.answers">
+  <div >
+    <div class="answer" *ngFor="let answer of this.questions[currentQuestion].answers">
     <!--Inputs & Output allow communication between parent & child components.-->
     <!--More information: https://angular.io/guide/component-interaction-->
     <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>
+  </div>
+  
+</div>
+<div class="row justify-content-end">
+  <div class="col-md-2 ">
+    <a  class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+    (click)="validAnswer()">Valider</a>
+  </div>
 </div>

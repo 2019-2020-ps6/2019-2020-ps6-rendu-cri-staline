@@ -35,9 +35,7 @@ router.get('/:answerId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    const answer = Answer.create({ ...req.body, questionId: question.id })
-    question.answers.push(answer)
+    const answer = Answer.create({ ...req.body, questionId: req.params.question.id })
     res.status(201).json(answer)
   } catch (err) {
     if (err.name === 'NotFoundError') {
@@ -70,6 +68,22 @@ router.delete('/:answerId', (req, res) => {
   try {
     getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId)
     Answer.delete(req.params.answerId)
+    res.status(204).end()
+  } catch (err) {
+    if (err.name === 'NotFoundError') {
+      res.status(404).end()
+    } else {
+      res.status(500).json(err)
+    }
+  }
+})
+
+router.delete('/', (req, res) => {
+  try {
+    const answers = filterAnswersFromQuestion(req.params.questionId)
+    answers.array.forEach((answer) => {
+      Answer.delete(answer)
+    })
     res.status(204).end()
   } catch (err) {
     if (err.name === 'NotFoundError') {

@@ -29,6 +29,8 @@ export class QuizService {
     = new BehaviorSubject(this.quizzes);
 
   public quizSelected$: Subject<Quiz> = new Subject();
+  public questionsSelected$: Subject<Quiz> = new Subject();
+  public answersSelected$: Subject<Quiz> = new Subject();
 
   private quizUrl = serverUrl + '/quizzes';
   private questionsPath = 'questions';
@@ -55,7 +57,9 @@ export class QuizService {
     this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
       this.quizSelected$.next(quiz);
     });
+
   }
+
 
 
   /* Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
