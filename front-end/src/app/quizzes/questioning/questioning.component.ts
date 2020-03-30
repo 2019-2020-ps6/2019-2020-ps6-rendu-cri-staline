@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Quiz } from '../../../models/quiz.model';
 import { Question, Answer } from '../../../models/question.model';
 import { QuizService } from 'src/services/quiz.service';
-
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-questioning',
   templateUrl: './questioning.component.html',
@@ -16,8 +17,8 @@ export class QuestioningComponent implements OnInit {
   public answers: Answer[];
   public quiz: Quiz ;
   public answersSelected: Answer[];
-
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) {
+  closeResult = '';
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private modalService: NgbModal) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       this.questions = quiz.questions;
@@ -32,7 +33,23 @@ export class QuestioningComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
   }
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
   answerSelected(newAnswer: Answer) {
     let bAlreadySelect = false;
     this.answersSelected.forEach((answer) => {
@@ -49,21 +66,23 @@ export class QuestioningComponent implements OnInit {
 
   }
 
-  validAnswer() {
+  validAnswer(content) {
 
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
-   if (this.currentQuestion === this.questions.length - 1) {
-        this.router.navigate(['quiz-list']);
+        if (this.currentQuestion === this.questions.length - 1) {
+          window.alert('redirection mais depuis validAnswer');
+          this.router.navigate(['quiz-list']);
+        } else {
+          this.open(content);
+          this.answersSelected = [];
+          this.currentQuestion++;
+          this.answers = this.questions[this.currentQuestion].answers;
+        }
       } else {
-        this.answersSelected = [];
-        this.currentQuestion++;
-        this.answers = this.questions[this.currentQuestion].answers;
+        this.deleteBadAnswers();
       }
-    } else {
-      this.deleteBadAnswers();
-    }
   }
 
   getNbAnswersCorrect() {
@@ -101,7 +120,9 @@ export class QuestioningComponent implements OnInit {
   }
 
   quitQuiz() {
-    this.router.navigate(['quiz-list']);
-    this.answersSelected = [];
+    if (window.confirm('est-tu sur de vouloir quitter ?')) {
+      this.router.navigate(['quiz-list']);
+      this.answersSelected = [];
+    }
   }
 }
