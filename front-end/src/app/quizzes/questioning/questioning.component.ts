@@ -15,15 +15,15 @@ export class QuestioningComponent implements OnInit {
   public currentQuestion: number;
   public quiz: Quiz ;
   public answersSelected: Answer[];
+  public answers: Answer[];
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       this.questions = quiz.questions;
+      this.answers = quiz.questions[this.currentQuestion].answers;
       console.log(this.quiz);
     });
-
-
   }
 
   ngOnInit() {
@@ -54,6 +54,8 @@ export class QuestioningComponent implements OnInit {
     this.answersSelected.forEach((answer) => {
       if (!answer.isCorrect) {
         bAllAnswerCorrect = false;
+        const index = this.answersSelected.indexOf(answer);
+        this.answers.splice(index, 1);
       }
     });
     if (bAllAnswerCorrect && this.answersSelected.length > 0) {
@@ -63,10 +65,10 @@ export class QuestioningComponent implements OnInit {
         this.currentQuestion++;
       }
     }
-
   }
 
   quitQuiz() {
-
+    this.router.navigate(['quiz-list']);
+    this.answersSelected = [];
   }
 }
