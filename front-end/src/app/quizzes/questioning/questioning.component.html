@@ -19,7 +19,7 @@
     <div class="col-md-12 d-flex justify-content-center text-question">{{this.questions[currentQuestion].label}}</div>
   </div>
   <div >
-    <div class="answer" *ngFor="let answer of this.questions[currentQuestion].answers">
+    <div class="answer" *ngFor="let answer of this.answers">
     <!--Inputs & Output allow communication between parent & child components.-->
     <!--More information: https://angular.io/guide/component-interaction-->
     <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>

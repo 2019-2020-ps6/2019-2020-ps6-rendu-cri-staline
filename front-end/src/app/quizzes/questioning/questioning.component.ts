@@ -13,6 +13,7 @@ export class QuestioningComponent implements OnInit {
 
   public questions: Question[];
   public currentQuestion: number;
+  public answers: Answer[];
   public quiz: Quiz ;
   public answersSelected: Answer[];
 
@@ -20,6 +21,7 @@ export class QuestioningComponent implements OnInit {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       this.questions = quiz.questions;
+      this.answers = this.questions[this.currentQuestion].answers;
       console.log(this.quiz);
     });
 
@@ -50,20 +52,55 @@ export class QuestioningComponent implements OnInit {
   }
 
   validAnswer() {
-    let bAllAnswerCorrect = true;
-    this.answersSelected.forEach((answer) => {
-      if (!answer.isCorrect) {
-        bAllAnswerCorrect = false;
-      }
-    });
-    if (bAllAnswerCorrect && this.answersSelected.length > 0) {
+
+    const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
+
+    if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
       if (this.currentQuestion === this.questions.length - 1) {
         this.router.navigate(['quiz-list']);
       } else {
+        this.answersSelected = [];
         this.currentQuestion++;
+        this.answers = this.questions[this.currentQuestion].answers;
       }
+    } else {
+      this.deleteBadAnswers();
     }
 
+  }
+
+  getNbAnswersCorrect() {
+    let nbAnswersCorrect = 0;
+    this.answers.forEach((answer) => {
+      if (answer.isCorrect) {
+        nbAnswersCorrect++;
+      }
+    });
+    return nbAnswersCorrect;
+  }
+
+  isAllAnswersCheckedCorrect() {
+    const nbAnswersCorrect = this.getNbAnswersCorrect();
+    let nbAnswersCorrectChecked = 0;
+    this.answersSelected.forEach((answer) => {
+      if (answer.isCorrect) {
+        nbAnswersCorrectChecked++;
+      } else {
+        nbAnswersCorrectChecked--;
+      }
+
+    });
+    return nbAnswersCorrect === nbAnswersCorrectChecked;
+  }
+
+  deleteBadAnswers() {
+    const answersToDelete = this.answersSelected.filter((answer) => !answer.isCorrect);
+    answersToDelete.forEach((answerToDlete) => {
+      const newArrayAnswers = this.answers.filter((answer) => answerToDlete !== answer);
+      const newArrayAnswersSelected = this.answersSelected.filter((answer) => answerToDlete !== answer);
+      this.answers = newArrayAnswers;
+      this.answersSelected = newArrayAnswersSelected;
+    });
   }
 
   quitQuiz() {
