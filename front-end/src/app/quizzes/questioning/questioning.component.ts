@@ -24,8 +24,6 @@ export class QuestioningComponent implements OnInit {
       this.answers = this.questions[this.currentQuestion].answers;
       console.log(this.quiz);
     });
-
-
   }
 
   ngOnInit() {
@@ -56,7 +54,7 @@ export class QuestioningComponent implements OnInit {
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
-      if (this.currentQuestion === this.questions.length - 1) {
+   if (this.currentQuestion === this.questions.length - 1) {
         this.router.navigate(['quiz-list']);
       } else {
         this.answersSelected = [];
@@ -66,7 +64,6 @@ export class QuestioningComponent implements OnInit {
     } else {
       this.deleteBadAnswers();
     }
-
   }
 
   getNbAnswersCorrect() {
@@ -104,6 +101,7 @@ export class QuestioningComponent implements OnInit {
   }
 
   quitQuiz() {
-
+    this.router.navigate(['quiz-list']);
+    this.answersSelected = [];
   }
 }
