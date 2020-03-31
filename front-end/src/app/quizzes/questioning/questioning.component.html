@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
@@ -23,11 +24,24 @@
     </div>
   </div>
 </div>
+=======
+<ng-template #nextQuestionContent let-modal>
+  <div class="modal-body" style="text-align: center;">
+  <div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
+    
+  </div>
+  <div><h1>Bien Joué</h1></div>
+  <div>Appuie sur la question suivante</div><br/>
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">Question suivante</button>
+    
+  </div>
+</ng-template>
+>>>>>>> c4ed1e690694f0e3df2bfb13e7d27a95522d7043
 
 <div class="row">
     <div class="col-md-12 ">
-      <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
-      (click)="quitQuiz()" routerLink="/quiz-list">Quitter</a>
+      <button class="btn btn-primary btn-lg active" (click)="quitQuiz()">Quitter</button>
     </div>
   </div>
   <div class="row">
@@ -55,6 +69,10 @@
 <div class="row justify-content-end">
   <div class="col-md-2 ">
     <a  class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
-    (click)="validAnswer()">Valider</a>
+    (click)="validAnswer(nextQuestionContent)">Valider</a>
   </div>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> c4ed1e690694f0e3df2bfb13e7d27a95522d7043
