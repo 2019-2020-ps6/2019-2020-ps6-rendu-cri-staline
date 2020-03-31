@@ -1,43 +1,16 @@
-<<<<<<< HEAD
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-=======
 <ng-template #nextQuestionContent let-modal>
   <div class="modal-body" style="text-align: center;">
   <div>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
-    
+
   </div>
   <div><h1>Bien Joué</h1></div>
   <div>Appuie sur la question suivante</div><br/>
   <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">Question suivante</button>
-    
+
   </div>
 </ng-template>
->>>>>>> c4ed1e690694f0e3df2bfb13e7d27a95522d7043
 
 <div class="row">
     <div class="col-md-12 ">
@@ -72,7 +45,3 @@
     (click)="validAnswer(nextQuestionContent)">Valider</a>
   </div>
 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> c4ed1e690694f0e3df2bfb13e7d27a95522d7043
