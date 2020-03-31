@@ -33,8 +33,6 @@ export class QuizService {
   public answersSelected$: Subject<Quiz> = new Subject();
 
   private quizUrl = serverUrl + '/quizzes';
-  private questionsPath = 'questions';
-
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
