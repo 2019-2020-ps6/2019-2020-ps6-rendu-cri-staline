@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { AnswerComponent } from './quizzes/answer/answer.component';
 import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
+import { UserAddComponent } from './users/user-add/user-add.component';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +21,7 @@ import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     QuizFormComponent,
     QuestioningComponent,
+    UserAddComponent,
     AnswerComponent
   ],
   imports: [
