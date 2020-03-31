@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
-
+import {Router } from '@angular/router';
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -12,7 +12,7 @@ export class QuizComponent implements OnInit {
   quiz: Quiz;
 
   @Output()
-  quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
+  quizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   constructor() {
   }
@@ -21,6 +21,6 @@ export class QuizComponent implements OnInit {
   }
 
   selectQuiz() {
-    this.quizSelected.emit(true);
+   this.quizSelected.emit(this.quiz);
   }
 }

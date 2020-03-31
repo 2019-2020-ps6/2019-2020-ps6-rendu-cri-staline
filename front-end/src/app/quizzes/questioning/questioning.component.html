@@ -1,0 +1,47 @@
+
+<ng-template #nextQuestionContent let-modal>
+  <div class="modal-body" style="text-align: center;">
+  <div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
+
+  </div>
+  <div><h1>Bien Joué</h1></div>
+  <div>Appuie sur la question suivante</div><br/>
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">Question suivante</button>
+
+  </div>
+</ng-template>
+
+<div class="row">
+    <div class="col-md-12 ">
+      <button class="btn btn-primary btn-lg active" (click)="quitQuiz()">Quitter</button>
+    </div>
+  </div>
+  <div class="row">
+    <ng-container *ngIf="this.questions[currentQuestion].image.length>0">
+      <div class="col-md-12  d-flex justify-content-center text-center">
+        <img src="assets/images/{{this.questions[currentQuestion].image}}" alt="..." class="img-thumbnail">
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center text-center">Choisir une ou plusieurs réponses 
+      en cochant la ou les cases et valide ta réponse avec Valider.</div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center text-question">{{this.questions[currentQuestion].label}}</div>
+  </div>
+  <div >
+    <div class="answer" *ngFor="let answer of this.answers">
+    <!--Inputs & Output allow communication between parent & child components.-->
+    <!--More information: https://angular.io/guide/component-interaction-->
+    <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>
+  </div>
+  
+</div>
+<div class="row justify-content-end">
+  <div class="col-md-2 ">
+    <a  class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+    (click)="validAnswer(nextQuestionContent)">Valider</a>
+  </div>
+</div>
