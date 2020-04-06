@@ -1,0 +1,7 @@
+<div class="card">
+  <h2>
+    <i class="fab fa-leanpub"></i>
+    {{user.firstName +" " + user.lastName}}
+  </h2>
+  <button class="button-card" (click)="selectUser()" routerLink="/users-list/{{user.id}}">Select</button>
+</div>

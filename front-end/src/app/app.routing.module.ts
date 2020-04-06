@@ -4,6 +4,7 @@ import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
 import { SelectActionComponent } from './admin/select-action/select-action.component';
 import { UserAddComponent } from './users/user-add/user-add.component';
+import {UsersListComponent} from './users/users-list/users-list.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
     {path: 'select-action', component: SelectActionComponent},
     {path: 'home', component: HomeComponent},
     {path: 'user-add', component: UserAddComponent},
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    {path: 'users-list', component: UsersListComponent},
+    { path: '', redirectTo: 'users-list', pathMatch: 'full' },
 ];
 
 @NgModule({
