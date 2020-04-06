@@ -1,0 +1,16 @@
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .grid-item {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .menu-button {
+      min-width: 300px;
+
+  }

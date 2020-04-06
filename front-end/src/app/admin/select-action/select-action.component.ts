@@ -11,14 +11,13 @@ export class SelectActionComponent implements OnInit {
 
 
   constructor(private router: Router) {
-    
+
   }
 
   ngOnInit() {
   }
 
-  selectAddingUser(){
+  selectAddingUser() {
     this.router.navigate(['user-add']);
   }
-  
 }
