@@ -10,7 +10,7 @@ import { AnswerComponent } from './quizzes/answer/answer.component';
 import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
 import { UserAddComponent } from './users/user-add/user-add.component';
-import { SelectActionComponent } from './admin/select-action/select-action.component';
+import { AdminWorkspaceComponent } from './admin/select-action/admin-workspace.component';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +27,7 @@ import { HomeComponent } from './home/home.component';
     QuestioningComponent,
     UserAddComponent,
     AnswerComponent,
-    SelectActionComponent,
+    AdminWorkspaceComponent,
     HomeComponent,
     UsersListComponent,
     UserComponent,
