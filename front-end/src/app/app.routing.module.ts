@@ -5,6 +5,7 @@ import { QuestioningComponent } from './quizzes/questioning/questioning.componen
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
 import { UserAddComponent } from './users/user-add/user-add.component';
 import {UsersListComponent} from './users/users-list/users-list.component';
+import {UserDetailsComponent} from './users/user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'user-add', component: UserAddComponent},
     {path: 'users-list', component: UsersListComponent},
-    { path: '', redirectTo: 'workspace', pathMatch: 'full' },
+    {path: 'users-list/:id', component: UserDetailsComponent},
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

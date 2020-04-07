@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
 import {UsersListComponent} from './users/users-list/users-list.component';
+import {UserDetailsComponent} from './users/user-details/user-details.component';
 import {UserComponent} from './users/user/user.component';
 import { HomeComponent } from './home/home.component';
 @NgModule({
@@ -31,6 +32,7 @@ import { HomeComponent } from './home/home.component';
     HomeComponent,
     UsersListComponent,
     UserComponent,
+    UserDetailsComponent,
   ],
   imports: [
     NgbModule,
