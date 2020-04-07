@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { User } from '../../../models/user.model';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   selectAddingUser() {

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Router } from '@angular/router';
 import { RightsService } from 'src/services/rights.service';
 @Component({
@@ -9,18 +9,18 @@ import { RightsService } from 'src/services/rights.service';
   export class HomeComponent implements OnInit {
 
 
-    constructor(private router:Router,private rightService:RightsService) {
- 
+    constructor(private router: Router, private rightService: RightsService) {
+
     }
     ngOnInit() {
     }
 
-    selectWorkspace(){
+    selectWorkspace() {
       this.rightService.enableAdmin();
       this.router.navigate(['workspace']);
     }
 
-    selectGamespace(){
+    selectGamespace() {
       this.rightService.disableAdmin();
       this.router.navigate(['users-list']);
     }

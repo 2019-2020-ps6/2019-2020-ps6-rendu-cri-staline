@@ -5,24 +5,24 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class RightsService {
-  
-  bEnableAdmin:boolean;
+
+  bEnableAdmin: boolean;
 
   public rightsSelected$: Subject<boolean> = new Subject();
   constructor() {
   }
-  enableAdmin(){
-    this.bEnableAdmin=true;
+  enableAdmin() {
+    this.bEnableAdmin = true;
     this.rightsSelected$.next(this.bEnableAdmin);
   }
-  disableAdmin(){
-    this.bEnableAdmin=false;
+  disableAdmin() {
+    this.bEnableAdmin = false;
     this.rightsSelected$.next(this.bEnableAdmin);
   }
 
-  
 
-  
+
+
 
 }
 

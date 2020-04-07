@@ -12,14 +12,14 @@ export class UserComponent implements OnInit {
   @Input()
   user: User;
 
-  enableAdmin:boolean;
+  enableAdmin: boolean;
 
   @Output()
   userSelected: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private router: Router,private rightsService:RightsService) {
-    this.rightsService.rightsSelected$.subscribe((rights)=>this.enableAdmin=rights)
-    this.enableAdmin=this.rightsService.bEnableAdmin;
+  constructor(private router: Router, private rightsService: RightsService) {
+    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
+    this.enableAdmin = this.rightsService.bEnableAdmin;
   }
 
   ngOnInit() {
@@ -29,5 +29,5 @@ export class UserComponent implements OnInit {
     this.userSelected.emit(this.user);
   }
 
-  
+
 }

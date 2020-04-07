@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { User } from '../../../models/user.model';
-import {Router,ActivatedRoute } from '@angular/router';
-import {UserService} from '../../../services/user.service'
+import {Router, ActivatedRoute } from '@angular/router';
+import {UserService} from '../../../services/user.service';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -9,14 +9,14 @@ import {UserService} from '../../../services/user.service'
 })
 export class UserDetailsComponent implements OnInit {
 
-  
+
   user: User;
 
-  constructor(private route: ActivatedRoute,private router: Router,public userService: UserService) {
-    this.userService.userSelected$.subscribe((user)=>{
-      this.user=user
-      console.log(this.user)
-    })
+  constructor(private route: ActivatedRoute, private router: Router, public userService: UserService) {
+    this.userService.userSelected$.subscribe((user) => {
+      this.user = user;
+      console.log(this.user);
+    });
   }
 
   ngOnInit() {
@@ -24,5 +24,5 @@ export class UserDetailsComponent implements OnInit {
     this.userService.setSelectedUser(id);
   }
 
- 
+
 }
