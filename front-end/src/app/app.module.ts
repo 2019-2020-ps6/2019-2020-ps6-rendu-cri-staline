@@ -14,6 +14,9 @@ import { SelectActionComponent } from './admin/select-action/select-action.compo
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
+import {UsersListComponent} from './users/users-list/users-list.component';
+import {UserComponent} from './users/user/user.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,10 @@ import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
     QuestioningComponent,
     UserAddComponent,
     AnswerComponent,
-    SelectActionComponent
+    SelectActionComponent,
+    HomeComponent,
+    UsersListComponent,
+    UserComponent,
   ],
   imports: [
     NgbModule,

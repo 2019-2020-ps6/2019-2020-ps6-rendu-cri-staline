@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="card">
+  <h2>Ajouter un acceuilli</h2>
+  <form class="user-add" [formGroup]="userForm">
+    <label for="firstName">
+      Prénom <br>
+      <input class="input-custom" type="text" id="firstName" [formControlName]="'firstName'">
+    </label>
+    <br>
+    <label for="lastName">
+      Nom <br>
+      <input class="input-custom" type="text" id="lastName" [formControlName]="'lastName'">
+    </label>
+    <br>
+    <button type="submit" class="button-card" (click)="addUser()">Create</button>
+  </form>
+</div>

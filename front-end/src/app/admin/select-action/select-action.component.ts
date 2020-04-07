@@ -20,5 +20,8 @@ export class SelectActionComponent implements OnInit {
   selectAddingUser() {
     this.router.navigate(['user-add']);
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 197feb8bc54a734603872cad96cb4a3f931a9518
 }
