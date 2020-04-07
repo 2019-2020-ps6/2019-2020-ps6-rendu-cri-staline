@@ -3,11 +3,11 @@ import { User } from '../../../models/user.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-workspace',
-  templateUrl: './admin-workspace.component.html',
-  styleUrls: ['./admin-workspace.component.scss']
+  selector: 'app-workspace',
+  templateUrl: './workspace.component.html',
+  styleUrls: ['./workspace.component.scss']
 })
-export class AdminWorkspaceComponent implements OnInit {
+export class WorkspaceComponent implements OnInit {
 
 
   constructor(private router: Router) {
