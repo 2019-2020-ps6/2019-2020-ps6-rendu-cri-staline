@@ -21,4 +21,8 @@ export class WorkspaceComponent implements OnInit {
     this.router.navigate(['user-add']);
   }
 
+  selectUsersList(){
+    this.router.navigate(['users-list']);
+  }
+
 }
