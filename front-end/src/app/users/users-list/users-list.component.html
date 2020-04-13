@@ -1,5 +1,5 @@
 <div class="users-list">
   <div class="user" *ngFor="let user of usersList">
-    <app-user [user]="user" (userSelected)="userSelected($event)"></app-user>
+    <app-user [user]="user" (userSelected)="userSelected($event)" (deleteUser)="deleteUser($event)"></app-user>
   </div>
 </div>

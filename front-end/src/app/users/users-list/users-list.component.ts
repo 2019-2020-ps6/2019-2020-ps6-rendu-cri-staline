@@ -30,4 +30,8 @@ export class UsersListComponent implements OnInit {
     console.log('userSelect() users-list');
   }
 
+  deleteUser(user: User) {
+    this.userService.deleteUser(user);
+  }
+
 }
