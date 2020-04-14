@@ -25,18 +25,26 @@ export class UserComponent implements OnInit {
   constructor(private router: Router, private rightsService: RightsService, private userService: UserService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
+
   }
 
   ngOnInit() {
+    if (this.enableAdmin === undefined && this.router.url !== 'users-list') {
+      this.router.navigate(['home']);
+    }
   }
 
-  selectUser() {
+  select() {
     this.userSelected.emit(this.user);
   }
 
   delete() {
     this.deleteUser.emit(this.user);
     this.router.navigate(['users-list']);
+  }
+
+  edit() {
+
   }
 
 }

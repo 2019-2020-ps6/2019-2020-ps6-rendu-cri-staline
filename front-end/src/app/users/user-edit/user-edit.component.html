@@ -1,0 +1,18 @@
+<div class="card">
+  <h2>Ajouter un acceuilli</h2>
+  <form class="user-add" [formGroup]="userForm">
+    <label for="firstName">
+      Prénom <br>
+      <input class="input-custom" type="text" id="firstName" value="{{this.user.firstName}}" [formControlName]="'firstName'">
+    </label>
+    <br>
+    <label for="lastName">
+      Nom <br>
+      <input class="input-custom" type="text" id="lastName" value="{{this.user.lastName}}" [formControlName]="'lastName'">
+    </label>
+    <br>
+    <button type="submit" class="button-card" (click)="updateUser()">Enregistrer</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
+
+  </form>
+</div>

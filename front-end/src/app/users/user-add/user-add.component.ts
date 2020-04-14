@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { User } from '../../../models/user.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../../services/user.service';

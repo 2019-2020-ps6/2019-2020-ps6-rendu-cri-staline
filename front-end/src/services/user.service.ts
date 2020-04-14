@@ -60,5 +60,11 @@ export class UserService {
     this.http.delete<User>(urlWithId, this.httpOptions).subscribe(() => this.setUsersFromUrl());
   }
 
+  updateUser(index: string, user: User) {
+    const urlWithId = this.userUrl + '/' + index;
+    this.http.put<User>(urlWithId, user, this.httpOptions).subscribe(() => {this.setUsersFromUrl(); });
+
+  }
+
 }
 
