@@ -120,7 +120,7 @@ export class QuestioningComponent implements OnInit {
   }
 
   quitQuiz() {
-    if (window.confirm('est-tu sur de vouloir quitter ?')) {
+    if (window.confirm('Êtes-vous sûr de vouloir quitter ?')) {
       this.router.navigate(['quiz-list']);
       this.answersSelected = [];
     }

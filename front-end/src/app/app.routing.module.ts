@@ -11,7 +11,9 @@ import {UserDetailsComponent} from './users/user-details/user-details.component'
 
 import { HomeComponent } from './home/home.component';
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
+import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 
+import { from } from 'rxjs';
 const routes: Routes = [
     {path: 'quiz-list', component: QuizListComponent},
     {path: 'quiz-list/:id', component: QuestioningComponent},
@@ -21,6 +23,7 @@ const routes: Routes = [
     {path: 'users-list/edit/:id', component: UserEditComponent},
     {path: 'users-list', component: UsersListComponent},
     {path: 'users-list/:id', component: UserDetailsComponent},
+    {path: 'theme-add', component: ThemeAddComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

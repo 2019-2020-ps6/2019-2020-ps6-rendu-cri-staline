@@ -23,6 +23,9 @@ import {UserDetailsComponent} from './users/user-details/user-details.component'
 
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
 import { HomeComponent } from './home/home.component';
+
+import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,7 @@ import { HomeComponent } from './home/home.component';
     UserComponent,
     UserDetailsComponent,
     UserEditComponent,
+    ThemeAddComponent
   ],
   imports: [
     NgbModule,
