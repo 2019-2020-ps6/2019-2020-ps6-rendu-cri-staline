@@ -1,6 +1,6 @@
 
 <ng-template #nextQuestionContent let-modal>
-  <div class="modal-body" style="text-align: center;">
+  <div class="modal-body" style="text-align: center;" >
   <div>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
 
@@ -10,6 +10,7 @@
   <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">Question suivante</button>
 
   </div>
+
 </ng-template>
 
 <div class="row">
@@ -25,7 +26,7 @@
     </ng-container>
   </div>
   <div class="row">
-    <div class="col-md-12 d-flex justify-content-center text-center">Choisir une ou plusieurs réponses 
+    <div class="col-md-12 d-flex justify-content-center text-center">Choisir une ou plusieurs réponses
       en cochant la ou les cases et valide ta réponse avec Valider.</div>
   </div>
   <div class="row">
@@ -37,11 +38,24 @@
     <!--More information: https://angular.io/guide/component-interaction-->
     <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>
   </div>
-  
+
 </div>
 <div class="row justify-content-end">
   <div class="col-md-2 ">
-    <a  class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+    <a *ngIf="this.currentQuestion != this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
     (click)="validAnswer(nextQuestionContent)">Valider</a>
+    <a *ngIf="this.currentQuestion == this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+       (click)="validAnswer(currentQuestionContent)">Valider</a>
   </div>
 </div>
+
+<ng-template #currentQuestionContent let-modal>
+  <div *ngIf="lastQuestion" class="modal-body" style="text-align: center;" role="dialog">
+    <div><h1>Que voulez-vous faire ?</h1></div>
+    <div class="btn-group-vertical">
+    <button type="button" class="btn btn-outline-dark" (click)="quitQuiz()">Liste des quiz</button>
+      <button type="button" class="btn btn-outline-dark">Recommencer</button>
+  </div>
+  </div>
+</ng-template>
+

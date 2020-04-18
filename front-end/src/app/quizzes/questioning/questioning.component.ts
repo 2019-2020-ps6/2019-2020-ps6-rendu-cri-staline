@@ -17,6 +17,7 @@ export class QuestioningComponent implements OnInit {
   public answers: Answer[];
   public quiz: Quiz ;
   public answersSelected: Answer[];
+  public lastQuestion = false;
   closeResult = '';
   constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private modalService: NgbModal) {
     this.quizService.quizSelected$.subscribe((quiz) => {
@@ -72,8 +73,10 @@ export class QuestioningComponent implements OnInit {
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
         if (this.currentQuestion === this.questions.length - 1) {
-          window.alert('redirection mais depuis validAnswer');
-          this.router.navigate(['quiz-list']);
+          this.lastQuestion = true;
+          this.open(content);
+          // window.alert('redirection mais depuis validAnswer');
+          // this.router.navigate(['quiz-list']);
         } else {
           this.open(content);
           this.answersSelected = [];
@@ -117,6 +120,7 @@ export class QuestioningComponent implements OnInit {
       this.answers = newArrayAnswers;
       this.answersSelected = newArrayAnswersSelected;
     });
+    window.alert('Vous y êtes presque, réessayez !');
   }
 
   quitQuiz() {
@@ -125,4 +129,5 @@ export class QuestioningComponent implements OnInit {
       this.answersSelected = [];
     }
   }
+
 }
