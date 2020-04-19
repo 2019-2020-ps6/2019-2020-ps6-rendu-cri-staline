@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
+import { QuizFormComponent} from './quizzes/quiz-form/quiz-form.component';
 
 import { UserAddComponent } from './users/user-add/user-add.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
     {path: 'users-list', component: UsersListComponent},
     {path: 'users-list/:id', component: UserDetailsComponent},
     {path: 'theme-add', component: ThemeAddComponent},
+    {path: 'quiz-form', component: QuizFormComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

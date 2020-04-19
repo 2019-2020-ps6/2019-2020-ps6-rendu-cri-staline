@@ -23,4 +23,8 @@ export class QuizListComponent implements OnInit {
   quizSelected(quiz: Quiz) {
     console.log('quizSelect() quiz-list');
   }
+
+  deleteQuiz(quiz: Quiz) {
+    this.quizService.deleteQuiz(quiz);
+  }
 }

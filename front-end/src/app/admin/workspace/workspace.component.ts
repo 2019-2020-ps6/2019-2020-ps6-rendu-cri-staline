@@ -1,5 +1,6 @@
 import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { User } from '../../../models/user.model';
+import { Quiz } from '../../../models/quiz.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,6 +25,14 @@ export class WorkspaceComponent implements OnInit {
 
   selectUsersList() {
     this.router.navigate(['users-list']);
+  }
+
+  selectAddQuiz() {
+    this.router.navigate(['quiz-form']);
+  }
+
+  selectQuizList() {
+    this.router.navigate(['quiz-list']);
   }
 
 }

@@ -14,7 +14,10 @@ export class QuizComponent implements OnInit {
   @Output()
   quizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor() {
+  @Output()
+  deleteQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
+
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -22,5 +25,10 @@ export class QuizComponent implements OnInit {
 
   selectQuiz() {
    this.quizSelected.emit(this.quiz);
+  }
+
+  delete() {
+    this.deleteQuiz.emit(this.quiz);
+    this.router.navigate(['quiz-list']);
   }
 }

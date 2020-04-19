@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-quiz-form',
@@ -20,10 +21,11 @@ export class QuizFormComponent implements OnInit {
    */
   public quizForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router) {
     // Form creation
     this.quizForm = this.formBuilder.group({
-      name: ['']
+      name: [''],
+      theme: ['']
     });
     // You can also add validators to your inputs such as required, maxlength or even create your own validator!
     // More information: https://angular.io/guide/reactive-forms#simple-form-validation
@@ -34,15 +36,9 @@ export class QuizFormComponent implements OnInit {
   }
 
   addQuiz() {
-    // We retrieve here the quiz object from the quizForm and we cast the type "as Quiz".
-    // const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
-
-    // Do you need to log your object here in your class? Uncomment the code below
-    // and open your console in your browser by pressing F12 and choose the tab "Console".
-    // You will see your quiz object when you click on the create button.
-    // console.log('Add quiz: ', quizToCreate);
-
-    // Now, add your quiz in the list!
+    const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+    this.quizService.addQuiz(quizToCreate);
+    this.router.navigate(['quiz-list']);
   }
 
 }
