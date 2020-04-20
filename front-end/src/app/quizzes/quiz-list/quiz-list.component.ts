@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
 import { Router } from '@angular/router';
+import {RightsService} from '../../../services/rights.service';
 
 @Component({
   selector: 'app-quiz-list',
@@ -11,13 +12,19 @@ import { Router } from '@angular/router';
 export class QuizListComponent implements OnInit {
 
   public quizList: Quiz[] = [];
+  public enableAdmin: boolean;
 
-  constructor(private router: Router, public quizService: QuizService) {
+  constructor(private router: Router, public quizService: QuizService, private rightsService: RightsService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     console.log(this.quizList);
+    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
+    this.enableAdmin = this.rightsService.bEnableAdmin;
   }
 
   ngOnInit() {
+    if (this.enableAdmin === undefined && this.router.url !== 'users-list') {
+      this.router.navigate(['home']);
+    }
   }
 
   quizSelected(quiz: Quiz) {
