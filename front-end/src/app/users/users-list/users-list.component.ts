@@ -18,8 +18,8 @@ export class UsersListComponent implements OnInit {
   constructor(private router: Router, public userService: UserService, private rightsService: RightsService) {
     this.userService.users$.subscribe((user) => {
       this.usersList = user;
-      console.log(this.usersList);
     });
+    console.log(this.usersList);
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
 

@@ -26,6 +26,9 @@ import { HomeComponent } from './home/home.component';
 
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 
+import { QuestionComponent } from './quizzes/questions/question/question.component';
+import { QuestionsListComponent } from './quizzes/questions/questions-list/questions-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +45,9 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
     UserComponent,
     UserDetailsComponent,
     UserEditComponent,
-    ThemeAddComponent
+    ThemeAddComponent,
+    QuestionComponent,
+    QuestionsListComponent
   ],
   imports: [
     NgbModule,

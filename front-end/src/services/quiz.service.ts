@@ -29,14 +29,11 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]>
     = new BehaviorSubject(this.quizzes);
 
-  public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
-
   public quizSelected$: Subject<Quiz> = new Subject();
   public questionsSelected$: Subject<Quiz> = new Subject();
   public answersSelected$: Subject<Quiz> = new Subject();
 
   private quizUrl = serverUrl + '/quizzes';
-  private questionUrl = serverUrl + '/quizzes' + '/:quizId' + '/questions';
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
@@ -47,13 +44,6 @@ export class QuizService {
     this.http.get<Quiz[]>(this.quizUrl).subscribe((quizList) => {
       this.quizzes = quizList;
       this.quizzes$.next(this.quizzes);
-    });
-  }
-
-  setQuestionsFromUrl() {
-    this.http.get<Question[]>(this.questionUrl).subscribe((questionsList) => {
-      this.questions = questionsList;
-      this.questions$.next(this.questions);
     });
   }
 
@@ -72,10 +62,6 @@ export class QuizService {
       this.quizSelected$.next(quiz);
     });
 
-  }
-
-  addQuestion(quiz: Quiz, question: Question) {
-    this.http.post<Question>(this.questionUrl, question, this.httpOptions).subscribe(() => this.setQuestionsFromUrl());
   }
 
   /* Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.

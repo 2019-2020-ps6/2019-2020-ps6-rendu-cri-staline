@@ -20,6 +20,9 @@ export class QuizComponent implements OnInit {
   @Output()
   deleteQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
+  @Output()
+  questionsQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
+
   constructor(private router: Router, private rightsService: RightsService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
@@ -38,5 +41,9 @@ export class QuizComponent implements OnInit {
   delete() {
     this.deleteQuiz.emit(this.quiz);
     this.router.navigate(['quiz-list']);
+  }
+
+  goToQuestions() {
+    this.router.navigate(['quiz-list', this.quiz.id, 'questions-list']);
   }
 }
