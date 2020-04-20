@@ -18,12 +18,16 @@ export class WorkspaceComponent implements OnInit {
 
   }
 
-  selectAddingUser() {
+  addingUser() {
     this.router.navigate(['user-add']);
   }
 
-  selectUsersList() {
+  usersList() {
     this.router.navigate(['users-list']);
+  }
+
+  addingTheme(){
+    this.router.navigate(['theme-add']);
   }
 
 }

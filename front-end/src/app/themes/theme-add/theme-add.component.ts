@@ -31,7 +31,7 @@ export class ThemeAddComponent implements OnInit {
     }, error => {
 
     });
-    this.router.navigate(['themes-list']);
+    this.router.navigate(['workspace']);
   }
 
 }
