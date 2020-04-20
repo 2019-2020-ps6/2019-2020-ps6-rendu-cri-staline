@@ -1,13 +1,15 @@
 const { Router } = require('express')
-
+const ResultsRouter = require('./results')
 const { User } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
-
+const { buildUser, buildUsers } = require('./manager')
 const router = new Router()
+
+router.use('/:userId/results', ResultsRouter)
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(User.get())
+    res.status(200).json(buildUsers())
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -15,7 +17,8 @@ router.get('/', (req, res) => {
 
 router.get('/:userId', (req, res) => {
   try {
-    res.status(200).json(User.getById(req.params.userId))
+    const user = buildUser(req.params.userId)
+    res.status(200).json(user)
   } catch (err) {
     manageAllErrors(res, err)
   }

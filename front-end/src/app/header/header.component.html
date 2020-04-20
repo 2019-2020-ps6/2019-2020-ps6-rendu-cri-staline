@@ -10,7 +10,10 @@
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" routerLink="workspace">Espace A</a>
+          <a class="nav-link" (click)="workspace()" routerLink="workspace">Admin</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" (click)="game()" routerLink="users-list">Game</a>
         </li>
       </ul>
     </div>

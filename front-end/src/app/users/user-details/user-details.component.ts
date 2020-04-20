@@ -9,20 +9,24 @@ import {UserService} from '../../../services/user.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-
-  user: User;
-
   constructor(private route: ActivatedRoute, private router: Router, public userService: UserService) {
     this.userService.userSelected$.subscribe((user) => {
       this.user = user;
+      this.user.imageFile = this.user.imageFile as File;
       console.log(this.user);
     });
   }
+
+
+  user: User;
+
+  public url: any;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.setSelectedUser(id);
   }
+
 
 
 }

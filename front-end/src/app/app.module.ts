@@ -20,6 +20,7 @@ import { UserAddComponent } from './users/user-add/user-add.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import {UsersListComponent} from './users/users-list/users-list.component';
 import {UserDetailsComponent} from './users/user-details/user-details.component';
+import {ResultComponent} from './users/result/result.component';
 
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
 import { HomeComponent } from './home/home.component';
@@ -42,7 +43,8 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
     UserComponent,
     UserDetailsComponent,
     UserEditComponent,
-    ThemeAddComponent
+    ThemeAddComponent,
+    ResultComponent
   ],
   imports: [
     NgbModule,

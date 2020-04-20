@@ -11,6 +11,12 @@
       <input class="input-custom" type="text" id="lastName" [formControlName]="'lastName'">
     </label>
     <br>
+    <div class="form-group">
+      <label for="imageFile">Choisir une image
+      <input type="file" class="form-control-file" id="imageFile" (change)="onFileChange($event)" [formControlName]="'imageFile'">
+    </label>
+    </div>
     <button type="submit" class="button-card" (click)="addUser()">Create</button>
   </form>
 </div>
+

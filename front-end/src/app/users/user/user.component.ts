@@ -3,7 +3,7 @@ import { User } from '../../../models/user.model';
 import {Router } from '@angular/router';
 import { RightsService } from 'src/services/rights.service';
 import { UserService } from '../../../services/user.service';
-
+import { RefereeService } from '../../../services/referee.service';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -22,7 +22,8 @@ export class UserComponent implements OnInit {
   @Output()
   deleteUser: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private router: Router, private rightsService: RightsService, private userService: UserService) {
+  constructor(private router: Router, private rightsService: RightsService,
+              private refereeService: RefereeService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
 
@@ -45,6 +46,10 @@ export class UserComponent implements OnInit {
 
   edit() {
 
+  }
+
+  play() {
+    this.refereeService.setPlayer(this.user);
   }
 
 }

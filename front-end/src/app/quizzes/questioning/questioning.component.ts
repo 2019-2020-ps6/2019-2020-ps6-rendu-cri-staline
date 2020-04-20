@@ -2,9 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Quiz } from '../../../models/quiz.model';
 import { Question, Answer } from '../../../models/question.model';
+import { Result } from '../../../models/result.model';
 import { QuizService } from 'src/services/quiz.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { RefereeService } from 'src/services/referee.service';
 @Component({
   selector: 'app-questioning',
   templateUrl: './questioning.component.html',
@@ -17,8 +19,13 @@ export class QuestioningComponent implements OnInit {
   public answers: Answer[];
   public quiz: Quiz ;
   public answersSelected: Answer[];
+  public firstTry: boolean;
+  public score: number;
   closeResult = '';
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private modalService: NgbModal) {
+  constructor(private route: ActivatedRoute, private quizService: QuizService,
+              private router: Router,
+              private modalService: NgbModal,
+              private refereeService: RefereeService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       this.questions = quiz.questions;
@@ -32,6 +39,8 @@ export class QuestioningComponent implements OnInit {
     this.currentQuestion = 0;
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
+    this.score = 0;
+    this.firstTry = true;
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -67,20 +76,32 @@ export class QuestioningComponent implements OnInit {
   }
 
   validAnswer(content) {
-
+    console.log(this.score);
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
         if (this.currentQuestion === this.questions.length - 1) {
           window.alert('redirection mais depuis validAnswer');
+          let result: Result;
+          if (this.firstTry) {
+            this.score++;
+          }
+          result = {userId: '', quizId: '', score: this.score / this.questions.length, date: new Date().toLocaleString()};
+          this.refereeService.addResult(result);
+          this.firstTry = true;
           this.router.navigate(['quiz-list']);
         } else {
           this.open(content);
           this.answersSelected = [];
           this.currentQuestion++;
+          if (this.firstTry) {
+            this.score++;
+          }
+          this.firstTry = true;
           this.answers = this.questions[this.currentQuestion].answers;
         }
       } else {
+        this.firstTry = false;
         this.deleteBadAnswers();
       }
   }

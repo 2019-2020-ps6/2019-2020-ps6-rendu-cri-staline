@@ -3,5 +3,7 @@
         <i class="fab fa-leanpub"></i>
         {{quiz.name}}
     </h2>
-    <button class="button-card" (click)="selectQuiz()" routerLink="/quiz-list/{{quiz.id}}">Select</button>
+    <ng-container *ngIf="this.enableAdmin===false">
+    <button class="button-card" (click)="play()" routerLink="/quiz-list/{{quiz.id}}">Select</button>
+    </ng-container>
 </div>
