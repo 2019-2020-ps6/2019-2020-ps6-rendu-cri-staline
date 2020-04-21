@@ -26,7 +26,7 @@ export class WorkspaceComponent implements OnInit {
     this.router.navigate(['users-list']);
   }
 
-  addingTheme(){
+  addingTheme() {
     this.router.navigate(['theme-add']);
   }
 
