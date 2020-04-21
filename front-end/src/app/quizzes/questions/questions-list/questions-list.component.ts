@@ -27,4 +27,8 @@ export class QuestionsListComponent implements OnInit {
     this.quizService.setSelectedQuiz(id);
   }
 
+  selectAddQuestion() {
+    this.router.navigate(['quiz-list', '/:id', 'questions-list', 'question-add']);
+  }
+
 }

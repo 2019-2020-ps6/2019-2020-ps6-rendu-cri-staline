@@ -28,6 +28,7 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 
 import { QuestionComponent } from './quizzes/questions/question/question.component';
 import { QuestionsListComponent } from './quizzes/questions/questions-list/questions-list.component';
+import { QuestionAddComponent } from './quizzes/questions/question-add/question-add.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { QuestionsListComponent } from './quizzes/questions/questions-list/quest
     UserEditComponent,
     ThemeAddComponent,
     QuestionComponent,
-    QuestionsListComponent
+    QuestionsListComponent,
+    QuestionAddComponent
   ],
   imports: [
     NgbModule,
