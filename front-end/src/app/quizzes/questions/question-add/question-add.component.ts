@@ -12,28 +12,24 @@ import {Question} from '../../../../models/question.model';
 })
 export class QuestionAddComponent implements OnInit {
   public questionForm: FormGroup;
-  public questionsList: Question[];
   public quiz: Quiz;
+  public id: string;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private route: ActivatedRoute) {
-    this.quizService.quizSelected$.subscribe((quiz) => {
-      this.quiz = quiz;
-      this.questionsList = quiz.questions;
-    });
     this.questionForm = this.formBuilder.group({
       label: ['']
     });
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.quizService.setSelectedQuiz(id);
+    this.id = this.route.snapshot.paramMap.get('quizId');
+    this.quizService.setSelectedQuiz(this.id);
   }
 
   addQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
-    this.quizService.addQuestion(questionToAdd);
-    this.router.navigate(['../', 'quiz-list', '/:id', 'questions-list']);
+    this.quizService.addQuestion(this.id, questionToAdd);
+    this.router.navigate(['quiz-list', this.id, 'questions-list']);
   }
 
 }

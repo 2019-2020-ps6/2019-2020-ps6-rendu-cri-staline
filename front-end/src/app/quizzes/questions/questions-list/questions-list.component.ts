@@ -23,12 +23,12 @@ export class QuestionsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('quizId');
     this.quizService.setSelectedQuiz(id);
   }
 
   selectAddQuestion() {
-    this.router.navigate(['quiz-list', '/:id', 'questions-list', 'question-add']);
+    this.router.navigate(['quiz-list', this.quiz.id.toString(), 'questions-list', 'question-add']);
   }
 
 }

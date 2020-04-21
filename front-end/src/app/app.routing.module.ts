@@ -28,8 +28,8 @@ const routes: Routes = [
     {path: 'users-list/:id', component: UserDetailsComponent},
     {path: 'theme-add', component: ThemeAddComponent},
     {path: 'quiz-form', component: QuizFormComponent},
-    {path: 'quiz-list/:id/questions-list', component: QuestionsListComponent},
-    {path: 'quiz-list/:id/questions-list/question-add', component: QuestionAddComponent},
+    {path: 'quiz-list/:quizId/questions-list', component: QuestionsListComponent},
+    {path: 'quiz-list/:quizId/questions-list/question-add', component: QuestionAddComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
