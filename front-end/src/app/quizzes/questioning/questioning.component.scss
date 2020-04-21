@@ -64,3 +64,24 @@
   from {opacity: 0;}
   to {opacity:1 ;}
 }
+
+@keyframes bigsmall {
+  from {transform:scale(0.95);}
+  to {transform:scale(1);}
+}
+.quit-button{
+  margin-top: 10px;
+}
+
+.help{
+  border-style: solid;
+  animation: bigsmall 1s infinite;
+  animation-direction: alternate-reverse;
+  font-size: 30px;
+}
+
+.icon-help{
+  margin:10px;
+}
+
+
