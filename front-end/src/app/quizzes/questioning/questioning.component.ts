@@ -19,6 +19,8 @@ export class QuestioningComponent implements OnInit {
   public answersSelected: Answer[];
   public lastQuestion = false;
   closeResult = '';
+  public currentRate: number;
+  public totalGoodAnswers: number;
   constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private modalService: NgbModal) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
@@ -31,15 +33,13 @@ export class QuestioningComponent implements OnInit {
   ngOnInit() {
     this.answersSelected = [];
     this.currentQuestion = 0;
+    this.totalGoodAnswers = 0;
+    this.currentRate = 0;
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
   }
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    return this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   private getDismissReason(reason: any): string {
@@ -72,16 +72,23 @@ export class QuestioningComponent implements OnInit {
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
+        this.totalGoodAnswers++;
         if (this.currentQuestion === this.questions.length - 1) {
           this.lastQuestion = true;
+          this.currentRate = (this.totalGoodAnswers / this.questions.length) * 5;
           this.open(content);
           // window.alert('redirection mais depuis validAnswer');
           // this.router.navigate(['quiz-list']);
         } else {
-          this.open(content);
-          this.answersSelected = [];
-          this.currentQuestion++;
-          this.answers = this.questions[this.currentQuestion].answers;
+          const modalRef = this.open(content);
+          modalRef.result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+            this.answersSelected = [];
+            this.currentQuestion++;
+            this.answers = this.questions[this.currentQuestion].answers;
+          }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          });
         }
       } else {
         this.deleteBadAnswers();
@@ -129,5 +136,26 @@ export class QuestioningComponent implements OnInit {
       this.answersSelected = [];
     }
   }
+
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+  retry() {
+    this.currentRate = 0;
+    this.answersSelected = [];
+    this.currentQuestion = 0;
+    this.shuffle(this.questions);
+   // this.validAnswer(content);
+
+  }
+
+  // displayRating(contentRating) {
+  //  this.open(contentRating);
+  // }
 
 }
