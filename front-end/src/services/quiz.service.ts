@@ -78,6 +78,11 @@ export class QuizService {
     this.http.post<Question>(urlWithId, question, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
   }
 
+  deleteQuestion(quizId: string, question: Question) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + question.id;
+    this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
+  }
+
   /* Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
 
   addQuestion(quiz: Quiz, question: Question) {

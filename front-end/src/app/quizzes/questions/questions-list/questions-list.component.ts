@@ -13,6 +13,7 @@ export class QuestionsListComponent implements OnInit {
 
   public questionsList: Question[] = [];
   public quiz: Quiz;
+  private id: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
@@ -23,12 +24,16 @@ export class QuestionsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('quizId');
-    this.quizService.setSelectedQuiz(id);
+    this.id = this.route.snapshot.paramMap.get('quizId');
+    this.quizService.setSelectedQuiz(this.id);
   }
 
   selectAddQuestion() {
     this.router.navigate(['quiz-list', this.quiz.id.toString(), 'questions-list', 'question-add']);
+  }
+
+  deleteQuestion(question: Question) {
+    this.quizService.deleteQuestion(this.id, question);
   }
 
 }
