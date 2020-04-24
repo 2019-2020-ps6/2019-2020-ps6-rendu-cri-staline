@@ -30,6 +30,9 @@ import { QuestionComponent } from './quizzes/questions/question/question.compone
 import { QuestionsListComponent } from './quizzes/questions/questions-list/questions-list.component';
 import { QuestionAddComponent } from './quizzes/questions/question-add/question-add.component';
 
+import {AnswersComponent} from './quizzes/questions/answers/answer/answers.component';
+import {AnswersListComponent} from './quizzes/questions/answers/answers-list/answers-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,9 @@ import { QuestionAddComponent } from './quizzes/questions/question-add/question-
     ThemeAddComponent,
     QuestionComponent,
     QuestionsListComponent,
-    QuestionAddComponent
+    QuestionAddComponent,
+    AnswersComponent,
+    AnswersListComponent
   ],
   imports: [
     NgbModule,

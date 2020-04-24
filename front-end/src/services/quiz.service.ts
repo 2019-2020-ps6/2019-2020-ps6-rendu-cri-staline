@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LIST } from '../mocks/quiz-list.mock';
-import { Question } from '../models/question.model';
+import {Answer, Question} from '../models/question.model';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 
 @Injectable({
@@ -21,18 +21,20 @@ export class QuizService {
    */
   private quizzes: Quiz[];
   private questions: Question[];
+  private answers: Answer[];
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public quizzes$: BehaviorSubject<Quiz[]>
-    = new BehaviorSubject(this.quizzes);
+  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
 
   public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
 
+  public answers$: BehaviorSubject<Answer[]> = new BehaviorSubject(this.answers);
+
   public quizSelected$: Subject<Quiz> = new Subject();
-  public questionsSelected$: Subject<Quiz> = new Subject();
+  public questionsSelected$: Subject<Question> = new Subject();
   public answersSelected$: Subject<Quiz> = new Subject();
 
   private quizUrl = serverUrl + '/quizzes';
@@ -56,6 +58,14 @@ export class QuizService {
     });
   }
 
+  setAnswersFromUrl(quizId: string, questionId: string) {
+    this.http.get<Answer[]>(this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers').subscribe(
+      (answersList) => {
+      this.answers = answersList;
+      this.answers$.next(this.answers);
+    });
+  }
+
   addQuiz(quiz: Quiz) {
     this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
@@ -71,6 +81,13 @@ export class QuizService {
       this.quizSelected$.next(quiz);
     });
 
+  }
+
+  setSelectedQuestion(quizId: string, questionId: string) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
+    this.http.get<Question>(urlWithId).subscribe((question) => {
+      this.questionsSelected$.next(question);
+    });
   }
 
   addQuestion(quizId: string, question: Question) {

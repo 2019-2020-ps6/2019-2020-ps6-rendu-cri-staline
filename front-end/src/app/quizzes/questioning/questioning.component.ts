@@ -127,7 +127,6 @@ export class QuestioningComponent implements OnInit {
       this.answers = newArrayAnswers;
       this.answersSelected = newArrayAnswersSelected;
     });
-    window.alert('Vous y êtes presque, réessayez !');
   }
 
   quitQuiz() {

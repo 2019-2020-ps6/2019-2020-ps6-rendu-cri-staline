@@ -16,6 +16,8 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 import { QuestionsListComponent} from './quizzes/questions/questions-list/questions-list.component';
 import { QuestionAddComponent } from './quizzes/questions/question-add/question-add.component';
 
+import { AnswersListComponent } from './quizzes/questions/answers/answers-list/answers-list.component';
+
 import { from } from 'rxjs';
 const routes: Routes = [
     {path: 'quiz-list', component: QuizListComponent},
@@ -30,6 +32,7 @@ const routes: Routes = [
     {path: 'quiz-form', component: QuizFormComponent},
     {path: 'quiz-list/:quizId/questions-list', component: QuestionsListComponent},
     {path: 'quiz-list/:quizId/questions-list/question-add', component: QuestionAddComponent},
+    {path: 'quiz-list/:quizId/questions-list/:questionId/answers-list', component: AnswersListComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
