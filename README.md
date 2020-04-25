@@ -16,7 +16,13 @@
 npm install --save ng2-charts
 ```
 
-2.Installation of Schematics Package
+2.Install Chart.js library
+
+```
+npm install --save chart.js
+```
+
+Installation of Schematics Package
 
 ```
 npm install --save-dev ng2-charts-schematics
