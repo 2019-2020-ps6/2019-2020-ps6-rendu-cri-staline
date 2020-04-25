@@ -28,6 +28,14 @@ Installation of Schematics Package
 npm install --save-dev ng2-charts-schematics
 ```
 
+### [ng-bootstrap](https://ng-bootstrap.github.io/#/getting-started)
+
+1.Install nb-bootstrap using npm
+
+```
+npm install bootstrap@~4.2.1 --save
+```
+
 
 
 
