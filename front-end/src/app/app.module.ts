@@ -32,6 +32,7 @@ import { QuestionsListComponent } from './quizzes/questions-list/questions-list.
 import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 
 import {AnswersListComponent} from './quizzes/answers-list/answers-list.component';
+import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {AnswersListComponent} from './quizzes/answers-list/answers-list.componen
     QuestionsListComponent,
     QuestionAddComponent,
     AnswersListComponent,
-    AnswerComponent
+    AnswerComponent,
+    AnswerAddComponent
   ],
   imports: [
     NgbModule,

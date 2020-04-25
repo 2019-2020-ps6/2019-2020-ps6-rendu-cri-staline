@@ -4,5 +4,5 @@
     <!--More information: https://angular.io/guide/component-interaction-->
     <app-question [question]="question" (deleteQuestion)="deleteQuestion($event)"></app-question>
   </div>
-  <button class="button-card" (click)="selectAddQuestion()">Ajouter une question</button>
+  <button (click)="selectAddQuestion()">Ajouter une question</button>
 </div>
