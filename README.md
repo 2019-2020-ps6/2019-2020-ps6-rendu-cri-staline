@@ -8,7 +8,7 @@
    -   Sana DIBE  
 
 ## Installation
-### ng2-charts
+### ng2-charts [https://valor-software.com/ng2-charts/#/GeneralInfo]
 
 1.Install ng2-charts using npm
 
