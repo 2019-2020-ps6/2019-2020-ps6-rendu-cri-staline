@@ -38,7 +38,7 @@ export class WorkspaceComponent implements OnInit {
     this.router.navigate(['quiz-list']);
   }
 
-  themeslist(){
+  themeslist() {
 
   }
 

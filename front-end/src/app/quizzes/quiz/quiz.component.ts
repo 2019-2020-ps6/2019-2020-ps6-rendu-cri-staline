@@ -24,7 +24,7 @@ export class QuizComponent implements OnInit {
   @Output()
   questionsQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor(private router: Router, private rightsService: RightsService, private refereeService:RefereeService) {
+  constructor(private router: Router, private rightsService: RightsService, private refereeService: RefereeService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }

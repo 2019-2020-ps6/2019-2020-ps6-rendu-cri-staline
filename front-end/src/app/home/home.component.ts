@@ -15,12 +15,12 @@ import { RightsService } from 'src/services/rights.service';
     ngOnInit() {
     }
 
-    selectWorkspace() {
+    workspace() {
       this.rightService.enableAdmin();
       this.router.navigate(['workspace']);
     }
 
-    selectGamespace() {
+    game() {
       this.rightService.disableAdmin();
       this.router.navigate(['users-list']);
     }

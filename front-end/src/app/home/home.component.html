@@ -1,24 +1,17 @@
-<div>
-    <div style="text-align: center;">
-        <h1>QuizMaster</h1>  
-    </div>
-    <div class="grid-container">
-        <div class="grid-item">
-            <div>
-                <img src="./assets/images/accompagnateur.jpg" alt="..." class="img-thumbnail">
-            </div>
-           <div>
-                <button type="button" class="btn btn-outline-dark menu-button" (click)="selectWorkspace()">Espace Accompagnateur</button>
-           </div>
-        </div>
-        <div class="grid-item">
-            <div>
-                <img src="./assets/images/quiz.jpg" alt="..." class="img-thumbnail">
-            </div>
-            <div>
-                <button type="button" class="btn btn-outline-dark menu-button" (click)="selectGamespace()" >Jeu</button>
-            </div>
-        </div>
 
-    </div>
-</div>
+
+ <div class="jumbotron">
+    <h1 class="display-10">Accompagnateur</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" style="color: white;" (click)="workspace()" role="button">Commencer</a>
+  </div>
+
+  <div class="jumbotron">
+    <h1 class="display-10">Jeu</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" style="color: white;" (click)="game()" role="button">Commencer</a>
+  </div>
+
+  
