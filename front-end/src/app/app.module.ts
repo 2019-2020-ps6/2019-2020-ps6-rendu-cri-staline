@@ -26,12 +26,11 @@ import { HomeComponent } from './home/home.component';
 
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 
-import { QuestionComponent } from './quizzes/questions/question/question.component';
-import { QuestionsListComponent } from './quizzes/questions/questions-list/questions-list.component';
-import { QuestionAddComponent } from './quizzes/questions/question-add/question-add.component';
+import { QuestionComponent } from './quizzes/question/question.component';
+import { QuestionsListComponent } from './quizzes/questions-list/questions-list.component';
+import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 
-import {AnswersComponent} from './quizzes/questions/answers/answer/answers.component';
-import {AnswersListComponent} from './quizzes/questions/answers/answers-list/answers-list.component';
+import {AnswersListComponent} from './quizzes/answers-list/answers-list.component';
 
 @NgModule({
   declarations: [
@@ -53,8 +52,8 @@ import {AnswersListComponent} from './quizzes/questions/answers/answers-list/ans
     QuestionComponent,
     QuestionsListComponent,
     QuestionAddComponent,
-    AnswersComponent,
-    AnswersListComponent
+    AnswersListComponent,
+    AnswerComponent
   ],
   imports: [
     NgbModule,

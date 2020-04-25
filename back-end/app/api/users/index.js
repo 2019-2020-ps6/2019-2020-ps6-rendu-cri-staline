@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
 
 router.put('/:userId', (req, res) => {
   try {
-    
     res.status(200).json(User.update(req.params.userId, req.body))
   } catch (err) {
     console.log(err)

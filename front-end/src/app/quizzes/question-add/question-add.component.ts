@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {QuizService} from '../../../../services/quiz.service';
+import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Quiz} from '../../../../models/quiz.model';
-import {Question} from '../../../../models/question.model';
+import {Quiz} from '../../../models/quiz.model';
+import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-question-add',

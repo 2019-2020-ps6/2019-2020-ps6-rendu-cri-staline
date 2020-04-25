@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Question} from '../../../../models/question.model';
+import {Question} from '../../../models/question.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {QuizService} from '../../../../services/quiz.service';
-import {Quiz} from '../../../../models/quiz.model';
+import {QuizService} from '../../../services/quiz.service';
+import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-questions-list',

@@ -13,10 +13,10 @@ import {UserDetailsComponent} from './users/user-details/user-details.component'
 import { HomeComponent } from './home/home.component';
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
-import { QuestionsListComponent} from './quizzes/questions/questions-list/questions-list.component';
-import { QuestionAddComponent } from './quizzes/questions/question-add/question-add.component';
+import { QuestionsListComponent} from './quizzes/questions-list/questions-list.component';
+import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 
-import { AnswersListComponent } from './quizzes/questions/answers/answers-list/answers-list.component';
+import { AnswersListComponent } from './quizzes/answers-list/answers-list.component';
 
 import { from } from 'rxjs';
 const routes: Routes = [

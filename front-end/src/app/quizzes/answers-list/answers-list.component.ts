@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Answer, Question} from '../../../../../models/question.model';
+import {Answer, Question} from '../../../models/question.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {QuizService} from '../../../../../services/quiz.service';
+import {QuizService} from '../../../services/quiz.service';
 
 @Component({
   selector: 'app-answers-list',
@@ -11,22 +11,20 @@ import {QuizService} from '../../../../../services/quiz.service';
 export class AnswersListComponent implements OnInit {
 
   public answersList: Answer[] = [];
-  public question: Question;
-  private id: string;
+  private questionId: string;
   private quizId: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
-    this.quizService.questionsSelected$.subscribe((question) => {
-      this.question = question;
-      this.answersList = question.answers;
-      console.log(this.question);
+    this.quizService.answersSelected$.subscribe((answers) => {
+      this.answersList = answers;
+      console.log(this.answersList);
     });
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('questionId');
+    this.questionId = this.route.snapshot.paramMap.get('questionId');
     this.quizId = this.route.snapshot.paramMap.get('quizId');
-    this.quizService.setSelectedQuestion(this.quizId, this.id);
+    this.quizService.setSelectedAnswers(this.quizId, this.questionId);
   }
 
 }

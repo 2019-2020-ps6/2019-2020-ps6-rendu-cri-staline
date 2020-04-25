@@ -10,5 +10,5 @@ module.exports = {
   Question,
   Answer,
   User,
-  Theme
+  Theme,
 }

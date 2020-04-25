@@ -35,7 +35,7 @@ export class QuizService {
 
   public quizSelected$: Subject<Quiz> = new Subject();
   public questionsSelected$: Subject<Question> = new Subject();
-  public answersSelected$: Subject<Quiz> = new Subject();
+  public answersSelected$: Subject<Answer[]> = new Subject();
 
   private quizUrl = serverUrl + '/quizzes';
   private httpOptions = httpOptionsBase;
@@ -87,6 +87,13 @@ export class QuizService {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
     this.http.get<Question>(urlWithId).subscribe((question) => {
       this.questionsSelected$.next(question);
+    });
+  }
+
+  setSelectedAnswers(quizId: string, questionId: string) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers';
+    this.http.get<Answer[]>(urlWithId).subscribe((answers) => {
+      this.answersSelected$.next(answers);
     });
   }
 
