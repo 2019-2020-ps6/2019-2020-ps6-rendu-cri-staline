@@ -1,3 +1,11 @@
+<div *ngIf="enableAdmin===true">
+  <h1>Liste des acceuillis</h1>
+</div>
+
+<div *ngIf="enableAdmin===false">
+  <h1>Veuillez choisir une personne</h1>
+</div>
+
 <div class="users-list">
   <div class="user" *ngFor="let user of usersList">
     <app-user [user]="user" (userSelected)="userSelected($event)" (deleteUser)="deleteUser($event)"></app-user>

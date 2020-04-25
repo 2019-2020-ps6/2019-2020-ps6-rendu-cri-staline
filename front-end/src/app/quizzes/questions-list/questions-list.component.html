@@ -1,0 +1,8 @@
+<div class="questions-list">
+  <div class="question" *ngFor="let question of questionsList">
+    <!--Inputs & Output allow communication between parent & child components.-->
+    <!--More information: https://angular.io/guide/component-interaction-->
+    <app-question [question]="question" (deleteQuestion)="deleteQuestion($event)"></app-question>
+  </div>
+  <button class="button-card" (click)="selectAddQuestion()">Ajouter une question</button>
+</div>

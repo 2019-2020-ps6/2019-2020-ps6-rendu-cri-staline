@@ -1,7 +1,8 @@
 export interface Answer {
-    type?: string;
-    value: string;
-    isCorrect: boolean;
+  id: string;
+  type?: string;
+  value: string;
+  isCorrect: boolean;
 }
 
 export interface Question {

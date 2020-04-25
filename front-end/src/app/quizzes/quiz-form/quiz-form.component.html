@@ -1,9 +1,14 @@
 <div class="card">
-  <h2>Create a new Quiz</h2>
+  <h2>Ajouter un quiz</h2>
   <form class="quiz-form" [formGroup]="quizForm">
-    <label for="title">
-      Title <br>
+    <label for="name">
+      Nom <br>
       <input class="input-custom" type="text" id="name" [formControlName]="'name'">
+    </label>
+    <br>
+    <label for="theme">
+      Theme <br>
+      <input class="input-custom" type="text" id="theme" [formControlName]="'theme'">
     </label>
     <br>
     <button type="submit" class="button-card" (click)="addQuiz()">Create</button>

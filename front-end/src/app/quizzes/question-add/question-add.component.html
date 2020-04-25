@@ -1,0 +1,11 @@
+<div class="card">
+  <h2>Ajouter une question</h2>
+  <form class="question-form" [formGroup]="questionForm">
+    <label for="label">
+      Question <br>
+      <input class="input-custom" type="text" id="label" [formControlName]="'label'">
+    </label>
+    <br>
+    <button type="submit" class="button-card" (click)="addQuestion()">Ajouter</button>
+  </form>
+</div>

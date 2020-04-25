@@ -27,6 +27,12 @@ import { HomeComponent } from './home/home.component';
 
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 
+import { QuestionComponent } from './quizzes/question/question.component';
+import { QuestionsListComponent } from './quizzes/questions-list/questions-list.component';
+import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
+
+import {AnswersListComponent} from './quizzes/answers-list/answers-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +50,12 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
     UserDetailsComponent,
     UserEditComponent,
     ThemeAddComponent,
-    ResultComponent
+    ResultComponent,
+    QuestionComponent,
+    QuestionsListComponent,
+    QuestionAddComponent,
+    AnswersListComponent,
+    AnswerComponent
   ],
   imports: [
     NgbModule,

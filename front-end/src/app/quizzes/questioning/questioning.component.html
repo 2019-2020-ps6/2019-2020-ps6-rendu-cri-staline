@@ -1,6 +1,6 @@
 
 <ng-template #nextQuestionContent let-modal>
-  <div class="modal-body" style="text-align: center;">
+  <div class="modal-body" style="text-align: center;" >
   <div>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
 
@@ -10,6 +10,7 @@
   <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">Question suivante</button>
 
   </div>
+
 </ng-template>
 
 <div class="row quit-button">
@@ -49,11 +50,37 @@
     <!--More information: https://angular.io/guide/component-interaction-->
     <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>
   </div>
-  
+
 </div>
 <div class="row justify-content-end">
   <div class="col-md-2 ">
-    <a  class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+    <a *ngIf="this.currentQuestion != this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
     (click)="validAnswer(nextQuestionContent)">Valider</a>
+    <a *ngIf="this.currentQuestion == this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+       (click)="validAnswer(quizRating)">Valider</a>
+    
   </div>
 </div>
+
+<ng-template #currentQuestionContent let-modal>
+  <div *ngIf="lastQuestion" class="modal-body" style="text-align: center;" role="dialog">
+    <div><h1>Que voulez-vous faire ?</h1></div>
+    <div class="btn-group-vertical">
+    <button type="button" class="btn btn-outline-dark" (click)="quitQuiz()">Liste des quiz</button><br>
+    <button type="button" class="btn btn-outline-dark" (click)="Retry()">Recommencer</button><br>
+    <button type="button" class="btn btn-outline-dark" (click)="listThemes()">Retour à la liste des thèmes</button>
+
+  </div>
+  </div>
+</ng-template>
+
+
+<ng-template #quizRating let-modal>
+<div  class="modal-body" style="text-align: center;">
+  <div><h1>Bien Joué !</h1></div>
+    <div>Vous avez fini le quiz !</div>
+<ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+<p>Appuie sur le bouton Continuer pour continuer</p>
+<button class="btn btn-sm btn-outline-primary mr-2" (click)="validAnswer(currentQuestionContent)">Continuer</button>
+</div>
+  </ng-template>

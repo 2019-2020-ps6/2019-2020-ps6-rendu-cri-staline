@@ -18,7 +18,13 @@ export class QuizComponent implements OnInit {
   @Output()
   quizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor(private refereeService: RefereeService, private rightsService: RightsService, private router: Router) {
+  @Output()
+  deleteQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
+
+  @Output()
+  questionsQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
+
+  constructor(private router: Router, private rightsService: RightsService, private refereeService:RefereeService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }
@@ -31,5 +37,14 @@ export class QuizComponent implements OnInit {
 
   play() {
     this.refereeService.setQuiz(this.quiz);
+  }
+
+  delete() {
+    this.deleteQuiz.emit(this.quiz);
+    this.router.navigate(['quiz-list']);
+  }
+
+  questions() {
+    this.router.navigate(['quiz-list', this.quiz.id, 'questions-list']);
   }
 }

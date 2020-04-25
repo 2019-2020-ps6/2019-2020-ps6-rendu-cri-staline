@@ -2,6 +2,7 @@ import { Component, OnInit , Input} from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import {User} from '../../../models/user.model';
+import {RightsService} from '../../../services/rights.service';
 
 @Component({
   selector: 'app-users-list',
@@ -14,16 +15,20 @@ export class UsersListComponent implements OnInit {
 
   public usersList: User[] = [];
 
-  constructor(private router: Router, public userService: UserService) {
+  constructor(private router: Router, public userService: UserService, private rightsService: RightsService) {
     this.userService.users$.subscribe((user) => {
       this.usersList = user;
-      console.log(this.usersList);
     });
+    console.log(this.usersList);
+    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
+    this.enableAdmin = this.rightsService.bEnableAdmin;
 
   }
 
   ngOnInit(): void {
-
+    if (this.enableAdmin === undefined && this.router.url !== 'users-list') {
+      this.router.navigate(['home']);
+    }
   }
 
   userSelected(user: User) {

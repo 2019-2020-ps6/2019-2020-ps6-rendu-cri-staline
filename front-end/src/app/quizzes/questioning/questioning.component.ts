@@ -43,11 +43,7 @@ export class QuestioningComponent implements OnInit {
     this.firstTry = true;
   }
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    return this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   private getDismissReason(reason: any): string {
@@ -146,4 +142,25 @@ export class QuestioningComponent implements OnInit {
       this.answersSelected = [];
     }
   }
+
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+  retry() {
+    this.answersSelected = [];
+    this.currentQuestion = 0;
+    this.shuffle(this.questions);
+   // this.validAnswer(content);
+
+  }
+
+  // displayRating(contentRating) {
+  //  this.open(contentRating);
+  // }
+
 }

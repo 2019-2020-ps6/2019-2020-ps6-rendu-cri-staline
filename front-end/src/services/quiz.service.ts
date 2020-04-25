@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LIST } from '../mocks/quiz-list.mock';
-import { Question } from '../models/question.model';
+import {Answer, Question} from '../models/question.model';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 
 @Injectable({
@@ -20,17 +20,22 @@ export class QuizService {
    * The list is retrieved from the mock.
    */
   private quizzes: Quiz[];
+  private questions: Question[];
+  private answers: Answer[];
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public quizzes$: BehaviorSubject<Quiz[]>
-    = new BehaviorSubject(this.quizzes);
+  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
+
+  public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
+
+  public answers$: BehaviorSubject<Answer[]> = new BehaviorSubject(this.answers);
 
   public quizSelected$: Subject<Quiz> = new Subject();
-  public questionsSelected$: Subject<Quiz> = new Subject();
-  public answersSelected$: Subject<Quiz> = new Subject();
+  public questionsSelected$: Subject<Question> = new Subject();
+  public answersSelected$: Subject<Answer[]> = new Subject();
 
   private quizUrl = serverUrl + '/quizzes';
   private httpOptions = httpOptionsBase;
@@ -46,8 +51,28 @@ export class QuizService {
     });
   }
 
+  setQuestionsFromUrl(quizId: string) {
+    this.http.get<Question[]>(this.quizUrl + '/' + quizId + '/questions').subscribe((questionsList) => {
+      this.questions = questionsList;
+      this.questions$.next(this.questions);
+    });
+  }
+
+  setAnswersFromUrl(quizId: string, questionId: string) {
+    this.http.get<Answer[]>(this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers').subscribe(
+      (answersList) => {
+      this.answers = answersList;
+      this.answers$.next(this.answers);
+    });
+  }
+
   addQuiz(quiz: Quiz) {
     this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+  }
+
+  deleteQuiz(quiz: Quiz) {
+    const urlWithId = this.quizUrl + '/' + quiz.id;
+    this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
 
   setSelectedQuiz(quizId: string) {
@@ -58,7 +83,29 @@ export class QuizService {
 
   }
 
+  setSelectedQuestion(quizId: string, questionId: string) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
+    this.http.get<Question>(urlWithId).subscribe((question) => {
+      this.questionsSelected$.next(question);
+    });
+  }
 
+  setSelectedAnswers(quizId: string, questionId: string) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers';
+    this.http.get<Answer[]>(urlWithId).subscribe((answers) => {
+      this.answersSelected$.next(answers);
+    });
+  }
+
+  addQuestion(quizId: string, question: Question) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions';
+    this.http.post<Question>(urlWithId, question, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
+  }
+
+  deleteQuestion(quizId: string, question: Question) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + question.id;
+    this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
+  }
 
   /* Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
 

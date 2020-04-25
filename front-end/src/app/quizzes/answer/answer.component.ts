@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {  Answer } from 'src/models/question.model';
+import {RightsService} from '../../../services/rights.service';
 @Component({
   selector: 'app-answer',
   templateUrl: './answer.component.html',
@@ -10,10 +11,14 @@ export class AnswerComponent implements OnInit {
   @Input()
   answer: Answer;
 
+  private enableAdmin: boolean;
+
   @Output()
   answerSelected: EventEmitter<Answer> = new EventEmitter<Answer>();
 
-  constructor() {
+  constructor( private rightsService: RightsService) {
+    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
+    this.enableAdmin = this.rightsService.bEnableAdmin;
   }
 
   ngOnInit() {
