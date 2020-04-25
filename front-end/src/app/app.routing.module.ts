@@ -17,6 +17,7 @@ import { QuestionsListComponent} from './quizzes/questions-list/questions-list.c
 import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 
 import { AnswersListComponent } from './quizzes/answers-list/answers-list.component';
+import { AnswerAddComponent } from './quizzes/answer-add/answer-add.component';
 
 import { from } from 'rxjs';
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
     {path: 'quiz-list/:quizId/questions-list', component: QuestionsListComponent},
     {path: 'quiz-list/:quizId/questions-list/question-add', component: QuestionAddComponent},
     {path: 'quiz-list/:quizId/questions-list/:questionId/answers-list', component: AnswersListComponent},
+    {path: 'quiz-list/:quizId/questions-list/:questionId/answers-list/answer-add', component: AnswerAddComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

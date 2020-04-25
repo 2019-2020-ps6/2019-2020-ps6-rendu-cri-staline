@@ -1,17 +1,32 @@
 # 2019-2020-ps6-rendu-cri-staline
-## PolyQuiz
-#### Groupe
-   "Cri-Staline"
-#### Auteurs 
+## Groupe
+   cri-staline
+## Auteurs 
    -   Kévin Ushaka Kubwawe
    -   Alexis Merienne
    -   Alexandre Ngai
    -   Sana DIBE  
-#### Structure du projet
 
-#### Descrption du projet
+## Installation
+### ng2-charts
 
-#### Outils utilisés
+1.Install ng2-charts using npm
+
+```
+npm install --save ng2-charts
+```
+
+2.Install Chart.js library
+
+```
+npm install --save chart.js
+```
+
+Installation of Schematics Package
+
+```
+npm install --save-dev ng2-charts-schematics
+```
 
 
 
