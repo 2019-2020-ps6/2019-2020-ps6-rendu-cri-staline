@@ -1,7 +1,6 @@
 # 2019-2020-ps6-rendu-cri-staline
-## PolyQuiz
 ## Groupe
-   "Cri-Staline"
+   cri-staline
 ## Auteurs 
    -   Kévin Ushaka Kubwawe
    -   Alexis Merienne
