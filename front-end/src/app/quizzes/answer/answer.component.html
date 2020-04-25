@@ -15,5 +15,14 @@
 
 <ng-container *ngIf="this.enableAdmin===true">
 
-  {{answer.value}}
+  <div class="card">
+    <h2>
+      <i class="fab fa-leanpub"></i>
+      {{answer.value}}
+    </h2>
+    <button class="button-card" (click)="edit()">Modifier</button>
+    <button class="button-card" (click)="edit()">Suprimer</button>
+  
+  </div>
+  
 </ng-container>

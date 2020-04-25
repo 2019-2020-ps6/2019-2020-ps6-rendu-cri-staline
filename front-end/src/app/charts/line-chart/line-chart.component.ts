@@ -100,7 +100,6 @@ export class LineChartComponent implements OnInit {
 
       // this.labels.forEach(element=> console.log(element));
       this.data.forEach(element => console.log(element));
-
       this.lineChartData = [];
       this.lineChartData.push({ data: this.data, label: 'Score' });
       this.lineChartLabels = this.labels;

@@ -1,10 +1,11 @@
 <div class="answers-list">
+  <div class="card">
+    <button class="button-card" style="margin: 35px;" (click)="selectAddQuestion()">Ajouter une réponse</button>
+    </div>
   <div class="answer" *ngFor="let answer of answersList">
     <!--Inputs & Output allow communication between parent & child components.-->
     <!--More information: https://angular.io/guide/component-interaction-->
     <app-answer [answer]="answer"></app-answer>
   </div>
 </div>
-<div>
-  <button (click)="selectAddAnswer()">Ajouter une reponse</button>
-</div>
+
