@@ -1,0 +1,21 @@
+<div class="flex">
+    <div class="flex-item">
+      <div style="display: block;">
+      <canvas baseChart width="200" height="200"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+    <div class="flex-item">
+      <table class="table table-responsive table-condensed">
+        
+      </table>
+    </div>
+  </div>

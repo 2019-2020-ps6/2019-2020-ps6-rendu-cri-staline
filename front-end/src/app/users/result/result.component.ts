@@ -16,6 +16,7 @@ export class ResultComponent implements OnInit {
   private quiz: Quiz;
 
   private value: number;
+  private rest: number;
   constructor(private quizService: QuizService) {
       this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
   }
@@ -23,9 +24,12 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
     this.quizService.setSelectedQuiz(this.result.quizId);
     this.value = this.result.score * 100;
+    this.rest = 100 - this.value;
+
   }
 
   play() {
 
   }
+
 }

@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
+
+import {LineChartComponent} from 'src/app/charts/line-chart/line-chart.component';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -55,14 +58,16 @@ import {AnswersListComponent} from './quizzes/answers-list/answers-list.componen
     QuestionsListComponent,
     QuestionAddComponent,
     AnswersListComponent,
-    AnswerComponent
+    AnswerComponent,
+    LineChartComponent
   ],
   imports: [
     NgbModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row" style="margin-top: 20px;">
   <div class="col-12 col-md-6 al justify-content-center text-center button-select">
     <img src="assets/images/harold.jpg" alt="..." class="img-thumbnail">
   </div>
@@ -12,17 +12,24 @@
       </div>
   </div>
 </div>
+
 <div class="row title-section">
-</div>
-<div class="row">
-    <div class="col-6 col-md-6 justify-content-center results">
-    <div class="result" *ngFor="let result of this.user.results">
-      <app-result [result]="result" ></app-result>
-    </div>
-  </div>
+  <button type="button" class="btn btn-primary">
+   <h1> Historique <span class="badge badge-light">{{this.results.length}}</span> </h1>
+    <span class="sr-only">unread messages</span>
+  </button>
 </div>
 
 <div class="row">
-  <div class="col-6 col-md-6 justify-content-center text-center"></div>
-  <div class="col-6 col-md-4 justify-content-center text-center"></div>
+  <div class="col-6 col-md-4 justify-content-center results">
+    <div class="result" *ngFor="let result of this.results">
+      <app-result [result]="result" ></app-result>
+    </div>
+  </div>
+  <div class="col-6 col-md-6 justify-content-center text-center">
+    <ng-container *ngIf="this.labels.length!==0">
+      <app-line-chart [data]="this.data" [labels]="this.labels"></app-line-chart>
+    </ng-container>
+  </div>
 </div>
+

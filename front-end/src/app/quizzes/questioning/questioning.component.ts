@@ -72,20 +72,23 @@ export class QuestioningComponent implements OnInit {
   }
 
   validAnswer(content) {
-    console.log(this.score);
+
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
         if (this.currentQuestion === this.questions.length - 1) {
-          window.alert('redirection mais depuis validAnswer');
           let result: Result;
           if (this.firstTry) {
             this.score++;
           }
-          result = {userId: '', quizId: '', score: this.score / this.questions.length, date: new Date().toLocaleString()};
+          result = {userId: '', quizId: '', score: this.score / this.questions.length, date: new Date().toUTCString()};
           this.refereeService.addResult(result);
           this.firstTry = true;
-          this.router.navigate(['quiz-list']);
+          console.log('HEY BRO');
+          if (window.confirm('redirection mais depuis validAnswer')) {
+            this.router.navigate(['quiz-list']);
+            this.answersSelected = [];
+          }
         } else {
           this.open(content);
           this.answersSelected = [];
