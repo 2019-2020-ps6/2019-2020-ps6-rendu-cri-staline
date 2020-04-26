@@ -58,4 +58,8 @@ export class AnswerAddComponent implements OnInit {
    return atLeastOneGoodAnswer;
   }
 
+  cancel() {
+    this.router.navigate(['quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list']);
+  }
+
 }

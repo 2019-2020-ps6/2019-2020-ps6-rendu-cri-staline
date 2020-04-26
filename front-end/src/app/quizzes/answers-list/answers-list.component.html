@@ -5,7 +5,7 @@
   <div class="answer" *ngFor="let answer of answersList">
     <!--Inputs & Output allow communication between parent & child components.-->
     <!--More information: https://angular.io/guide/component-interaction-->
-    <app-answer [answer]="answer"></app-answer>
+    <app-answer [answer]="answer" (deleteAnswer)="deleteAnswer($event)"></app-answer>
   </div>
 </div>
 

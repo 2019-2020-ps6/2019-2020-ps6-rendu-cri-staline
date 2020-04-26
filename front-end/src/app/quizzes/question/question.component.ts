@@ -23,10 +23,16 @@ export class QuestionComponent implements OnInit {
   }
 
   delete() {
-    this.deleteQuestion.emit(this.question);
+    if (window.confirm('Etes-vous sûr de vouloir supprimer cette question ?')) {
+      this.deleteQuestion.emit(this.question);
+    }
   }
 
   goToAnswers() {
     this.router.navigate(['quiz-list', this.question.quizId, 'questions-list', this.question.id, 'answers-list']);
+  }
+
+  edit() {
+
   }
 }

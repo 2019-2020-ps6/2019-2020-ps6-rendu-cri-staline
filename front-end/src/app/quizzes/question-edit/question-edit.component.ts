@@ -1,21 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Question} from '../../../models/question.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Quiz} from '../../../models/quiz.model';
-import {Question} from '../../../models/question.model';
 
 @Component({
-  selector: 'app-question-add',
-  templateUrl: 'question-add.component.html',
-  styleUrls: ['question-add.component.scss']
+  selector: 'app-question-edit',
+  templateUrl: './question-edit.component.html',
+  styleUrls: ['./question-edit.component.scss']
 })
-export class QuestionAddComponent implements OnInit {
+export class QuestionEditComponent implements OnInit {
   public questionForm: FormGroup;
-  public quiz: Quiz;
+  public question: Question;
   public id: string;
+  public questionId: string;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private route: ActivatedRoute) {
+    this.quizService.questionsSelected$.subscribe((question) => {
+      this.question = question;
+      console.log(this.question);
+    });
     this.questionForm = this.formBuilder.group({
       label: ['']
     });
@@ -23,12 +27,17 @@ export class QuestionAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('quizId');
+    this.questionId = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(this.id);
+    this.quizService.setSelectedQuestion(this.id, this.questionId);
   }
 
-  addQuestion() {
+  updateQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
-    this.quizService.addQuestion(this.id, questionToAdd);
+    if (questionToAdd.label === '') {
+      questionToAdd.label = this.question.label;
+    }
+    this.quizService.updateQuestion(this.id, this.question.id, questionToAdd);
     this.router.navigate(['quiz-list', this.id, 'questions-list']);
   }
 

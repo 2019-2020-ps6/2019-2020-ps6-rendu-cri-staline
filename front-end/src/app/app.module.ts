@@ -17,6 +17,7 @@ import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
 import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuizComponent } from './quizzes/quiz/quiz.component';
+import { QuizEditComponent } from './quizzes/quiz-edit/quiz-edit.component';
 
 import {UserComponent} from './users/user/user.component';
 import { UserAddComponent } from './users/user-add/user-add.component';
@@ -40,6 +41,8 @@ import { QuestionAddComponent } from './quizzes/question-add/question-add.compon
 
 import {AnswersListComponent} from './quizzes/answers-list/answers-list.component';
 import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
+import {QuestionEditComponent} from './quizzes/question-edit/question-edit.component';
+import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
     AnswerComponent,
     LineChartComponent,
     AnswerAddComponent,
+    QuizEditComponent,
+    QuestionEditComponent,
+    AnswerEditComponent
   ],
   imports: [
     NgbModule,

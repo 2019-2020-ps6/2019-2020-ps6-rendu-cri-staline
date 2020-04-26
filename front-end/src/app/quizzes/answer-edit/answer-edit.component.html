@@ -11,7 +11,7 @@
     <br/>
 
     <label>
-        <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="true" />Vrai
+      <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="true" />Vrai
     </label>
 
     <br/>
@@ -23,14 +23,7 @@
 
     <br/>
 
-    <button type="submit" class="button-card" (click)="addAnswer()">Ajouter</button>
+    <button type="submit" class="button-card" (click)="updateAnswer()">Enregistrer</button>
     <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
-
   </form>
-  <ng-container *ngIf="this.alert===true">
-    <br/>
-    <div class="alert alert-warning" role="alert">
-      {{this.err}}
-    </div>
-  </ng-container>
 </div>

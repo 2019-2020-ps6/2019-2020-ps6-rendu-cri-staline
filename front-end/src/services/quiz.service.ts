@@ -90,6 +90,11 @@ export class QuizService {
     });
   }
 
+  updateQuiz(quizId: string, quiz: Quiz) {
+    const urlWithId = this.quizUrl + '/' + quizId;
+    this.http.put<Quiz>(urlWithId, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+  }
+
   setSelectedAnswers(quizId: string, questionId: string) {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers';
     this.http.get<Answer[]>(urlWithId).subscribe((answers) => {
@@ -107,38 +112,25 @@ export class QuizService {
     this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
   }
 
+  updateQuestion(quizId: string, questionId: string, question: Question) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
+    this.http.put<Question>(urlWithId, question, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
+  }
+
   addAnswer(quizId: string, questionId: string, answer: Answer) {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers';
     this.http.post<Answer>(urlWithId, answer, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));
   }
 
   deleteAnswer(quizId: string, questionId: string, answer: Answer) {
-    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers' + answer.id;
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers' + '/' + answer.id;
     this.http.delete<Answer>(urlWithId, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));
   }
 
-  /* Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
-
-  addQuestion(quiz: Quiz, question: Question) {
-    quiz.questions.push(question);
-    const index = this.quizzes.findIndex((q: Quiz) => q.id === quiz.id);
-    if (index) {
-      this.updateQuizzes(quiz, index);
-    }
+  updateAnswer(quizId: string, questionId: string, answerId: string, answer: Answer) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers' + '/' + answerId;
+    this.http.put<Answer>(urlWithId, answer, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));
   }
 
-  deleteQuestion(quiz: Quiz, question: Question) {
-    const index = quiz.questions.findIndex((q) => q.label === question.label);
-    if (index !== -1) {
-      quiz.questions.splice(index, 1)
-      this.updateQuizzes(quiz, index);
-    }
-  }
-
-  private updateQuizzes(quiz: Quiz, index: number) {
-    this.quizzes[index] = quiz;
-    this.quizzes$.next(this.quizzes);
-  }
-  */
 }
 
