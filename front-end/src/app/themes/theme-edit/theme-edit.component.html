@@ -1,0 +1,18 @@
+<div class="card">
+  <form class="theme-add" [formGroup]="themeForm">
+    <label for="themeName">
+      Nom du thème :  <br>
+      <input class="input-custom" type="text" id="themeName" value="{{this.theme.themeName}}" [formControlName]="'themeName'">
+    </label>
+    <br>      
+    <div class="form-group">
+      <label for="themeImage">Image :
+      <input type="file" class="form-control-file" id="themeImage" value="{{this.theme.themeImage}}" (change)="onFileChange($event)" [formControlName]="'themeImage'">
+    </label>
+    </div>
+    <button type="submit" class="button-card" (click)="updateTheme()">Enregistrer</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
+  </form>
+</div>
+
+

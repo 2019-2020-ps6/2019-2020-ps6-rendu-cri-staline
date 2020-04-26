@@ -29,6 +29,10 @@ import { WorkspaceComponent } from './admin/workspace/workspace.component';
 import { HomeComponent } from './home/home.component';
 
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
+import {ThemeComponent} from './themes/theme/theme.component';
+import { ThemeEditComponent } from './themes/theme-edit/theme-edit.component';
+import {ThemesListComponent} from './themes/themes-list/themes-list.component';
+import {ThemeDetailsComponent} from './themes/theme-details/theme-details.component';
 
 import { QuestionComponent } from './quizzes/question/question.component';
 import { QuestionsListComponent } from './quizzes/questions-list/questions-list.component';
@@ -54,6 +58,10 @@ import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
     UserDetailsComponent,
     UserEditComponent,
     ThemeAddComponent,
+    ThemeComponent,
+    ThemeEditComponent,
+    ThemesListComponent,
+    ThemeDetailsComponent,
     ResultComponent,
     QuestionComponent,
     QuestionsListComponent,

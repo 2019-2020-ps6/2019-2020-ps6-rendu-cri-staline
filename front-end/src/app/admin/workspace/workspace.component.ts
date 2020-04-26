@@ -39,7 +39,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   themeslist() {
-
+    this.router.navigate(['themes-list']);
   }
 
 }

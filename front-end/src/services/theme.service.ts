@@ -22,7 +22,7 @@ export class ThemeService {
   constructor(private http: HttpClient) {
     this.setThemesFromUrl();
   }
-
+/*
   addThemeWithPicture(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
     formData.append('themeFile', imageFile);
@@ -36,7 +36,7 @@ export class ThemeService {
     return this.http.request(req);
    // this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
   }
-
+*/
   setThemesFromUrl() {
     this.http.get<Theme[]>(this.themeUrl).subscribe((themeList) => {
       this.themes = themeList;
@@ -44,7 +44,7 @@ export class ThemeService {
     });
   }
 
-  addTheme(theme: Theme) {
+  addQuiz(theme: Theme) {
     this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
   }
 
@@ -59,6 +59,12 @@ export class ThemeService {
   deleteTheme(theme: Theme) {
     const urlWithId = this.themeUrl + '/' + theme.id;
     this.http.delete<Theme>(urlWithId, this.httpOptions).subscribe(() => this.setThemesFromUrl());
+  }
+
+  updateTheme(index: string, theme: Theme) {
+    const urlWithId = this.themeUrl + '/' + index;
+    this.http.put<Theme>(urlWithId, theme, this.httpOptions).subscribe(() => {this.setThemesFromUrl(); });
+
   }
 
 }
