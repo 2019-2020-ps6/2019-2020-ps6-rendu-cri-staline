@@ -1,0 +1,13 @@
+<div class="card">
+  <h2>
+    <i class="fab fa-leanpub"></i>
+    {{theme.themeName}}
+  </h2>
+  
+
+  <ng-container *ngIf="this.enableAdmin===true">
+    <button class="button-card" (click)="quizzes()">Entrer</button>
+    <button class="button-card" (click)="edit()" routerLink="edit/{{theme.id}}">Modifier</button>
+    <button class="button-card" (click)="delete()" routerLink="/">Supprimer</button>
+  </ng-container>
+</div>

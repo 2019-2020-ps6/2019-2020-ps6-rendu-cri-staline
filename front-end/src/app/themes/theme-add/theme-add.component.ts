@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Theme } from '../../../models/theme.model';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ThemeService} from '../../../services/theme.service';
 import {Router} from '@angular/router';
 
@@ -11,27 +11,35 @@ import {Router} from '@angular/router';
 })
 
 export class ThemeAddComponent implements OnInit {
-  public themeForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder, public themeService: ThemeService, private router: Router) {
     this.themeForm = this.formBuilder.group({
       themeName: [''],
-      themeImage: ['']
+      themeImage: [null, Validators.required],
     });
   }
+  public themeForm: FormGroup;
+  public selectedFile: File;
 
   ngOnInit() {
   }
 
   addTheme() {
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
-    const themeImageFile: File = ( window.document.getElementById('fileuploadbox') as HTMLInputElement).files[0];
-    this.themeService.addThemeWithPicture(themeToAdd, themeImageFile).subscribe((event) => {
-      console.log(event);
-    }, error => {
+    themeToAdd.themeImage = this.selectedFile;
+    console.log(themeToAdd);
+    this.themeService.addQuiz(themeToAdd);
+    this.router.navigate(['themes-list']);
 
-    });
-    this.router.navigate(['workspace']);
+  //  const themeImageFile: File = ( window.document.getElementById('fileuploadbox') as HTMLInputElement).files[0];
+  //  this.themeService.addThemeWithPicture(themeToAdd, themeImageFile).subscribe((event) => {
+  //    console.log(event);
+  //  }, error => {
+
+  //  });
   }
+onFileChange(event) {
+  this.selectedFile = event.target.files[0] as File;
+}
 
 }

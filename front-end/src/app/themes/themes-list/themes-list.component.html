@@ -1,0 +1,9 @@
+<div *ngIf="enableAdmin===false">
+  <h1>Thèmes</h1>
+</div>
+
+<div class="themes-list">
+    <div class="theme" *ngFor="let theme of themeList">
+        <app-theme [theme]="theme" (themeSelected)="themeSelected($event)" (deletetheme)="deleteTheme($event)"></app-theme>
+    </div>
+  </div>

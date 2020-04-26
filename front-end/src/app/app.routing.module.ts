@@ -10,9 +10,14 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import {UsersListComponent} from './users/users-list/users-list.component';
 import {UserDetailsComponent} from './users/user-details/user-details.component';
 
+import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
+import { ThemeEditComponent } from './themes/theme-edit/theme-edit.component';
+import {ThemesListComponent} from './themes/themes-list/themes-list.component';
+import {ThemeDetailsComponent} from './themes/theme-details/theme-details.component';
+
+
 import { HomeComponent } from './home/home.component';
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
-import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 import { QuestionsListComponent} from './quizzes/questions-list/questions-list.component';
 import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 
@@ -29,6 +34,9 @@ const routes: Routes = [
     {path: 'users-list/edit/:id', component: UserEditComponent},
     {path: 'users-list', component: UsersListComponent},
     {path: 'users-list/:id', component: UserDetailsComponent},
+    {path: 'themes-list/edit/:id', component: ThemeEditComponent},
+    {path: 'themes-list', component: ThemesListComponent},
+    {path: 'themes-list/:id', component: ThemeDetailsComponent},
     {path: 'theme-add', component: ThemeAddComponent},
     {path: 'quiz-form', component: QuizFormComponent},
     {path: 'quiz-list/:quizId/questions-list', component: QuestionsListComponent},
