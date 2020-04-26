@@ -41,4 +41,8 @@ export class QuizFormComponent implements OnInit {
     this.router.navigate(['quiz-list']);
   }
 
+  cancel() {
+    this.router.navigate(['workspace']);
+  }
+
 }

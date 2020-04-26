@@ -32,4 +32,8 @@ export class QuestionAddComponent implements OnInit {
     this.router.navigate(['quiz-list', this.id, 'questions-list']);
   }
 
+  cancel() {
+    this.router.navigate(['quiz-list', this.id, 'questions-list']);
+  }
+
 }

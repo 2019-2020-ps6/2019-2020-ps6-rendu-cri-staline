@@ -90,6 +90,11 @@ export class QuizService {
     });
   }
 
+  updateQuiz(quizId: string, quiz: Quiz) {
+    const urlWithId = this.quizUrl + '/' + quizId;
+    this.http.put<Quiz>(urlWithId, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+  }
+
   setSelectedAnswers(quizId: string, questionId: string) {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers';
     this.http.get<Answer[]>(urlWithId).subscribe((answers) => {
@@ -117,28 +122,5 @@ export class QuizService {
     this.http.delete<Answer>(urlWithId, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));
   }
 
-  /* Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
-
-  addQuestion(quiz: Quiz, question: Question) {
-    quiz.questions.push(question);
-    const index = this.quizzes.findIndex((q: Quiz) => q.id === quiz.id);
-    if (index) {
-      this.updateQuizzes(quiz, index);
-    }
-  }
-
-  deleteQuestion(quiz: Quiz, question: Question) {
-    const index = quiz.questions.findIndex((q) => q.label === question.label);
-    if (index !== -1) {
-      quiz.questions.splice(index, 1)
-      this.updateQuizzes(quiz, index);
-    }
-  }
-
-  private updateQuizzes(quiz: Quiz, index: number) {
-    this.quizzes[index] = quiz;
-    this.quizzes$.next(this.quizzes);
-  }
-  */
 }
 

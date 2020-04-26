@@ -7,7 +7,7 @@
     </label>
 
     <br/>
-    Réponse juste 
+    Réponse juste
     <br/>
 
     <label>
@@ -23,11 +23,10 @@
 
     <br/>
 
-    <button type="submit" class="button-card" (click)="addAnswer()">
-      Ajouter
-    </button>
-  
-  </form> 
+    <button type="submit" class="button-card" (click)="addAnswer()">Ajouter</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
+
+  </form>
   <ng-container *ngIf="this.alert===true">
     <br/>
     <div class="alert alert-warning" role="alert">

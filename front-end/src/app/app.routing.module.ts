@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
 import { QuizFormComponent} from './quizzes/quiz-form/quiz-form.component';
+import {QuizEditComponent} from './quizzes/quiz-edit/quiz-edit.component';
 
 import { UserAddComponent } from './users/user-add/user-add.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
