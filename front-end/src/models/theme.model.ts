@@ -1,5 +1,5 @@
 export interface Theme {
-    id: string;
+    id?: string;
     themeName: string;
-    themeImage: File;
+    themeImage?: File;
 }

@@ -28,15 +28,13 @@ export class ThemeAddComponent implements OnInit {
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     themeToAdd.themeImage = this.selectedFile;
     console.log(themeToAdd);
-    this.themeService.addQuiz(themeToAdd);
-    this.router.navigate(['themes-list']);
 
-  //  const themeImageFile: File = ( window.document.getElementById('fileuploadbox') as HTMLInputElement).files[0];
-  //  this.themeService.addThemeWithPicture(themeToAdd, themeImageFile).subscribe((event) => {
-  //    console.log(event);
-  //  }, error => {
-
-  //  });
+    this.themeService.addThemeWithPicture({themeName : themeToAdd.themeName}, themeToAdd.themeImage).subscribe((event) => {
+      console.log(event);
+      this.router.navigate(['themes-list']);
+    }, error => {
+      console.error(error);
+    });
   }
 onFileChange(event) {
   this.selectedFile = event.target.files[0] as File;

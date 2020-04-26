@@ -66,8 +66,8 @@
   <div class="modal-body" style="text-align: center;" role="dialog">
     <div><h1>Que voulez-vous faire ?</h1></div>
     <div class="btn-group-vertical">
-    <button type="button" class="btn btn-outline-dark" (click)="quitQuiz()">Liste des quiz</button><br>
-    <button type="button" class="btn btn-outline-dark" (click)="Retry()">Recommencer</button><br>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('quit')">Liste des quiz</button><br>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('retry')">Recommencer</button><br>
     <button type="button" class="btn btn-outline-dark" (click)="listThemes()">Retour à la liste des thèmes</button>
 
   </div>
@@ -80,7 +80,15 @@
   <div><h1>Bien Joué !</h1></div>
     <div>Vous avez fini le quiz !</div>
 <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-<p>Appuie sur le bouton Continuer pour continuer</p>
-<button class="btn btn-sm btn-outline-primary mr-2" (click)="validAnswer(currentQuestionContent)">Continuer</button>
+<p>Appuyez sur le bouton Continuer pour continuer</p>
+<button class="btn btn-sm btn-outline-primary mr-2" (click)="modal.close();validAnswer(currentQuestionContent)">Continuer</button>
 </div>
+</ng-template>
+
+  <ng-template #noneAnswer let-modal>
+    <div  class="modal-body" style="text-align: center;">
+      <div><h1>Vous devez sélectionner au moins une réponse</h1></div>
+      <div>Appuyez sur le bouton Revenir à la question et sélectionnez une ou plusieurs réponses</div><br/>
+      <button class="btn btn-sm btn-outline-primary mr-2" (click)="modal.close('go to question')">Revenir à la question</button>
+    </div>
   </ng-template>

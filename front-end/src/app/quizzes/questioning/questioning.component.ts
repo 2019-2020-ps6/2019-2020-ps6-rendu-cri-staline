@@ -89,7 +89,22 @@ export class QuestioningComponent implements OnInit {
           this.refereeService.addResult(result);
           this.firstTry = true;
           console.log('HEY BRO');
-          this.open(content);
+          const modalRef = this.open(content);
+          // tslint:disable-next-line: no-shadowed-variable
+          modalRef.result.then((result) => {
+            switch (result) {
+              case 'retry':
+                this.retry();
+                break;
+              case 'quit':
+                this.quitQuiz();
+                break;
+              default:
+                break;
+            }
+          }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          });
           //  if (window.confirm('redirection mais depuis validAnswer')) {
           //  this.router.navigate(['quiz-list']);
           //  this.answersSelected = [];
@@ -170,9 +185,19 @@ export class QuestioningComponent implements OnInit {
 }
 
   retry() {
-    this.answersSelected = [];
+    console.log('Retrying...');
+    this.score = 0;
+    this.questions = this.shuffle(this.quiz.questions);
     this.currentQuestion = 0;
-    this.shuffle(this.questions);
+    this.answers = [];
+    this.answers = this.questions[this.currentQuestion].answers;
+    this.firstTry = true;
+    this.totalGoodAnswers = 0;
+    this.currentRate = 5;
+
+    this.answersSelected = [];
+    console.log('shuffle is done , questions:', JSON.stringify(this.questions));
+    console.log('answers:', this.answers);
    // this.validAnswer(content);
 
   }

@@ -3,7 +3,7 @@
 </div>
 
 <div class="themes-list">
-    <div class="theme" *ngFor="let theme of themeList">
+    <div class="theme" *ngFor="let theme of themesList">
         <app-theme [theme]="theme" (themeSelected)="themeSelected($event)" (deletetheme)="deleteTheme($event)"></app-theme>
     </div>
   </div>
