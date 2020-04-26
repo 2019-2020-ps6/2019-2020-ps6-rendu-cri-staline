@@ -1,0 +1,12 @@
+<div class="card">
+  <form class="question-add" [formGroup]="questionForm">
+    <label for="label">
+      Label <br>
+      <input class="input-custom" type="text" id="label" value="{{this.question.label}}" [formControlName]="'label'">
+    </label>
+    <br>
+    <button type="submit" class="button-card" (click)="updateQuestion()">Enregistrer</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
+
+  </form>
+</div>

@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="card">
+  <form class="quiz-form" [formGroup]="quizForm">
+    <label for="name">
+      Nom <br>
+      <input class="input-custom" type="text" id="name" value="{{this.quiz.name}}" [formControlName]="'name'">
+    </label>
+    <br>
+    <label for="theme">
+      Theme <br>
+      <input class="input-custom" type="text" id="theme" value="{{this.quiz.theme}}" [formControlName]="'theme'">
+    </label>
+    <br>
+    <button type="submit" class="button-card" (click)="updateQuiz()">Enregistrer</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
 
-</body>
-</html>
+  </form>
+</div>

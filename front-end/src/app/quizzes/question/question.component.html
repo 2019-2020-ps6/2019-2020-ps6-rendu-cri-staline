@@ -4,5 +4,6 @@
     {{question.label}}
   </h2>
   <button class="button-card" (click)="goToAnswers()">Consulter</button>
+  <button class="button-card" (click)="edit()" routerLink="edit/{{question.id}}">Modifier</button>
 
 </div>

@@ -112,6 +112,11 @@ export class QuizService {
     this.http.delete<Question>(urlWithId, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
   }
 
+  updateQuestion(quizId: string, questionId: string, question: Question) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
+    this.http.put<Question>(urlWithId, question, this.httpOptions).subscribe(() => this.setQuestionsFromUrl(quizId));
+  }
+
   addAnswer(quizId: string, questionId: string, answer: Answer) {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers';
     this.http.post<Answer>(urlWithId, answer, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));

@@ -29,4 +29,8 @@ export class QuestionComponent implements OnInit {
   goToAnswers() {
     this.router.navigate(['quiz-list', this.question.quizId, 'questions-list', this.question.id, 'answers-list']);
   }
+
+  edit() {
+
+  }
 }

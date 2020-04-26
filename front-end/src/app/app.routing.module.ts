@@ -24,11 +24,13 @@ import { QuestionAddComponent } from './quizzes/question-add/question-add.compon
 
 import { AnswersListComponent } from './quizzes/answers-list/answers-list.component';
 import { AnswerAddComponent } from './quizzes/answer-add/answer-add.component';
+import { QuestionEditComponent} from './quizzes/question-edit/question-edit.component';
 
 import { from } from 'rxjs';
 const routes: Routes = [
     {path: 'quiz-list', component: QuizListComponent},
     {path: 'quiz-list/:id', component: QuestioningComponent},
+    {path: 'quiz-list/edit/:id', component: QuizEditComponent},
     {path: 'workspace', component: WorkspaceComponent},
     {path: 'home', component: HomeComponent},
     {path: 'user-add', component: UserAddComponent},
@@ -42,6 +44,7 @@ const routes: Routes = [
     {path: 'quiz-form', component: QuizFormComponent},
     {path: 'quiz-list/:quizId/questions-list', component: QuestionsListComponent},
     {path: 'quiz-list/:quizId/questions-list/question-add', component: QuestionAddComponent},
+    {path: 'quiz-list/:quizId/questions-list/edit/:id', component: QuestionEditComponent},
     {path: 'quiz-list/:quizId/questions-list/:questionId/answers-list', component: AnswersListComponent},
     {path: 'quiz-list/:quizId/questions-list/:questionId/answers-list/answer-add', component: AnswerAddComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
