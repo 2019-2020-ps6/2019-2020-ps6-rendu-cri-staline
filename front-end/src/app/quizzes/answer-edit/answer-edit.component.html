@@ -1,0 +1,29 @@
+<div class="card">
+  <form class="answer-form" [formGroup]="answerForm">
+
+    <label for="value">
+      Réponse <br>
+      <input class="input-custom" type="text" id="value" [formControlName]="'value'">
+    </label>
+
+    <br/>
+    Réponse juste
+    <br/>
+
+    <label>
+      <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="true" />Vrai
+    </label>
+
+    <br/>
+
+    <label>
+      <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="false" />Faux
+    </label>
+
+
+    <br/>
+
+    <button type="submit" class="button-card" (click)="updateAnswer()">Enregistrer</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
+  </form>
+</div>

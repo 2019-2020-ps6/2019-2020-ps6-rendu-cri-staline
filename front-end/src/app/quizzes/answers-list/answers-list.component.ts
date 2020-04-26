@@ -31,4 +31,8 @@ export class AnswersListComponent implements OnInit {
     this.router.navigate(['quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list', 'answer-add']);
   }
 
+  deleteAnswer(answer: Answer) {
+    this.quizService.deleteAnswer(this.quizId, this.questionId, answer);
+  }
+
 }

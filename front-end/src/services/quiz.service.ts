@@ -123,8 +123,13 @@ export class QuizService {
   }
 
   deleteAnswer(quizId: string, questionId: string, answer: Answer) {
-    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers' + answer.id;
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers' + '/' + answer.id;
     this.http.delete<Answer>(urlWithId, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));
+  }
+
+  updateAnswer(quizId: string, questionId: string, answerId: string, answer: Answer) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers' + '/' + answerId;
+    this.http.put<Answer>(urlWithId, answer, this.httpOptions).subscribe(() => this.setAnswersFromUrl(quizId, questionId));
   }
 
 }

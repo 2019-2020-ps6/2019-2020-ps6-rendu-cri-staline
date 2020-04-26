@@ -23,7 +23,9 @@ export class QuestionComponent implements OnInit {
   }
 
   delete() {
-    this.deleteQuestion.emit(this.question);
+    if (window.confirm('Etes-vous sûr de vouloir supprimer cette question ?')) {
+      this.deleteQuestion.emit(this.question);
+    }
   }
 
   goToAnswers() {

@@ -40,8 +40,10 @@ export class QuizComponent implements OnInit {
   }
 
   delete() {
-    this.deleteQuiz.emit(this.quiz);
-    this.router.navigate(['quiz-list']);
+    if (window.confirm('Etes-vous sûr de vouloir supprimer ce quiz ?')) {
+      this.deleteQuiz.emit(this.quiz);
+      this.router.navigate(['quiz-list']);
+    }
   }
 
   questions() {

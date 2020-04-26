@@ -42,6 +42,7 @@ import { QuestionAddComponent } from './quizzes/question-add/question-add.compon
 import {AnswersListComponent} from './quizzes/answers-list/answers-list.component';
 import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
 import {QuestionEditComponent} from './quizzes/question-edit/question-edit.component';
+import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {QuestionEditComponent} from './quizzes/question-edit/question-edit.compo
     LineChartComponent,
     AnswerAddComponent,
     QuizEditComponent,
-    QuestionEditComponent
+    QuestionEditComponent,
+    AnswerEditComponent
   ],
   imports: [
     NgbModule,
