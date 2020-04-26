@@ -1,4 +1,4 @@
-const { User,Result } = require('../../models')
+const { User, Result } = require('../../models')
 const { filterResultsFromUser } = require('./results/manager')
 
 /**
@@ -6,7 +6,7 @@ const { filterResultsFromUser } = require('./results/manager')
  * This function aggregates the results from the database to build a user with all the data needed by the clients.
  * @param quizId
  */
-const buildUser= (userId) => {
+const buildUser = (userId) => {
   const user = User.getById(userId)
   const results = filterResultsFromUser(user.id)
   return { ...user, results }

@@ -3,6 +3,7 @@ const ResultsRouter = require('./results')
 const { User } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
 const { buildUser, buildUsers } = require('./manager')
+
 const router = new Router()
 
 router.use('/:userId/results', ResultsRouter)

@@ -1,21 +1,37 @@
 <div class="card">
-  <h2>Ajouter une réponse</h2>
   <form class="answer-form" [formGroup]="answerForm">
+
     <label for="value">
       Réponse <br>
       <input class="input-custom" type="text" id="value" [formControlName]="'value'">
     </label>
-    <br>
-    <div formGroupName="correct">
-      Réponse juste <br>
-      <label>
-        <input type="radio" name="isCorrect" id="isCorrect" formControlName="isCorrect" [value]="true" />Vrai
-      </label>
-      <label>
-        <input type="radio" name="isCorrect" id="false" formControlName="isCorrect" [value]="false" />Faux
-      </label>
+
+    <br/>
+    Réponse juste 
+    <br/>
+
+    <label>
+        <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="true" />Vrai
+    </label>
+
+    <br/>
+
+    <label>
+      <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="false" />Faux
+    </label>
+
+
+    <br/>
+
+    <button type="submit" class="button-card" (click)="addAnswer()">
+      Ajouter
+    </button>
+  
+  </form> 
+  <ng-container *ngIf="this.alert===true">
+    <br/>
+    <div class="alert alert-warning" role="alert">
+      {{this.err}}
     </div>
-    <br>
-    <button type="submit" class="button-card" (click)="addAnswer()">Ajouter</button>
-  </form>
+  </ng-container>
 </div>

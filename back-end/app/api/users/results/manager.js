@@ -1,4 +1,4 @@
-const { Result ,User} = require('../../../models')
+const { Result, User } = require('../../../models')
 const NotFoundError = require('../../../utils/errors/not-found-error')
 /**
  * Results Manager.
@@ -13,7 +13,7 @@ const NotFoundError = require('../../../utils/errors/not-found-error')
 const filterResultsFromUser = (userId) => {
   const results = Result.get()
   const parsedId = parseInt(userId, 10)
-  return results.filter((result) =>  parseInt(result.userId,10) === parsedId)
+  return results.filter((result) => parseInt(result.userId, 10) === parsedId)
 }
 
 /**

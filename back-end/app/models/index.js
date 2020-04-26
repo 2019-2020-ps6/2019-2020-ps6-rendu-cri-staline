@@ -11,5 +11,5 @@ module.exports = {
   Answer,
   User,
   Theme,
-  Result
+  Result,
 }
