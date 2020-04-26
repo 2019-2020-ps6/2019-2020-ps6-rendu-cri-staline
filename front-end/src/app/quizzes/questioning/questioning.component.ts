@@ -22,6 +22,8 @@ export class QuestioningComponent implements OnInit {
   public firstTry: boolean;
   public score: number;
   closeResult = '';
+  public currentRate: number;
+  public totalGoodAnswers: number;
   constructor(private route: ActivatedRoute, private quizService: QuizService,
               private router: Router,
               private modalService: NgbModal,
@@ -41,6 +43,8 @@ export class QuestioningComponent implements OnInit {
     this.quizService.setSelectedQuiz(id);
     this.score = 0;
     this.firstTry = true;
+    this.totalGoodAnswers = 0;
+    this.currentRate = 5;
   }
   open(content) {
     return this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
@@ -85,19 +89,29 @@ export class QuestioningComponent implements OnInit {
           this.refereeService.addResult(result);
           this.firstTry = true;
           console.log('HEY BRO');
-          if (window.confirm('redirection mais depuis validAnswer')) {
-            this.router.navigate(['quiz-list']);
-            this.answersSelected = [];
-          }
-        } else {
           this.open(content);
+          //  if (window.confirm('redirection mais depuis validAnswer')) {
+          //  this.router.navigate(['quiz-list']);
+          //  this.answersSelected = [];
+          //  }
+        } else {
+        //  this.open(content);
+        //  this.answersSelected = [];
+        //  this.currentQuestion++;
+        const modalRef = this.open(content);
+        modalRef.result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
           this.answersSelected = [];
           this.currentQuestion++;
-          if (this.firstTry) {
+          this.answers = this.questions[this.currentQuestion].answers;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+        if (this.firstTry) {
             this.score++;
           }
-          this.firstTry = true;
-          this.answers = this.questions[this.currentQuestion].answers;
+        this.firstTry = true;
+        this.answers = this.questions[this.currentQuestion].answers;
         }
       } else {
         this.firstTry = false;
@@ -137,6 +151,7 @@ export class QuestioningComponent implements OnInit {
       this.answers = newArrayAnswers;
       this.answersSelected = newArrayAnswersSelected;
     });
+    window.alert('Vous y êtes presque, réessayez !');
   }
 
   quitQuiz() {
