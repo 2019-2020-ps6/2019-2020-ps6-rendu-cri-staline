@@ -2,6 +2,7 @@ import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { User } from '../../../models/user.model';
 import { Quiz } from '../../../models/quiz.model';
 import { Router } from '@angular/router';
+import { QuizService } from 'src/services/quiz.service';
 
 @Component({
   selector: 'app-workspace',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class WorkspaceComponent implements OnInit {
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private quizService: QuizService) {
 
   }
 
@@ -35,6 +36,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   quizzeslist() {
+    this.quizService.setQuizzesFromUrl();
     this.router.navigate(['quiz-list']);
   }
 

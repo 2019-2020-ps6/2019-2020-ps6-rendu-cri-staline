@@ -1,6 +1,5 @@
 const { Theme } = require('../../models')
 
-
 const buildTheme= (themeId) => {
   const theme = Theme.getById(themeId)
   return theme

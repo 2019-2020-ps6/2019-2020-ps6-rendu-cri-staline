@@ -33,12 +33,14 @@ public haveErrors = false;
     console.log(themeToAdd);
     this.valid(themeToAdd);
     if (!this.haveErrors) {
-      this.themeService.addTheme({themeName : themeToAdd.themeName}, themeToAdd.themeImage).subscribe((event) => {
+      /*this.themeService.addTheme(themeToAdd).subscribe((event) => {
         console.log(event);
         this.router.navigate(['themes-list']);
       }, error => {
         console.error(error);
-      });
+      });*/
+      this.themeService.addTheme(themeToAdd);
+      this.router.navigate(['themes-list']);
     }
   }
 onFileChange(event) {

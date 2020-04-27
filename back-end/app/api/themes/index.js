@@ -6,6 +6,8 @@ const express = require('express')
  var path = require('path')
 const manageAllErrors = require('../../utils/routes/error-management')
 const { buildTheme, buildThemes } = require('./manager')
+const {deleteQuizzesOfTheme}= require('../quizzes/manager')
+
 const router = new Router()
 
 
@@ -23,7 +25,7 @@ var storage = multer.diskStorage({
  router.use(bodyParser.json({ limit: '50mb' }));
  router.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 
- router.post('/', upload.single('themeFile'), (req, res, next) => {
+ router.post('/createFile', upload.single('themeFile'), (req, res, next) => {
     console.log('req body:', req.body);
     let themeObject = {...JSON.parse(...req.body)}
     if(req.file!=undefined){
@@ -36,6 +38,18 @@ var storage = multer.diskStorage({
 
     res.status(200).json(theme)
  }) 
+ router.post('/', (req, res, next) => {
+  let themeObject = {...req.body}
+  if(req.file!=undefined){
+    themeObject = {...req.body, themeImage: req.file.filename}
+  }
+  console.log('req.file:', req.file);
+  console.log('req.data:', req.data);
+
+  const theme = Theme.create(themeObject)
+
+  res.status(200).json(theme)
+}) 
 
 
 router.get('/', (req, res) => {
@@ -75,11 +89,14 @@ router.get('/', (req, res) => {
   
   router.delete('/:themeId', (req, res) => {
     try {
+      deleteQuizzesOfTheme(req.params.themeId);
       Theme.delete(req.params.themeId)
       res.status(204).end()
     } catch (err) {
+      console.log(err);
       manageAllErrors(res, err)
     }
   })
+  
   
 module.exports = router

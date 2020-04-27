@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Theme } from '../../../models/theme.model';
+import { Quiz } from '../../../models/quiz.model';
 import {Router } from '@angular/router';
 import { RightsService } from 'src/services/rights.service';
 import { ThemeService } from '../../../services/theme.service';
 import { RefereeService } from '../../../services/referee.service';
+import { QuizService } from 'src/services/quiz.service';
 
 @Component({
   selector: 'app-theme',
@@ -29,7 +31,6 @@ export class ThemeComponent implements OnInit {
               private refereeService: RefereeService, private themeService: ThemeService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
-
   }
 
   ngOnInit() {

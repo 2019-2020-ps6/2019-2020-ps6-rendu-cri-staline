@@ -35,7 +35,7 @@ export class QuizEditComponent implements OnInit {
     if (quizToEdit.name === '') {
       quizToEdit.name = this.quiz.name;
     }
-    if (quizToEdit.theme === '') {
+    if (quizToEdit.theme.themeName === '') {
       quizToEdit.theme = this.quiz.theme;
     }
     this.quizService.updateQuiz(this.quiz.id, quizToEdit);

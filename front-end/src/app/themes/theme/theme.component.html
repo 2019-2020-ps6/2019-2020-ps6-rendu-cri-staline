@@ -1,8 +1,14 @@
 <div class="card">
-  <h2>
-    <img src="{{imageUrl}}" width="100px" height="100px" />
-    {{theme.themeName}}
-  </h2>
+
+    <div>
+      <h2>
+        <ng-container *ngIf="theme.themeImage!==undefined">
+          <img src="{{imageUrl}}" width="100px" height="100px" />
+        </ng-container>
+        {{theme.themeName}}
+      </h2>
+    </div>
+ 
   
 
   <ng-container *ngIf="this.enableAdmin===true">

@@ -33,8 +33,14 @@ const buildQuizzes = () => {
   return quizzes.map((quiz) => buildQuizz(quiz.id))
 }
 
+const deleteQuizzesOfTheme =(themeId)=>{
+  const quizzes=buildQuizzesByThemeId(themeId);
+  quizzes.forEach((quiz)=>Quiz.delete(quiz.id))
+}
+
 module.exports = {
   buildQuizz,
   buildQuizzes,
   buildQuizzesByThemeId,
+  deleteQuizzesOfTheme,
 }

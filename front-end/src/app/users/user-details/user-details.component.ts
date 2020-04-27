@@ -20,7 +20,7 @@ export class UserDetailsComponent implements OnInit {
         console.log('compute');
         this.compute();
         this.setNbPages();
-        this.changePage(1);
+        this.changePage(this.currentPage);
       }
     });
   }
@@ -38,6 +38,7 @@ export class UserDetailsComponent implements OnInit {
   public resultsDisplayed: Result[] = [];
   public nbResultsPage = 3;
   public pages: number[] = [];
+  public currentPage = 1;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -53,11 +54,34 @@ export class UserDetailsComponent implements OnInit {
    }
   }
 
+  next() {
+    if (this.currentPage < this.nbResultsPage) {
+      this.currentPage++;
+    }
+  }
+
+  previous() {
+
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  changeOrderResults() {
+    this.results = this.results.sort((a, b) => {
+      const aTmp: Date = new Date(a.date);
+      const bTmp: Date = new Date(b.date);
+      return bTmp.getTime() - aTmp.getTime();
+    });
+  }
+
   changePage(page) {
+    this.changeOrderResults();
     this.resultsDisplayed = [];
-    for (let i = page - 1; i < page + this.nbResultsPage || i < this.results.length; i++) {
+    for (let i = page - 1; i < page - 1 + this.nbResultsPage && i < this.results.length; i++) {
       this.resultsDisplayed.push(this.results[i]);
     }
+    console.log(this.resultsDisplayed);
   }
   compute() {
 

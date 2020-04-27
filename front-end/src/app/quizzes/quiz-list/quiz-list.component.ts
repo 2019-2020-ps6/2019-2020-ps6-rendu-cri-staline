@@ -15,10 +15,13 @@ export class QuizListComponent implements OnInit {
   public enableAdmin: boolean;
 
   constructor(private router: Router, public quizService: QuizService, private rightsService: RightsService) {
-    this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
-    console.log(this.quizList);
+    this.quizService.quizzes$.subscribe((quiz) => {this.quizList = quiz;
+
+                                                   console.log(this.quizList);
+    });
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
+    console.log(this.enableAdmin);
   }
 
   ngOnInit() {

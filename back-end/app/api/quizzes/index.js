@@ -38,7 +38,7 @@ router.get('/:quizId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    const quiz = Quiz.create({ ...req.body })
+    const quiz = Quiz.create({ ...req.body,themeId:parseInt(req.body.themeId) })
     res.status(201).json(quiz)
   } catch (err) {
     manageAllErrors(res, err)
