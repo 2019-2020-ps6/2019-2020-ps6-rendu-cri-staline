@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
 import {Router} from '@angular/router';
+import {Theme} from '../../../models/theme.model';
+import {ThemeService} from '../../../services/theme.service';
 
 @Component({
   selector: 'app-quiz-form',
@@ -20,9 +22,12 @@ export class QuizFormComponent implements OnInit {
    * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
    */
   public quizForm: FormGroup;
+  public themesList: Theme[] = [];
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router) {
+  // tslint:disable-next-line:max-line-length
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private themeService: ThemeService) {
     // Form creation
+    this.themeService.themes$.subscribe((theme) => this.themesList = theme);
     this.quizForm = this.formBuilder.group({
       name: [''],
       theme: ['']
