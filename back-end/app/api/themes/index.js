@@ -23,9 +23,12 @@ var storage = multer.diskStorage({
  router.use(bodyParser.json({ limit: '50mb' }));
  router.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 
- router.post('/createTheme', upload.single('themeFile'), (req, res, next) => {
+ router.post('/', upload.single('themeFile'), (req, res, next) => {
     console.log('req body:', req.body);
-    const themeObject = {...JSON.parse(req.body.themeObject), themeImage: req.file.filename}
+    let themeObject = {...JSON.parse(...req.body)}
+    if(req.file!=undefined){
+      themeObject = {...JSON.parse(...req.body), themeImage: req.file.filename}
+    }
     console.log('req.file:', req.file);
     console.log('req.data:', req.data);
 
@@ -34,16 +37,6 @@ var storage = multer.diskStorage({
     res.status(200).json(theme)
  }) 
 
- router.post('/editTheme',  upload.single('themeFile'), (req, res, next) => {
-    console.log('req body:', req.body);
-    const themeObject = {...JSON.parse(req.body.themeObject), themeImage: req.file.filename}
-    console.log('req.file:', req.file);
-    console.log('req.data:', req.data);
-
-    const theme = Theme.update(req.body.themeId, themeObject)
-    res.status(200).json(theme)
-
- })
 
 router.get('/', (req, res) => {
     try {
@@ -62,18 +55,16 @@ router.get('/', (req, res) => {
     }
   })
   
-  router.post('/', (req, res) => {
-    try {
-      const theme = Theme.create({ ...req.body })
-      res.status(201).json(theme)
-    } catch (err) {
-      manageAllErrors(res, err)
-    }
-  })
+
   // edit route
-  router.put('/:themeId', (req, res) => {
+  router.put('/:themeId',upload.single('themeFile'), (req, res) => {
     try {
-      res.status(200).json(Theme.update(req.params.themeId, req.body))
+      let themeObject = {...JSON.parse(req.body.themeObject)}
+      if(req.file.filename!=undefined){
+        themeObject={...JSON.parse(req.body.themeObject), themeImage: req.file.filename}
+      }
+      const theme = Theme.update(req.body.themeId, themeObject)
+      res.status(200).json(theme)
     } catch (err) {
       console.log(err)
       manageAllErrors(res, err)

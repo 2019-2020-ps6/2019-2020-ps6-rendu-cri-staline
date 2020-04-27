@@ -21,6 +21,9 @@ export class ThemeAddComponent implements OnInit {
   public themeForm: FormGroup;
   public selectedFile: File;
 
+public errors: string[] = [];
+public haveErrors = false;
+
   ngOnInit() {
   }
 
@@ -28,16 +31,31 @@ export class ThemeAddComponent implements OnInit {
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     themeToAdd.themeImage = this.selectedFile;
     console.log(themeToAdd);
-
-    this.themeService.addThemeWithPicture({themeName : themeToAdd.themeName}, themeToAdd.themeImage).subscribe((event) => {
-      console.log(event);
-      this.router.navigate(['themes-list']);
-    }, error => {
-      console.error(error);
-    });
+    this.valid(themeToAdd);
+    if (!this.haveErrors) {
+      this.themeService.addTheme({themeName : themeToAdd.themeName}, themeToAdd.themeImage).subscribe((event) => {
+        console.log(event);
+        this.router.navigate(['themes-list']);
+      }, error => {
+        console.error(error);
+      });
+    }
   }
 onFileChange(event) {
   this.selectedFile = event.target.files[0] as File;
+}
+valid(themeToAdd) {
+  this.haveErrors = false;
+  this.errors = [];
+  if (themeToAdd.themeName === '') {
+    this.errors.push('Entrez un nom.');
+    this.haveErrors = true;
+  }
+
+}
+checkValue() {
+  const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
+  this.valid(themeToAdd);
 }
 
 }

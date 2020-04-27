@@ -83,6 +83,14 @@ export class QuizService {
 
   }
 
+  setQuizzesByTheme(themeId: string) {
+    const urlWithId = this.quizUrl + '/theme/' + themeId ;
+    this.http.get<Quiz[]>(urlWithId).subscribe((quizList) => {
+      this.quizzes = quizList;
+      this.quizzes$.next(this.quizzes);
+    });
+  }
+
   setSelectedQuestion(quizId: string, questionId: string) {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
     this.http.get<Question>(urlWithId).subscribe((question) => {

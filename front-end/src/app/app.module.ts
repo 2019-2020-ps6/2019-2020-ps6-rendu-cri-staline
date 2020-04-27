@@ -34,7 +34,7 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 import {ThemeComponent} from './themes/theme/theme.component';
 import { ThemeEditComponent } from './themes/theme-edit/theme-edit.component';
 import {ThemesListComponent} from './themes/themes-list/themes-list.component';
-import {ThemeDetailsComponent} from './themes/theme-details/theme-details.component';
+import {ThemeQuizListComponent} from './themes/theme-quiz-list/theme-quiz-list.component';
 
 import { QuestionComponent } from './quizzes/question/question.component';
 import { QuestionsListComponent } from './quizzes/questions-list/questions-list.component';
@@ -65,7 +65,7 @@ import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
     ThemeComponent,
     ThemeEditComponent,
     ThemesListComponent,
-    ThemeDetailsComponent,
+    ThemeQuizListComponent,
     ResultComponent,
     QuestionComponent,
     QuestionsListComponent,
@@ -77,7 +77,8 @@ import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
     QuizEditComponent,
     QuestionEditComponent,
     AnswerEditComponent,
-    ParametersComponent
+    ParametersComponent,
+
   ],
   imports: [
     NgbModule,

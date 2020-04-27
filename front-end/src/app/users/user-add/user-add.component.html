@@ -3,20 +3,26 @@
   <form class="user-add" [formGroup]="userForm">
     <label for="firstName">
       Prénom <br>
-      <input class="input-custom" type="text" id="firstName" [formControlName]="'firstName'">
+      <input class="input-custom" type="text" id="firstName" (change)="checkValue()" [formControlName]="'firstName'">
     </label>
     <br>
     <label for="lastName">
       Nom <br>
-      <input class="input-custom" type="text" id="lastName" [formControlName]="'lastName'">
+      <input class="input-custom" type="text" id="lastName" (change)="checkValue()" [formControlName]="'lastName'">
     </label>
     <br>
     <div class="form-group">
       <label for="imageFile">Choisir une image
       <input type="file" class="form-control-file" id="imageFile" (change)="onFileChange($event)" [formControlName]="'imageFile'">
     </label>
+    <ng-container *ngIf="this.haveErrors===true">
+      <div class="alert alert-danger" *ngFor="let error of this.errors"  role="alert">
+        {{error}}
+      </div>
+    </ng-container>
     </div>
     <button type="submit" class="button-card" (click)="addUser()">Create</button>
+    <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
   </form>
 </div>
 

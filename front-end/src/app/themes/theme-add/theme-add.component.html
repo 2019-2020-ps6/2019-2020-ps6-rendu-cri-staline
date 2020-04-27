@@ -29,7 +29,7 @@
   <form class="theme-add" [formGroup]="themeForm">
     <label for="themeName">
       Nom du thème :  <br>
-      <input class="input-custom" type="text" id="themeName" [formControlName]="'themeName'">
+      <input class="input-custom" type="text" id="themeName"  (change)="checkValue()" [formControlName]="'themeName'">
     </label>
     <br>      
     <div class="form-group">
@@ -37,6 +37,12 @@
       <input type="file" class="form-control-file" id="themeImage" (change)="onFileChange($event)" [formControlName]="'themeImage'">
     </label>
     </div>
+    <br/>
+    <ng-container *ngIf="this.haveErrors===true">
+      <div class="alert alert-danger" *ngFor="let error of this.errors"  role="alert">
+        {{error}}
+      </div>
+    </ng-container>
     <button type="submit" class="button-card" (click)="addTheme()">Créer</button>
     <button class="button-card" (click)="delete()" routerLink="/">Annuler</button>
   </form>

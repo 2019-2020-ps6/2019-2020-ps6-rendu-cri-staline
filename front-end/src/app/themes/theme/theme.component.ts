@@ -48,9 +48,10 @@ export class ThemeComponent implements OnInit {
 
   quizzes() {
     this.router.navigate(['themes-list', this.theme.id, 'quiz-list']);
+
   }
 
-  edit() {
+  play() {
 
   }
 

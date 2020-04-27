@@ -3,14 +3,25 @@
   <form class="quiz-form" [formGroup]="quizForm">
     <label for="name">
       Nom <br>
-      <input class="input-custom" type="text" id="name" [formControlName]="'name'">
+      <input class="input-custom" (change)="this.checkValue()" type="text" id="name" [formControlName]="'name'">
     </label>
     <br>
     <label for="theme">
       Theme <br>
-      <input class="input-custom" type="text" id="theme" [formControlName]="'theme'">
+      <select  (change)="this.checkValue()" [formControlName]="'themeId'" >
+        <option *ngFor="let theme of this.themeList"  value={{theme.id}}>
+          {{theme.themeName}}
+        </option>
+      </select>
     </label>
-    <br>
+    <br/>
+    <ng-container *ngIf="this.haveErrors===true">
+      <div class="alert alert-danger" *ngFor="let error of this.errors"  role="alert">
+        {{error}}
+      </div>
+    </ng-container>
+    <br/>
+    <br/>
     <button type="submit" class="button-card" (click)="addQuiz()">Ajouter</button>
     <button type="submit" class="button-card" (click)="cancel()">Annuler</button>
   </form>

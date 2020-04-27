@@ -10,4 +10,8 @@
     <button class="button-card" (click)="edit()" routerLink="edit/{{theme.id}}">Modifier</button>
     <button class="button-card" (click)="delete()" routerLink="/">Supprimer</button>
   </ng-container>
+
+  <ng-container *ngIf="this.enableAdmin===false">
+    <button class="button-card" (click)="quizzes()">Entrer</button>
+  </ng-container>
 </div>

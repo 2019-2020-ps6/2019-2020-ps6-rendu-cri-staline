@@ -22,15 +22,15 @@ export class ThemeService {
   constructor(private http: HttpClient) {
     this.setThemesFromUrl();
   }
-  addThemeWithPicture(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
+  addTheme(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
+    formData.append('themeName', JSON.stringify(theme));
     formData.append('themeFile', imageFile);
-    formData.append('themeObject', JSON.stringify(theme));
     const options = {
       params: new HttpParams(),
       reportProgress: true,
     };
-    const url = this.themeUrl + '/createTheme';
+    const url = this.themeUrl;
     const req = new HttpRequest('POST', url, formData, options);
     return this.http.request(req);
    // this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
@@ -41,12 +41,11 @@ export class ThemeService {
     console.log('imageFile before edit:', imageFile);
     formData.append('themeFile', imageFile);
     formData.append('themeObject', JSON.stringify(theme));
-    formData.append('themeId', themeId);
     const options = {
       params: new HttpParams(),
       reportProgress: true,
     };
-    const url = this.themeUrl + '/editTheme';
+    const url = this.themeUrl + '/' + themeId;
     const req = new HttpRequest('POST', url, formData, options);
     return this.http.request(req);
 

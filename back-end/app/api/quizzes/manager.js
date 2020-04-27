@@ -1,6 +1,7 @@
 const { Quiz } = require('../../models')
 const { filterQuestionsFromQuizz } = require('./questions/manager')
 const { filterAnswersFromQuestion } = require('./questions/answers/manager')
+const {buildTheme } = require('../themes/manager')
 
 /**
  * Function buildQuizz.
@@ -10,11 +11,17 @@ const { filterAnswersFromQuestion } = require('./questions/answers/manager')
 const buildQuizz = (quizId) => {
   const quiz = Quiz.getById(quizId)
   const questions = filterQuestionsFromQuizz(quiz.id)
+  const theme=buildTheme(quiz.themeId)
   const questionWithAnswers = questions.map((question) => {
     const answers = filterAnswersFromQuestion(question.id)
     return { ...question, answers }
   })
-  return { ...quiz, questions: questionWithAnswers }
+  return { ...quiz,theme :theme, questions: questionWithAnswers }
+}
+
+const buildQuizzesByThemeId=(themeId)=>{
+  const quizzes= buildQuizzes();
+  return quizzes.filter( (quiz)=> quiz.themeId===themeId);
 }
 
 /**
@@ -29,4 +36,5 @@ const buildQuizzes = () => {
 module.exports = {
   buildQuizz,
   buildQuizzes,
+  buildQuizzesByThemeId,
 }

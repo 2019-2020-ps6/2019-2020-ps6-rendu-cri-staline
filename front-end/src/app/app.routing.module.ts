@@ -14,7 +14,7 @@ import {UserDetailsComponent} from './users/user-details/user-details.component'
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 import { ThemeEditComponent } from './themes/theme-edit/theme-edit.component';
 import {ThemesListComponent} from './themes/themes-list/themes-list.component';
-import {ThemeDetailsComponent} from './themes/theme-details/theme-details.component';
+import {ThemeQuizListComponent} from './themes/theme-quiz-list/theme-quiz-list.component';
 
 
 import { HomeComponent } from './home/home.component';
@@ -42,7 +42,7 @@ const routes: Routes = [
     {path: 'users-list/:id', component: UserDetailsComponent},
     {path: 'themes-list/edit/:id', component: ThemeEditComponent},
     {path: 'themes-list', component: ThemesListComponent},
-    {path: 'themes-list/:id', component: ThemeDetailsComponent},
+    {path: 'themes-list/:themeId/quiz-list', component: ThemeQuizListComponent},
     {path: 'theme-add', component: ThemeAddComponent},
     {path: 'parameters', component: ParametersComponent},
     {path: 'quiz-form', component: QuizFormComponent},

@@ -19,6 +19,8 @@ export class UserDetailsComponent implements OnInit {
       if (this.results.length > 1) {
         console.log('compute');
         this.compute();
+        this.setNbPages();
+        this.changePage(1);
       }
     });
   }
@@ -31,12 +33,31 @@ export class UserDetailsComponent implements OnInit {
   public data: number[] = [];
   public results: Result[] = [];
   public labels: Label[] = [];
-
   public nbLabels = 7;
+
+  public resultsDisplayed: Result[] = [];
+  public nbResultsPage = 3;
+  public pages: number[] = [];
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.setSelectedUser(id);
+  }
+
+  setNbPages() {
+   for (let i = 0, j = 1; i < this.results.length; i++) {
+     if (i % this.nbResultsPage === 0) {
+       this.pages.push(j);
+       j++;
+     }
+   }
+  }
+
+  changePage(page) {
+    this.resultsDisplayed = [];
+    for (let i = page - 1; i < page + this.nbResultsPage || i < this.results.length; i++) {
+      this.resultsDisplayed.push(this.results[i]);
+    }
   }
   compute() {
 
