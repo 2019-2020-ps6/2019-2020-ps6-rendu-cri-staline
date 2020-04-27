@@ -36,10 +36,18 @@ export class ThemeEditComponent implements OnInit {
     if (themeToAdd.themeName === '') {
       themeToAdd.themeName = this.theme.themeName;
     }
-    this.themeService.updateTheme(this.theme.id, themeToAdd);
-    this.router.navigate(['themes-list']);
+    this.themeService.updateTheme(this.theme.id, { themeName: themeToAdd.themeName
+    }, this.theme.themeImage).subscribe((result) => {
+      this.router.navigate(['themes-list']);
+    }, error => {
+      console.error('Error', error);
+    });
   }
   cancel() {
     this.router.navigate(['themes-list']);
+  }
+
+  onFileChange(event) {
+    this.theme.themeImage = event.target.files[0] as File;
   }
 }

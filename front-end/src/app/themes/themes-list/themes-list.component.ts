@@ -15,14 +15,15 @@ export class ThemesListComponent implements OnInit {
   public enableAdmin: boolean;
 
   constructor(private router: Router, public themeService: ThemeService, private rightsService: RightsService) {
+
+  }
+
+  ngOnInit(): void {
     this.themeService.themes$.subscribe((theme) => this.themesList = theme);
     console.log(this.themesList);
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
 
-  }
-
-  ngOnInit(): void {
     if (this.enableAdmin === undefined && this.router.url !== 'themes-list') {
       this.router.navigate(['home']);
     }
@@ -33,6 +34,7 @@ export class ThemesListComponent implements OnInit {
   }
 
   deleteTheme(theme: Theme) {
+    console.log('deleting theme...');
     this.themeService.deleteTheme(theme);
   }
 

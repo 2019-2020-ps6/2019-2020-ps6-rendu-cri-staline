@@ -16,13 +16,12 @@ export class ThemeService {
   public themeSelected$: Subject<Theme> = new Subject();
 
   private themeUrl = serverUrl + '/themes';
-
+   public themeImageUrl = serverUrl + '/getThemeFile';
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
     this.setThemesFromUrl();
   }
-
   addThemeWithPicture(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
     formData.append('themeFile', imageFile);
@@ -37,6 +36,22 @@ export class ThemeService {
    // this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
   }
 
+  updateTheme(themeId: string, theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
+    const formData = new FormData();
+    console.log('imageFile before edit:', imageFile);
+    formData.append('themeFile', imageFile);
+    formData.append('themeObject', JSON.stringify(theme));
+    formData.append('themeId', themeId);
+    const options = {
+      params: new HttpParams(),
+      reportProgress: true,
+    };
+    const url = this.themeUrl + '/editTheme';
+    const req = new HttpRequest('POST', url, formData, options);
+    return this.http.request(req);
+
+  }
+
   setThemesFromUrl() {
     this.http.get<Theme[]>(this.themeUrl).subscribe((themeList) => {
       this.themes = themeList;
@@ -44,9 +59,6 @@ export class ThemeService {
     });
   }
 
-  addQuiz(theme: Theme) {
-    this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
-  }
 
   setSelectedTheme(themeId: string) {
     const urlWithId = this.themeUrl + '/' + themeId;
@@ -57,15 +69,12 @@ export class ThemeService {
   }
 
   deleteTheme(theme: Theme) {
+    console.log('calling delete theme:', theme);
     const urlWithId = this.themeUrl + '/' + theme.id;
     this.http.delete<Theme>(urlWithId, this.httpOptions).subscribe(() => this.setThemesFromUrl());
   }
 
-  updateTheme(index: string, theme: Theme) {
-    const urlWithId = this.themeUrl + '/' + index;
-    this.http.put<Theme>(urlWithId, theme, this.httpOptions).subscribe(() => {this.setThemesFromUrl(); });
 
-  }
 
 }
 
