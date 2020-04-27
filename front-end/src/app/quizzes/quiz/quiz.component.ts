@@ -36,6 +36,7 @@ export class QuizComponent implements OnInit {
   }
 
   play() {
+    this.router.navigate(['quiz-list', this.quiz.id], {fragment: 'question'});
     this.refereeService.setQuiz(this.quiz);
   }
 

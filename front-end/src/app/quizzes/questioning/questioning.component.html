@@ -1,13 +1,21 @@
 
 <ng-template #nextQuestionContent let-modal>
   <div class="modal-body" style="text-align: center;" >
-  <div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
-
-  </div>
-  <div><h1>Bien Joué</h1></div>
-  <div>Appuie sur la question suivante</div><br/>
-  <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">Question suivante</button>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/220px-Five-pointed_star.svg.png" style="width:100px; height: 100px"/>
+    </div>
+    <div><h1>Bien Joué</h1></div>
+    <div>{{this.questions[currentQuestion].label}}</div>
+    <p style="font-weight: bold;">Réponse : </p>
+    <div class="answer" *ngFor="let answer of answersCorrect">
+      {{answer}}
+    </div>
+    <br/>
+    <div>Appuie sur la question suivante</div>
+    <br/>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('go to next')">
+      Question suivante
+    </button>
 
   </div>
 
@@ -15,51 +23,53 @@
 
 <div class="row quit-button">
     <div class="col-md-12 ">
-      <button class="btn btn-primary btn-lg active" (click)="quitQuiz()">Quitter</button>
+      <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;" (click)="quitQuiz()">Quitter</button>
     </div>
   </div>
+
   <div class="row">
-    <ng-container *ngIf="this.questions[currentQuestion].image.length>0">
+    <ng-container *ngIf="this.questions[currentQuestion].image!==undefined">
       <div class="col-md-12  d-flex justify-content-center text-center">
+  
         <img src="assets/images/{{this.questions[currentQuestion].image}}" alt="..." class="img-thumbnail">
       </div>
     </ng-container>
   </div>
 
-  <div class="row">   
-    <div class="col-md-12 d-flex justify-content-center text-center help">
-      <div class="row">
-        <div class="col-6 col-md-1 justify-content-center text-center">
-          <svg class="bi bi-question-square-fill icon-help" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2zm4.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z" clip-rule="evenodd"/>
-          </svg>
-        </div>
-        <div class="col-6 col-md-11 content-start">
-          Choisir une ou plusieurs réponses en cochant la ou les cases et valide ta réponse avec Valider.
-        </div>
-      </div>
-    </div>
-  </div>
-  
   <div class="row">
     <div class="col-md-12 d-flex justify-content-center text-question">{{this.questions[currentQuestion].label}}</div>
   </div>
-  <div >
-    <div class="answer" *ngFor="let answer of this.answers">
-    <!--Inputs & Output allow communication between parent & child components.-->
-    <!--More information: https://angular.io/guide/component-interaction-->
-    <app-answer [answer]="answer" (answerSelected)="answerSelected($event)"></app-answer>
+
+  <div class="row">
+    <div class="col-md-2 d-flex justify-content-center text-center">
+      <div class="info help">
+        <svg class="bi bi-question-square-fill icon-help" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2zm4.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z" clip-rule="evenodd"/>
+        </svg>
+        {{this.help}}
+      </div>
+    </div>
+    <div class="col-md-9 d-flex justify-content-start text-center">
+      <div >
+        <div class="answer" *ngFor="let answer of answers">
+        <!--Inputs & Output allow communication between parent & child components.-->
+        <!--More information: https://angular.io/guide/component-interaction-->
+        <app-answer [answer]="answer" [styleCheckBox]="styleCheckBox" (answerSelected)="answerSelected($event)"></app-answer>
+      </div>
+    </div>
   </div>
+
+
 
 </div>
 <div class="row justify-content-end">
-  <div class="col-md-2 ">
-    <a *ngIf="this.currentQuestion != this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
-    (click)="validAnswer(nextQuestionContent)">Valider</a>
-    <a *ngIf="this.currentQuestion == this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
-       (click)="validAnswer(quizRating)">Valider</a>
+    <div class="col-md-2" [ngStyle]="styleBtnValid">
+      <a *ngIf="this.currentQuestion !== this.questions.length-1" class="btn btn-primary btn-lg active btn-valid" role="button" aria-pressed="true"
+        (click)="validAnswer(nextQuestionContent)">Valider</a>
+      <a *ngIf="this.currentQuestion === this.questions.length-1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+        (click)="validAnswer(quizRating)">Valider</a>
     
-  </div>
+    </div>
 </div>
 
 <ng-template #currentQuestionContent let-modal>
@@ -74,12 +84,20 @@
   </div>
 </ng-template>
 
+<div #question></div>
+
 
 <ng-template #quizRating let-modal>
 <div  class="modal-body" style="text-align: center;">
   <div><h1>Bien Joué !</h1></div>
+  <div>{{this.questions[currentQuestion].label}}</div>
+  <p style="font-weight: bold;">Réponse : </p>
+  <div class="answer" *ngFor="let answer of answersCorrect">
+    {{answer}}
+  </div>
+  <br/>
     <div>Vous avez fini le quiz !</div>
-<ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+<ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="currentRate"></ngb-rating>
 <p>Appuyez sur le bouton Continuer pour continuer</p>
 <button class="btn btn-sm btn-outline-primary mr-2" (click)="modal.close();validAnswer(currentQuestionContent)">Continuer</button>
 </div>

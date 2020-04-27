@@ -12,10 +12,14 @@ export class AnswerComponent implements OnInit {
   @Input()
   answer: Answer;
 
+  @Input()
+  styleCheckBox: any;
+
   private enableAdmin: boolean;
 
   @Output()
   answerSelected: EventEmitter<Answer> = new EventEmitter<Answer>();
+
 
   @Output()
   deleteAnswer: EventEmitter<Answer> = new EventEmitter<Answer>();

@@ -42,4 +42,8 @@ export class WorkspaceComponent implements OnInit {
     this.router.navigate(['themes-list']);
   }
 
+  parameters() {
+
+  }
+
 }

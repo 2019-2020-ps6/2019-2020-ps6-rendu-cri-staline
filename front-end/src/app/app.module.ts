@@ -27,6 +27,7 @@ import {UserDetailsComponent} from './users/user-details/user-details.component'
 import {ResultComponent} from './users/result/result.component';
 
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
+import { ParametersComponent } from './admin/parameters/parameters.component';
 import { HomeComponent } from './home/home.component';
 
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
@@ -75,7 +76,8 @@ import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
     AnswerAddComponent,
     QuizEditComponent,
     QuestionEditComponent,
-    AnswerEditComponent
+    AnswerEditComponent,
+    ParametersComponent
   ],
   imports: [
     NgbModule,

@@ -19,6 +19,7 @@ import {ThemeDetailsComponent} from './themes/theme-details/theme-details.compon
 
 import { HomeComponent } from './home/home.component';
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
+import { ParametersComponent } from './admin/parameters/parameters.component';
 import { QuestionsListComponent} from './quizzes/questions-list/questions-list.component';
 import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 
@@ -26,6 +27,7 @@ import { AnswersListComponent } from './quizzes/answers-list/answers-list.compon
 import { AnswerAddComponent } from './quizzes/answer-add/answer-add.component';
 import { QuestionEditComponent} from './quizzes/question-edit/question-edit.component';
 import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
+
 
 import { from } from 'rxjs';
 const routes: Routes = [
@@ -42,6 +44,7 @@ const routes: Routes = [
     {path: 'themes-list', component: ThemesListComponent},
     {path: 'themes-list/:id', component: ThemeDetailsComponent},
     {path: 'theme-add', component: ThemeAddComponent},
+    {path: 'parameters', component: ParametersComponent},
     {path: 'quiz-form', component: QuizFormComponent},
     {path: 'quiz-list/:quizId/questions-list', component: QuestionsListComponent},
     {path: 'quiz-list/:quizId/questions-list/question-add', component: QuestionAddComponent},
@@ -53,7 +56,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, {
+        anchorScrolling: 'enabled'
+      })],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

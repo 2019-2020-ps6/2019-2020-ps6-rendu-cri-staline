@@ -12,6 +12,12 @@ input[type=checkbox]
   padding: 10px;
 }
 
+.help{
+  animation: bigsmall 1s infinite;
+  animation-direction: alternate-reverse;
+  font-size: 30px;
+}
+
 .check{
     margin-top: 10px;
 }
