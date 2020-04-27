@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ThemeService} from '../../../services/theme.service';
+import {Theme} from '../../../models/theme.model';
 
 @Component({
   selector: 'app-quiz-edit',
@@ -12,11 +14,16 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class QuizEditComponent implements OnInit {
   public quizForm: FormGroup;
   public quiz: Quiz;
+  public themeList: Theme[] = [];
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private route: ActivatedRoute) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router,
+              private route: ActivatedRoute, private themeService: ThemeService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       console.log(this.quiz);
+    });
+    themeService.themes$.subscribe(themes => {
+      this.themeList = themes;
     });
 
     this.quizForm = this.formBuilder.group({

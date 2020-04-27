@@ -145,6 +145,9 @@ export class QuestioningComponent implements OnInit {
         case 'quit':
           this.quitQuiz();
           break;
+        case 'home':
+          this.goToHomePage();
+          break;
         default:
           break;
       }
@@ -250,6 +253,10 @@ export class QuestioningComponent implements OnInit {
       this.styleBtnValid = this.styleAnimation;
       this.styleCheckBox = {};
     }
+  }
+
+  goToHomePage() {
+    this.router.navigate(['home']);
   }
 
 
