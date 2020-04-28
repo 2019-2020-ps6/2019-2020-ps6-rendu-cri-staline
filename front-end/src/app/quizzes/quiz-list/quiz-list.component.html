@@ -1,3 +1,8 @@
+<div class="row quit-button">
+  <div class="col-md-12 ">
+    <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;" (click)="goBack()">Retour</button>
+  </div>
+</div>
 
 <div *ngIf="enableAdmin===false">
   <h1>Choisissez un quiz</h1>
@@ -9,7 +14,7 @@
       <div class="quiz" *ngFor="let quiz of quizList">
           <!--Inputs & Output allow communication between parent & child components.-->
           <!--More information: https://angular.io/guide/component-interaction-->
-          
+
           <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (deleteQuiz)="deleteQuiz($event)"></app-quiz>
         </div>
     </div>
