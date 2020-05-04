@@ -75,6 +75,11 @@
 
 .info{
   border-style: solid;
+  border-width: 3px;
+  background-color:#D2D1E8 ;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }
 .help{
   animation: bigsmall 1s infinite;
@@ -84,6 +89,7 @@
 
 .icon-help{
   margin:10px;
+  
 }
 
 .btn-valid{
@@ -105,4 +111,30 @@
   display: inline-block;
   overflow: hidden;
   color: red;
+}
+
+
+.block-colored{
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  background-color: #D2D1E8;
+}
+
+.block{
+  margin:10px;
+}
+
+.btn-valid{
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.lst-answer{
+  margin-top: 15px;
+}
+
+.answer{
+  margin:15px;
 }

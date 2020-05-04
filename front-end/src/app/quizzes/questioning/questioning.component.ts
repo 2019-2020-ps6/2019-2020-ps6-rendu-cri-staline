@@ -43,7 +43,10 @@ export class QuestioningComponent implements OnInit {
   //  this.open(contentRating);
   // }
 
-  public styleBtnValid: any = {};
+  public styleBtnValid: any = {
+      margin: '20px',
+      color: 'black'
+  };
   public styleCheckBox: any = {};
 
   public styleAnimation = {
@@ -197,7 +200,6 @@ export class QuestioningComponent implements OnInit {
       this.answers = newArrayAnswers;
       this.answersSelected = newArrayAnswersSelected;
     });
-    window.alert('Vous y êtes presque, réessayez !');
   }
   setAnswersCorrect() {
     this.answersCorrect = [];

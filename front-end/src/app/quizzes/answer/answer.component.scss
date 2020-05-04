@@ -19,10 +19,18 @@ input[type=checkbox]
 }
 
 .check{
-    margin-top: 10px;
+  margin-left: 15px;
+    margin-top: 15px;
+}
+
+.block{
+  border: black;
+  border-style: solid outset;
+  border-radius: 8px;
 }
 
 .answer{
-
-    margin-top: 15px;
+    padding: 10px;
+    background-color: #F0E6FF;
+    color: black;
 }

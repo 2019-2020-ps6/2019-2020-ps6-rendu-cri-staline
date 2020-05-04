@@ -7,8 +7,8 @@
     <br>
     <label for="theme">
       Theme <br>
-      <select [formControlName]="'theme'" >
-        <option *ngFor="let theme of this.themeList"  value={{theme.themeName}}>
+      <select [formControlName]="'themeId'" >
+        <option *ngFor="let theme of this.themeList"  value={{theme.id}}>
           {{theme.themeName}}
         </option>
       </select>

@@ -28,7 +28,7 @@ export class QuizEditComponent implements OnInit {
 
     this.quizForm = this.formBuilder.group({
       name: [''],
-      theme: ['']
+      themeId: ['']
     });
   }
 
@@ -39,12 +39,11 @@ export class QuizEditComponent implements OnInit {
 
   updateQuiz() {
     const quizToEdit: Quiz = this.quizForm.getRawValue() as Quiz;
+    console.log(quizToEdit);
     if (quizToEdit.name === '') {
       quizToEdit.name = this.quiz.name;
     }
-    if (quizToEdit.theme.themeName === '') {
-      quizToEdit.theme = this.quiz.theme;
-    }
+
     this.quizService.updateQuiz(this.quiz.id, quizToEdit);
     this.router.navigate(['quiz-list']);
   }

@@ -32,16 +32,22 @@ export class ThemeEditComponent implements OnInit {
     this.themeService.setSelectedTheme(id);
   }
   updateTheme() {
-    const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
+    let themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     if (themeToAdd.themeName === '') {
       themeToAdd.themeName = this.theme.themeName;
     }
-    this.themeService.updateTheme(this.theme.id, { themeName: themeToAdd.themeName
-    }, this.theme.themeImage).subscribe((result) => {
-      this.router.navigate(['themes-list']);
-    }, error => {
-      console.error('Error', error);
-    });
+    themeToAdd = {...themeToAdd, id: this.theme.id};
+    console.log(themeToAdd);
+    if (themeToAdd.themeImage !== undefined) {
+      this.themeService.updateThemeImageFile(this.theme.id, { themeName: themeToAdd.themeName
+      }, this.theme.themeImage).subscribe((result) => {
+      }, error => {
+        console.error('Error', error);
+      });
+    } else {
+      this.themeService.updateTheme(this.theme.id, themeToAdd);
+    }
+    this.router.navigate(['themes-list']);
   }
   cancel() {
     this.router.navigate(['themes-list']);

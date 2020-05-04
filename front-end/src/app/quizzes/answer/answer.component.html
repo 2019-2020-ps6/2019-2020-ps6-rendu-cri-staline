@@ -1,16 +1,17 @@
-<ng-container *ngIf="this.enableAdmin===false">
-  <div class="row answer">
-      <div class="col-md-4 d-flex justify-content-end check">
-      <div class="form-check" [ngStyle]="styleCheckBox">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (click)="selectAnswer()">
-          <label class="form-check-label" for="defaultCheck1">
-          </label>
-        </div>
+<ng-container *ngIf="this.enableAdmin===false" >
+  <div class="row block answer">
+     <div class="col-1">
+        <div class="form-check check" [ngStyle]="styleCheckBox">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (click)="selectAnswer()">
+            <label class="form-check-label" for="defaultCheck1">
+              
+            </label>        
+        </div>  
       </div>
-      <div class="col-md-8 d-flex justify-content-start">
+      <div class="col-10">
         {{answer.value}}
       </div>
-  </div>
+    </div>   
 </ng-container>
 
 <ng-container *ngIf="this.enableAdmin===true">

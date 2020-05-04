@@ -71,13 +71,24 @@ router.get('/', (req, res) => {
   
 
   // edit route
-  router.put('/:themeId',upload.single('themeFile'), (req, res) => {
+  router.put('/updateFile/:themeId',upload.single('themeFile'), (req, res) => {
     try {
       let themeObject = {...JSON.parse(req.body.themeObject)}
       if(req.file.filename!=undefined){
         themeObject={...JSON.parse(req.body.themeObject), themeImage: req.file.filename}
       }
       const theme = Theme.update(req.body.themeId, themeObject)
+      res.status(200).json(theme)
+    } catch (err) {
+      console.log(err)
+      manageAllErrors(res, err)
+    }
+  })
+
+  router.put('/:themeId', (req, res) => {
+    try {
+      const themeObject={...req.body ,themeId:parseInt(req.body.themeId,10)}
+      const theme = Theme.update(req.body.themeId,themeObject)
       res.status(200).json(theme)
     } catch (err) {
       console.log(err)
