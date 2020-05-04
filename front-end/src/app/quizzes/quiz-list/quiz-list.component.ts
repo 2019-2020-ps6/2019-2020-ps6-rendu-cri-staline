@@ -37,4 +37,8 @@ export class QuizListComponent implements OnInit {
   deleteQuiz(quiz: Quiz) {
     this.quizService.deleteQuiz(quiz);
   }
+
+  goBack() {
+    this.router.navigate(['workspace']);
+  }
 }

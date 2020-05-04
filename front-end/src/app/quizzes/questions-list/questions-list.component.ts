@@ -14,6 +14,7 @@ export class QuestionsListComponent implements OnInit {
   public questionsList: Question[] = [];
   public quiz: Quiz;
   private id: string;
+  private previousUrl: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
@@ -26,6 +27,7 @@ export class QuestionsListComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('quizId');
     this.quizService.setSelectedQuiz(this.id);
+    this.previousUrl = 'quiz-list' + '/' + this.id + '/questions-list';
   }
 
   selectAddQuestion() {
@@ -34,6 +36,10 @@ export class QuestionsListComponent implements OnInit {
 
   deleteQuestion(question: Question) {
     this.quizService.deleteQuestion(this.id, question);
+  }
+
+  goBack() {
+    this.router.navigate(['quiz-list']);
   }
 
 }

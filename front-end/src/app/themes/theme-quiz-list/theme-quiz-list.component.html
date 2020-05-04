@@ -1,7 +1,8 @@
 
 <div *ngIf="enableAdmin===false">
+  Choisissez un quiz
   <div class="quiz-list">
-    
+
       <div class="quiz" *ngFor="let quiz of quizList">
           <!--Inputs & Output allow communication between parent & child components.-->
           <!--More information: https://angular.io/guide/component-interaction-->
@@ -9,11 +10,12 @@
             <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (deleteQuiz)="deleteQuiz($event)"></app-quiz>
           </ng-container>
         </div>
-   
+
   </div>
 </div>
 
 <div *ngIf="enableAdmin===true">
+  Liste des quiz
   <div class="quiz-list">
     <div class="quiz" *ngFor="let quiz of quizList">
         <!--Inputs & Output allow communication between parent & child components.-->
