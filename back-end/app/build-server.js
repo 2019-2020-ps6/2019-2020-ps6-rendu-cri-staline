@@ -9,7 +9,7 @@ module.exports = (cb) => {
   app.disable('x-powered-by')
   app.use(cors())
 
-  app.use('/api/getThemeFile', express.static(__dirname + '/storage/themeFiles'));
+  app.use('/api/getThemeFile', express.static(`${__dirname}/storage/themeFiles`))
   app.use(bodyParser.json({ limit: '50mb' }))
   app.use(morgan('[:date[iso]] :method :url :status :response-time ms - :res[content-length]'))
   app.use('/api', api)

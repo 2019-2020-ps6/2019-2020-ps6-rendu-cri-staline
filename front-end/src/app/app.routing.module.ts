@@ -30,7 +30,9 @@ import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
 
 
 import { from } from 'rxjs';
+import { ResultDetailsComponent } from './users/result-details/result-details.component';
 const routes: Routes = [
+    {path: 'users-list/:id/results/:resultId', component: ResultDetailsComponent},
     {path: 'quiz-list', component: QuizListComponent},
     {path: 'quiz-list/:id', component: QuestioningComponent},
     {path: 'quiz-list/edit/:id', component: QuizEditComponent},

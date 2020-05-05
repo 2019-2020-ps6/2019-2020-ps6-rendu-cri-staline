@@ -7,13 +7,16 @@ import { QuizService } from 'src/services/quiz.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { RefereeService } from 'src/services/referee.service';
+import { UserService } from 'src/services/user.service';
+import { User } from 'src/models/user.model';
 @Component({
   selector: 'app-questioning',
   templateUrl: './questioning.component.html',
   styleUrls: ['./questioning.component.scss']
 })
 export class QuestioningComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private quizService: QuizService,
+  constructor(private route: ActivatedRoute,
+              private quizService: QuizService,
               private router: Router,
               private modalService: NgbModal,
               private refereeService: RefereeService) {
@@ -25,15 +28,18 @@ export class QuestioningComponent implements OnInit {
     });
 
   }
-
+  public user: User;
   public questions: Question[];
   public currentQuestion: number;
   public answers: Answer[];
   public quiz: Quiz ;
   public answersSelected: Answer[];
+  public answersFirstTry: number[];
   public firstTry: boolean;
+  public mEndQuiz: boolean;
   public score: number;
-  closeResult = '';
+  public timeStart: string;
+  public closeResult = '';
   public currentRate: number;
   public help = '';
 
@@ -56,21 +62,14 @@ export class QuestioningComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.router.events.subscribe(s => {
-      if (s instanceof NavigationEnd) {
-        const tree = this.router.parseUrl(this.router.url);
-        if (tree.fragment) {
-          const element = document.querySelector('#' + tree.fragment);
-          if (element) { element.scrollIntoView(true); }
-        }
-      }
-    });
     this.answersSelected = [];
+    this.answersFirstTry = [];
     this.currentQuestion = 0;
-    const id = this.route.snapshot.paramMap.get('id');
-    this.quizService.setSelectedQuiz(id);
     this.score = 0;
     this.firstTry = true;
+    this.timeStart = Date.now().toLocaleString();
+    this.user = this.refereeService.user;
+    this.mEndQuiz = false;
     this.setTextHelp();
   }
   open(content) {
@@ -103,11 +102,16 @@ export class QuestioningComponent implements OnInit {
   }
 
   validAnswer(content) {
-
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
     if (allAnswersCheckedCorrect && this.answersSelected.length > 0) {
+        if (this.firstTry && this.mEndQuiz === false) {
+          this.score++;
+        }
+        console.log(this.score);
+        this.firstTry = true;
         if (this.currentQuestion === this.questions.length - 1) {
+          this.mEndQuiz = true;
           this.endQuiz(content);
         } else {
           this.nextQuestion(content);
@@ -130,25 +134,20 @@ export class QuestioningComponent implements OnInit {
   }
   endQuiz(content) {
     this.setAnswersCorrect();
-    let result: Result;
-    if (this.firstTry) {
-      this.score++;
-    }
-    result = {userId: '', quizId: '', score: this.score / this.questions.length, date: new Date().toUTCString()};
-    this.refereeService.addResult(result);
-    this.firstTry = true;
-    console.log('HEY BRO');
     const modalRef = this.open(content);
     // tslint:disable-next-line: no-shadowed-variable
     modalRef.result.then((result) => {
       switch (result) {
         case 'retry':
+          this.pushResult();
           this.retry();
           break;
         case 'quit':
+          this.pushResult();
           this.quitQuiz();
           break;
         case 'home':
+          this.pushResult();
           this.goToHomePage();
           break;
         default:
@@ -157,6 +156,17 @@ export class QuestioningComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+  pushResult() {
+    const result: Result = {
+      answersId: this.answersFirstTry,
+      userId: parseInt(this.user.id, 10),
+      score: this.score / this.questions.length,
+      date: new Date().toUTCString(),
+      startingTime: this.timeStart,
+      endTime: new Date().toUTCString(),
+    };
+    this.refereeService.addResult(result, parseInt(this.quiz.id, 10));
   }
   nextQuestion(content) {
     this.setAnswersCorrect();
@@ -171,10 +181,6 @@ export class QuestioningComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    if (this.firstTry) {
-        this.score++;
-      }
-    this.firstTry = true;
     this.answers = this.questions[this.currentQuestion].answers;
   }
 
@@ -187,12 +193,16 @@ export class QuestioningComponent implements OnInit {
       } else {
         nbAnswersCorrectChecked--;
       }
+      if (this.firstTry) {
+        this.answersFirstTry.push(parseInt(answer.id, 10));
+      }
 
     });
     return nbAnswersCorrect === nbAnswersCorrectChecked;
   }
 
   deleteBadAnswers() {
+
     const answersToDelete = this.answersSelected.filter((answer) => !answer.isCorrect);
     answersToDelete.forEach((answerToDlete) => {
       const newArrayAnswers = this.answers.filter((answer) => answerToDlete !== answer);
@@ -231,6 +241,7 @@ export class QuestioningComponent implements OnInit {
   retry() {
     console.log('Retrying...');
     this.score = 0;
+    this.mEndQuiz = false;
     this.questions = this.shuffle(this.quiz.questions);
     this.currentQuestion = 0;
     this.answers = [];

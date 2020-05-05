@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
   try {
     res.status(200).json(buildUsers())
   } catch (err) {
+    console.log(err)
     manageAllErrors(res, err)
   }
 })
@@ -19,8 +20,10 @@ router.get('/', (req, res) => {
 router.get('/:userId', (req, res) => {
   try {
     const user = buildUser(req.params.userId)
+
     res.status(200).json(user)
   } catch (err) {
+    console.log(err)
     manageAllErrors(res, err)
   }
 })

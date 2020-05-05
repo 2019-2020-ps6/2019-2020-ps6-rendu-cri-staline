@@ -23,6 +23,7 @@ export class UserComponent implements OnInit {
   deleteUser: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private router: Router, private rightsService: RightsService,
+              private userService: UserService,
               private refereeService: RefereeService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
@@ -36,6 +37,7 @@ export class UserComponent implements OnInit {
   }
 
   select() {
+    this.refereeService.setUser(this.user);
     this.userSelected.emit(this.user);
   }
 
@@ -49,7 +51,8 @@ export class UserComponent implements OnInit {
   }
 
   play() {
-    this.refereeService.setPlayer(this.user);
+    this.userService.setSelectedUser(this.user.id);
+    this.refereeService.setUser(this.user);
   }
 
 }

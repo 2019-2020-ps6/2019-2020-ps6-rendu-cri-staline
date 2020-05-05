@@ -1,7 +1,7 @@
 const { Quiz } = require('../../models')
 const { filterQuestionsFromQuizz } = require('./questions/manager')
 const { filterAnswersFromQuestion } = require('./questions/answers/manager')
-const {buildTheme } = require('../themes/manager')
+const { buildTheme } = require('../themes/manager')
 
 /**
  * Function buildQuizz.
@@ -11,17 +11,17 @@ const {buildTheme } = require('../themes/manager')
 const buildQuizz = (quizId) => {
   const quiz = Quiz.getById(quizId)
   const questions = filterQuestionsFromQuizz(quiz.id)
-  const theme=buildTheme(quiz.themeId)
+  const theme = buildTheme(quiz.themeId)
   const questionWithAnswers = questions.map((question) => {
     const answers = filterAnswersFromQuestion(question.id)
     return { ...question, answers }
   })
-  return { ...quiz,theme :theme, questions: questionWithAnswers }
+  return { ...quiz, theme, questions: questionWithAnswers }
 }
 
-const buildQuizzesByThemeId=(themeId)=>{
-  const quizzes= buildQuizzes();
-  return quizzes.filter( (quiz)=> quiz.themeId===themeId);
+const buildQuizzesByThemeId = (themeId) => {
+  const quizzes = buildQuizzes()
+  return quizzes.filter((quiz) => quiz.themeId === themeId)
 }
 
 /**
@@ -33,9 +33,9 @@ const buildQuizzes = () => {
   return quizzes.map((quiz) => buildQuizz(quiz.id))
 }
 
-const deleteQuizzesOfTheme =(themeId)=>{
-  const quizzes=buildQuizzesByThemeId(themeId);
-  quizzes.forEach((quiz)=>Quiz.delete(quiz.id))
+const deleteQuizzesOfTheme = (themeId) => {
+  const quizzes = buildQuizzesByThemeId(themeId)
+  quizzes.forEach((quiz) => Quiz.delete(quiz.id))
 }
 
 module.exports = {

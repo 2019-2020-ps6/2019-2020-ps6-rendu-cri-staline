@@ -8,7 +8,7 @@ const { filterResultsFromUser } = require('./results/manager')
  */
 const buildUser = (userId) => {
   const user = User.getById(userId)
-  const results = filterResultsFromUser(user.id)
+  const results = filterResultsFromUser(userId)
   return { ...user, results }
 }
 

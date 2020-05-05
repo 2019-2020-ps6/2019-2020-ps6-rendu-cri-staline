@@ -44,6 +44,7 @@ import {AnswersListComponent} from './quizzes/answers-list/answers-list.componen
 import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
 import {QuestionEditComponent} from './quizzes/question-edit/question-edit.component';
 import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
+import { ResultDetailsComponent } from './users/result-details/result-details.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
     QuestionEditComponent,
     AnswerEditComponent,
     ParametersComponent,
+    ResultDetailsComponent,
 
   ],
   imports: [

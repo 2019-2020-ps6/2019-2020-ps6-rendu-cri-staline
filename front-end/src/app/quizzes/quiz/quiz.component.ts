@@ -3,6 +3,7 @@ import { Quiz } from '../../../models/quiz.model';
 import {Router } from '@angular/router';
 import { RefereeService } from 'src/services/referee.service';
 import { RightsService } from 'src/services/rights.service';
+import { QuizService } from 'src/services/quiz.service';
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -24,7 +25,9 @@ export class QuizComponent implements OnInit {
   @Output()
   questionsQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor(private router: Router, private rightsService: RightsService, private refereeService: RefereeService) {
+  constructor(private router: Router,
+              private rightsService: RightsService,
+              private quizService: QuizService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }
@@ -37,7 +40,7 @@ export class QuizComponent implements OnInit {
 
   play() {
     this.router.navigate(['quiz-list', this.quiz.id], {fragment: 'question'});
-    this.refereeService.setQuiz(this.quiz);
+    this.quizService.setSelectedQuiz( this.quiz.id);
   }
 
   delete() {

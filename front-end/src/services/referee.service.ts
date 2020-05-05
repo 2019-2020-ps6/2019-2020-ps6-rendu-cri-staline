@@ -11,8 +11,9 @@ import { serverUrl, httpOptionsBase } from '../configs/server.config';
 })
 export class RefereeService {
 
-  private user: User;
-  private quiz: Quiz;
+  public user: User;
+
+  public resultSelected$: Subject<Result> = new Subject();
 
   private userUrl = serverUrl + '/users';
   private httpOptions = httpOptionsBase;
@@ -21,21 +22,25 @@ export class RefereeService {
 
   }
 
-  setPlayer(user: User) {
+  setSelectedResult(resultId: string) {
+    const urlWithId = serverUrl + '/users/' + this.user.id + '/results/' + resultId;
+    this.http.get<Result>(urlWithId).subscribe((result) => {
+      this.resultSelected$.next(result);
+    });
+
+  }
+
+  setUser(user) {
     this.user = user;
   }
 
-  setQuiz(quiz: Quiz) {
-    this.quiz = quiz;
+  addResult(result: Result, quizId: number) {
+    this.userUrl = serverUrl + '/users/' + result.userId + '/results';
+    const req = {...result, quizId};
+    console.log(result);
+    this.http.post<Result>(this.userUrl, req, this.httpOptions).subscribe();
   }
 
-  addResult(result: Result) {
-    this.userUrl = serverUrl + '/users/' + this.user.id + '/results';
-    result.quizId = this.quiz.id.toString();
-    result.userId = this.user.id.toString();
-    console.log(result);
-    this.http.post<Result>(this.userUrl, result, this.httpOptions).subscribe();
-  }
 
 
 }

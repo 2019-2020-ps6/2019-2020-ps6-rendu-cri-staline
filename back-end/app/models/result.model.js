@@ -2,8 +2,11 @@ const Joi = require('joi')
 const BaseModel = require('../utils/base-model.js')
 
 module.exports = new BaseModel('Result', {
-  userId: Joi.string().required(),
-  quizId: Joi.string().required(),
-  score: Joi.number().required(),
+  userId: Joi.number().required(),
+  quizId: Joi.number().required(),
+  answersId: Joi.array().required(),
+  score: Joi.number(),
   date: Joi.string(),
+  startingTime: Joi.string(),
+  endTime: Joi.string(),
 })

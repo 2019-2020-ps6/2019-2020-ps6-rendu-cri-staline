@@ -16,12 +16,14 @@ export class UserDetailsComponent implements OnInit {
     this.userService.userSelected$.subscribe((user) => {
       this.user = user;
       this.results = this.user.results;
+      this.setNbPages();
+      this.changePage(this.currentPage);
+      console.log(this.results);
       if (this.results.length > 1) {
         console.log('compute');
         this.compute();
-        this.setNbPages();
-        this.changePage(this.currentPage);
       }
+
     });
   }
 

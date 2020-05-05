@@ -1,0 +1,37 @@
+@import '../../../styles/card.scss';
+
+.result {
+    // Add some CSS here! What if you try to change the background?
+    margin-top: 10px;
+
+}
+
+.progress-bar{
+    margin: 5px;
+}
+
+.text-result{
+    font-size: 2 px;
+}
+
+.block-colored{
+    border: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background-color: #D2D1E8;
+  }
+  
+  .block{
+    margin:10px;
+  }
+
+  .text-section{
+      font-size: 20px;
+  }
+
+  .sub-block{
+    border: black;
+    border-style: solid;
+    border-width: 1px;
+  }
