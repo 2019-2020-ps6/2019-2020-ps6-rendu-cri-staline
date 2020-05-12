@@ -13,6 +13,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./result-details.component.scss']
 })
 export class ResultDetailsComponent implements OnInit {
+  constructor(private quizService: QuizService,
+              private refereeService: RefereeService, private route: ActivatedRoute,
+              private router: Router) {
+      refereeService.resultSelected$.subscribe((rslt) => {
+        this.result = rslt;
+        console.log(this.result);
+      });
+  }
 
 
   public result: Result;
@@ -20,29 +28,21 @@ export class ResultDetailsComponent implements OnInit {
 
   private value: number;
   private rest: number;
-  constructor(private quizService: QuizService, 
-    private refereeService: RefereeService, private route :ActivatedRoute,
-    private router :Router) {
-      refereeService.resultSelected$.subscribe((rslt) => {
-        this.result = rslt;
-        console.log(this.result)
-      });
-  }
+
+  userId: string;
 
   ngOnInit() {
     this.user = this.refereeService.user;
     this.userId = this.route.snapshot.paramMap.get('id');
   }
 
-  
+
   init() {
     this.value = this.result.score * 100;
     this.rest = 100 - this.value;
   }
-
-  userId:string;
-  back(){
-    this.router.navigate(['users-list',this.userId]);
+  back() {
+    this.router.navigate(['users-list', this.userId]);
   }
 
   play() {

@@ -11,10 +11,6 @@ import { RightsService } from 'src/services/rights.service';
 })
 export class ThemeQuizListComponent implements OnInit {
 
-  public quizList: Quiz[];
-
-  enableAdmin: boolean;
-
   constructor(private route: ActivatedRoute, private router: Router,
               public quizService: QuizService, private rightsService: RightsService) {
     this.quizService.quizzes$.subscribe((quizzes) => {
@@ -25,19 +21,23 @@ export class ThemeQuizListComponent implements OnInit {
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }
 
+  public quizList: Quiz[];
+
+  enableAdmin: boolean;
+
+  themeId: string;
+
 
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('themeId');
     this.quizService.setQuizzesByTheme(id);
-    this.themeId=id;
+    this.themeId = id;
   }
-  goBack(){
+  goBack() {
     this.router.navigate(['themes-list']);
   }
-
-  themeId:string;
-  goBackInGame(){
-    this.router.navigate(['themes-list',this.themeId]);
+  goBackInGame() {
+    this.router.navigate(['themes-list', this.themeId]);
   }
 }

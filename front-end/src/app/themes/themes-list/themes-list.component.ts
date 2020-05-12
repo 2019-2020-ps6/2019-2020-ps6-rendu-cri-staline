@@ -36,11 +36,11 @@ export class ThemesListComponent implements OnInit {
     this.themeService.deleteTheme(theme);
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['workspace']);
   }
 
-  goBackInGame(){
+  goBackInGame() {
     this.router.navigate(['users-list']);
   }
 }

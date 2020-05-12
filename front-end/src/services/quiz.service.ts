@@ -97,8 +97,8 @@ export class QuizService {
       this.questionsSelected$.next(question);
     });
   }
-  setSelectedAnswer(quizId: string, questionId: string, answerId:string){
-    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId+'/answers/'+answerId;
+  setSelectedAnswer(quizId: string, questionId: string, answerId: string) {
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId + '/answers/' + answerId;
     this.http.get<Answer>(urlWithId).subscribe((answer) => {
       this.answerSelected$.next(answer);
     });

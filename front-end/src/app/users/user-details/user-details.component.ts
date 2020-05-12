@@ -99,7 +99,7 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['users-list']);
   }
 

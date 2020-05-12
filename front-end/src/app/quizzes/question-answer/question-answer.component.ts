@@ -14,41 +14,41 @@ export class QuestionAnswerComponent implements OnInit {
   question: Question;
 
   @Input()
-  answersCorrect:number[]
+  answersCorrect: number[];
 
-  answers:Answer[];
+  answers: Answer[];
 
-  public styleCheckBox:any = {
+  public styleCheckBox: any = {
 
-    "transform": "scale(1)",
+    transform: 'scale(1)',
   };
 
 
 
-  constructor(private router: Router, private rightsService:RightsService, private route: ActivatedRoute) {
-        
+  constructor(private router: Router, private rightsService: RightsService, private route: ActivatedRoute) {
+
   }
 
-  public map={}
+  public map = {};
   ngOnInit() {
-    
 
-    this.answers=this.question.answers;
-    this.answers.forEach(answer=>{
-      this.map[answer.id]=false;
-      this.answersCorrect.forEach(answerId=>{     
-        if(parseInt(answer.id,10)===answerId){
-          this.map[answer.id]=true;
+
+    this.answers = this.question.answers;
+    this.answers.forEach(answer => {
+      this.map[answer.id] = false;
+      this.answersCorrect.forEach(answerId => {
+        if (parseInt(answer.id, 10) === answerId) {
+          this.map[answer.id] = true;
         }
       });
     });
-    console.log(this.question)
-    
+    console.log(this.question);
+
   }
 
 
   delete() {
-    
+
   }
 
 

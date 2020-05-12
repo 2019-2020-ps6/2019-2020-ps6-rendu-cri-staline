@@ -34,7 +34,7 @@ export class AnswerComponent implements OnInit {
   }
 
   selectAnswer() {
-    
+
    this.answerSelected.emit(this.answer);
   }
 
