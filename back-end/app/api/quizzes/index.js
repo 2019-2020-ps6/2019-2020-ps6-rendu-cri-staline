@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     const quizzes = buildQuizzes()
     res.status(200).json(quizzes)
   } catch (err) {
+    console.log(err)
     manageAllErrors(res, err)
   }
 })

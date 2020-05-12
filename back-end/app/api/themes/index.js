@@ -100,7 +100,7 @@ router
 
 router.delete('/:themeId', (req, res) => {
   try {
-    deleteQuizzesOfTheme(req.params.themeId)
+    deleteQuizzesOfTheme(parseInt(req.params.themeId,10))
     Theme.delete(req.params.themeId)
     res.status(204).end()
   } catch (err) {

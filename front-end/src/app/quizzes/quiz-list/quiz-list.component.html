@@ -1,8 +1,19 @@
 
 
+<div *ngIf="enableAdmin===true">
+  <div class="row quit-button">
+
+    <div class="col-md-12 ">
+      <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;margin-top: 10px;display: flex;" (click)="goBack()">Retour à l'espace accompagnateur</button>
+    </div>
+  </div>
+  <button class="button-card" style="margin: 35px;" (click)="selectAddQuiz()">Ajouter un quiz</button>
+    
+  </div>
+
 <div *ngIf="enableAdmin===false">
   <div class="row quit-button">
-    <div class="col-md-12 ">
+   <div class="col-md-12 ">
       <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;" (click)="goBack()">Retour</button>
     </div>
   </div>

@@ -25,14 +25,22 @@ export class ResultComponent implements OnInit {
 
   ngOnInit() {
 
+    
     this.value = this.result.score * 100;
     this.rest = 100 - this.value;
 
   }
 
   display() {
+    
     this.refereeService.setSelectedResult(this.result.id.toString());
     this.router.navigate(['users-list', this.result.userId, 'results', this.result.id]);
+  }
+
+  onLink:boolean=true;
+  show(){
+    this.onLink=false;
+    console.log("Ok")
   }
 
 }

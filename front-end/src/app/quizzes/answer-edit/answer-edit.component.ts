@@ -25,6 +25,10 @@ export class AnswerEditComponent implements OnInit {
     this.quizService.answersSelected$.subscribe((answers) => {
       this.answerList = answers;
     });
+    this.quizService.answerSelected$.subscribe((answerTmp)=>{
+        this.answer=answerTmp;
+        console.log(this.answer)
+    });
   }
 
   ngOnInit(): void {
@@ -33,6 +37,7 @@ export class AnswerEditComponent implements OnInit {
     this.answerId = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuestion(this.quizId, this.questionId);
     this.quizService.setSelectedAnswers(this.quizId, this.questionId);
+    this.quizService.setSelectedAnswer(this.quizId, this.questionId,this.answerId);
   }
 
   updateAnswer() {

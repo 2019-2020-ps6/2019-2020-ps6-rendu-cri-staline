@@ -99,7 +99,9 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
-
+  goBack(){
+    this.router.navigate(['users-list']);
+  }
 
 
 }

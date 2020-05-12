@@ -30,6 +30,14 @@ export class ThemeQuizListComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('themeId');
     this.quizService.setQuizzesByTheme(id);
+    this.themeId=id;
+  }
+  goBack(){
+    this.router.navigate(['themes-list']);
+  }
 
+  themeId:string;
+  goBackInGame(){
+    this.router.navigate(['themes-list',this.themeId]);
   }
 }

@@ -3,22 +3,34 @@
 
     <label for="value">
       Réponse <br>
-      <input class="input-custom" type="text" id="value" [formControlName]="'value'">
+      <input class="input-custom" type="text"  value="{{answer.value}}" id="value" [formControlName]="'value'">
     </label>
 
     <br/>
     Réponse juste
     <br/>
 
-    <label>
-      <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="true" />Vrai
-    </label>
+    <div *ngIf="answer.isCorrect===true">
+      <label>
+        <input type="radio" name="isCorrect" id="isCorrect" [checked]="true" [formControlName]="'isCorrect'" [value]="true" />Vrai
+      </label>
 
-    <br/>
+      <br/>
+      <label>
+        <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="false" />Faux
+      </label>
+    </div>
 
-    <label>
-      <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="false" />Faux
-    </label>
+    <div *ngIf="answer.isCorrect===false">
+      <label>
+        <input type="radio" name="isCorrect" id="isCorrect" [formControlName]="'isCorrect'" [value]="true" />Vrai
+      </label>
+
+      <br/>
+      <label>
+        <input type="radio" name="isCorrect" id="isCorrect" [checked]="true" [formControlName]="'isCorrect'" [value]="false" />Faux
+      </label>
+    </div>
 
 
     <br/>

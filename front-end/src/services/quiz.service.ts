@@ -33,6 +33,7 @@ export class QuizService {
   public answers$: BehaviorSubject<Answer[]> = new BehaviorSubject(this.answers);
 
   public quizSelected$: Subject<Quiz> = new Subject();
+  public answerSelected$: Subject<Answer> = new Subject();
   public questionsSelected$: Subject<Question> = new Subject();
   public answersSelected$: Subject<Answer[]> = new Subject();
 
@@ -94,6 +95,12 @@ export class QuizService {
     const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId;
     this.http.get<Question>(urlWithId).subscribe((question) => {
       this.questionsSelected$.next(question);
+    });
+  }
+  setSelectedAnswer(quizId: string, questionId: string, answerId:string){
+    const urlWithId = this.quizUrl + '/' + quizId + '/questions' + '/' + questionId+'/answers/'+answerId;
+    this.http.get<Answer>(urlWithId).subscribe((answer) => {
+      this.answerSelected$.next(answer);
     });
   }
 

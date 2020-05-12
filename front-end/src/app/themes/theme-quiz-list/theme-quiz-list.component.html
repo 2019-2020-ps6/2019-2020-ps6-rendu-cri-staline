@@ -1,6 +1,18 @@
 
+<div *ngIf="enableAdmin===true">
+  <div class="row quit-button">
+    <div class="col-md-12 ">
+      <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;margin-top: 10px;" (click)="goBack()">Retour à la liste des thèmes</button>
+    </div>
+  </div>
+  </div>
 <div *ngIf="enableAdmin===false">
-  Choisissez un quiz
+  <div class="row quit-button">
+    <div class="col-md-12 ">
+       <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px; margin-top: 10px;" (click)="goBackInGame()">Retour au choix du thème</button>
+     </div>
+   </div>
+   Choisissez un quiz
   <div class="quiz-list">
 
       <div class="quiz" *ngFor="let quiz of quizList">

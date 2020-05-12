@@ -5,6 +5,7 @@ import { Quiz } from 'src/models/quiz.model';
 import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
 import { RefereeService } from 'src/services/referee.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-result-details',
@@ -19,19 +20,29 @@ export class ResultDetailsComponent implements OnInit {
 
   private value: number;
   private rest: number;
-  constructor(private quizService: QuizService, private refereeService: RefereeService) {
+  constructor(private quizService: QuizService, 
+    private refereeService: RefereeService, private route :ActivatedRoute,
+    private router :Router) {
       refereeService.resultSelected$.subscribe((rslt) => {
         this.result = rslt;
+        console.log(this.result)
       });
   }
 
   ngOnInit() {
     this.user = this.refereeService.user;
+    this.userId = this.route.snapshot.paramMap.get('id');
   }
 
+  
   init() {
     this.value = this.result.score * 100;
     this.rest = 100 - this.value;
+  }
+
+  userId:string;
+  back(){
+    this.router.navigate(['users-list',this.userId]);
   }
 
   play() {

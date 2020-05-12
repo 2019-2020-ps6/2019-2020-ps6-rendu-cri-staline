@@ -38,5 +38,8 @@ export class UsersListComponent implements OnInit {
   deleteUser(user: User) {
     this.userService.deleteUser(user);
   }
+  goBack(){
+    this.router.navigate(['workspace']);
+  }
 
 }

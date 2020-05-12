@@ -45,11 +45,13 @@ import { AnswerAddComponent} from './quizzes/answer-add/answer-add.component';
 import {QuestionEditComponent} from './quizzes/question-edit/question-edit.component';
 import {AnswerEditComponent} from './quizzes/answer-edit/answer-edit.component';
 import { ResultDetailsComponent } from './users/result-details/result-details.component';
+import { QuestionAnswerComponent } from './quizzes/question-answer/question-answer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuizListComponent,
+    QuestionAnswerComponent,
     QuizComponent,
     HeaderComponent,
     QuizFormComponent,

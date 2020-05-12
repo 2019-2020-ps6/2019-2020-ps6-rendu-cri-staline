@@ -30,9 +30,11 @@ export class AnswerComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.answer);
   }
 
   selectAnswer() {
+    
    this.answerSelected.emit(this.answer);
   }
 

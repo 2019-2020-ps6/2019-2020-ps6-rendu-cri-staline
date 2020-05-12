@@ -41,4 +41,8 @@ export class QuizListComponent implements OnInit {
   goBack() {
     this.router.navigate(['workspace']);
   }
+
+  selectAddQuiz(){
+    this.router.navigate(['quiz-form']);
+  }
 }

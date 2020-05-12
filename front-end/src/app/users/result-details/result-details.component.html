@@ -10,6 +10,24 @@
       <div class="row block sub-block">
         <div class="col">Fini à {{result.endTime}}</div>
       </div>
+      <div class="row block sub-block">
+        <div class="col" (click)="back()" style="cursor:pointer; color: royalblue;"><u>Terminer la relecture...</u></div>
+      </div>
   </div>
 
+  
+
+  <div class="question"  *ngFor="let question of result.quiz.questions">
+    <div class="container block block-colored text-section" style="margin: 20px;padding: 10px;">
+      <!--Inputs & Output allow communication between parent & child components.-->
+      <!--More information: https://angular.io/guide/component-interaction-->
+      <app-question-answer [question]="question" [answersCorrect]="result.answersId"></app-question-answer>
+    </div>
+  </div>
+
+  <div class="container block block-colored text-section" style="margin: 20px;padding: 10px;">
+      <div class="row block sub-block">
+        <div class="col" (click)="back()" style="cursor:pointer; color: royalblue;" ><u>Terminer la relecture...</u></div>
+      </div>
+  </div>
   
