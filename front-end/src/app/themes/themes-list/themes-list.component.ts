@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {Theme} from '../../../models/theme.model';
 import {RightsService} from '../../../services/rights.service';
 import { NavigationService } from 'src/services/navigation.service';
+import { QuizService } from 'src/services/quiz.service';
+import { Quiz } from 'src/models/quiz.model';
 
 @Component({
   selector: 'app-themes-list',
@@ -13,21 +15,23 @@ import { NavigationService } from 'src/services/navigation.service';
 export class ThemesListComponent implements OnInit {
 
   public themesList: Theme[] = [];
+  public quizList: Quiz[];
   public enableAdmin: boolean;
 
   constructor(private router: Router, public themeService: ThemeService, private rightsService: RightsService,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService, private quizService: QuizService) {
+
     this.themeService.themes$.subscribe((theme) => this.themesList = theme);
     console.log(this.themesList);
-    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
+    this.rightsService.enableAdmin$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
     this.navigationService.setTitle('Thèmes');
+    this.navigationService.setPreviousUrl(['workspace']);
   }
 
   ngOnInit(): void {
-    if (this.enableAdmin === undefined && this.router.url !== 'themes-list') {
-      this.router.navigate(['home']);
-    }
+    console.log(this.enableAdmin);
+
   }
 
   themeSelected(theme: Theme) {
@@ -44,7 +48,7 @@ export class ThemesListComponent implements OnInit {
   }
 
   addTheme() {
-    this.router.navigate(['theme-add']);
+    this.router.navigate(['themes-list', 'add']);
   }
 
   goBackInGame() {

@@ -3,6 +3,7 @@ import { User } from '../../../models/user.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
 import {Router} from '@angular/router';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-user-add',
@@ -12,12 +13,14 @@ import {Router} from '@angular/router';
 
 export class UserAddComponent implements OnInit {
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, private router: Router) {
+  constructor(public formBuilder: FormBuilder, public userService: UserService,
+              private router: Router, private navigationService: NavigationService) {
     this.userForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
       imageFile: [null, Validators.required],
     });
+    this.navigationService.setPreviousUrl(['users-list']);
   }
   public userForm: FormGroup;
   public selectedFile: File;

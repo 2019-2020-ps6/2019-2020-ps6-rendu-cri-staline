@@ -14,7 +14,7 @@ import { NavigationService } from 'src/services/navigation.service';
 export class QuestionAddComponent implements OnInit {
   public questionForm: FormGroup;
   public quiz: Quiz;
-  public id: string;
+  public quizId: string;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService,
               private router: Router, private route: ActivatedRoute,
@@ -25,14 +25,16 @@ export class QuestionAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('quizId');
-    this.quizService.setSelectedQuiz(this.id);
+    this.quizId = this.route.snapshot.paramMap.get('quizId');
+    const themeId = this.route.snapshot.paramMap.get('themeId');
+    this.quizService.setSelectedQuiz(this.quizId);
+    this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', this.quizId, 'questions-list']);
   }
 
   addQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
-    this.quizService.addQuestion(this.id, questionToAdd);
-    this.router.navigate(['quiz-list', this.id, 'questions-list']);
+    this.quizService.addQuestion(this.quizId, questionToAdd);
+    this.navigationService.previous();
   }
 
   cancel() {

@@ -4,6 +4,7 @@ import {Router, ActivatedRoute } from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import { Result } from 'src/models/result.model';
 import { Label } from 'ng2-charts';
+import { NavigationService } from 'src/services/navigation.service';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -12,7 +13,8 @@ import { Label } from 'ng2-charts';
 export class UserDetailsComponent implements OnInit {
 
 
-  constructor(private route: ActivatedRoute, private router: Router, public userService: UserService) {
+  constructor(private route: ActivatedRoute, private router: Router,
+              private userService: UserService, private navigationService: NavigationService) {
     this.userService.userSelected$.subscribe((user) => {
       this.user = user;
       this.results = this.user.results;
@@ -23,28 +25,32 @@ export class UserDetailsComponent implements OnInit {
         console.log('compute');
         this.compute();
       }
-
+      this.navigationService.setTitle('Acceuilli ' + this.user.firstName + ' ' + this.user.lastName);
     });
+
+    this.navigationService.setPreviousUrl(['users-list']);
   }
 
 
-  public user: User;
+  private user: User;
 
-  public url: any;
+  private url: any;
 
-  public data: number[] = [];
-  public results: Result[] = [];
-  public labels: Label[] = [];
-  public nbLabels = 7;
+  private data: number[] = [];
+  private results: Result[] = [];
+  private labels: Label[] = [];
+  private nbLabels = 7;
 
-  public resultsDisplayed: Result[] = [];
-  public nbResultsPage = 3;
-  public pages: number[] = [];
-  public currentPage = 1;
+  private resultsDisplayed: Result[] = [];
+  private nbResultsPage = 3;
+  private pages: number[] = [];
+  private currentPage = 1;
 
+  private userId: string;
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.userService.setSelectedUser(id);
+    const userId = this.route.snapshot.paramMap.get('userId');
+    this.userService.setSelectedUser(userId);
+    this.navigationService.setTitle('Acceuilli ' + this.user.firstName + ' ' + this.user.lastName);
   }
 
   setNbPages() {

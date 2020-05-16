@@ -13,6 +13,7 @@ import { NavigationService } from 'src/services/navigation.service';
     constructor(private router: Router, private rightService: RightsService,
                 private navigationService: NavigationService) {
       this.navigationService.setTitle('Acceuil');
+      this.navigationService.setPreviousUrl(['']);
 
     }
     ngOnInit() {

@@ -14,6 +14,7 @@ export class AnswerAddComponent implements OnInit {
   public answerForm: FormGroup;
   private questionId: string;
   private quizId: string;
+  private themeId: string;
   private err = '';
   private alert = false;
   public answersList: Answer[] = [];
@@ -33,8 +34,12 @@ export class AnswerAddComponent implements OnInit {
   ngOnInit(): void {
     this.questionId = this.route.snapshot.paramMap.get('questionId');
     this.quizId = this.route.snapshot.paramMap.get('quizId');
+    this .themeId = this.route.snapshot.paramMap.get('themeId');
     this.quizService.setSelectedQuestion(this.quizId, this.questionId);
     this.quizService.setSelectedAnswers(this.quizId, this.questionId);
+    this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list',
+     this.quizId, 'questions-list', this.questionId, 'answers-list']);
+
   }
 
   addAnswer() {
@@ -42,7 +47,7 @@ export class AnswerAddComponent implements OnInit {
     answerToAdd = {type: 'text', ...answerToAdd};
     if (this.checkForm) {
       this.quizService.addAnswer(this.quizId, this.questionId, answerToAdd);
-      this.router.navigate(['quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list']);
+      this.navigationService.previous();
     }
   }
 

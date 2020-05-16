@@ -8,56 +8,63 @@ import { RightsService } from './rights.service';
 })
 export class NavigationService {
 
-
-private previousUrl: string;
 private currentUrl: string;
+public previousUrl: string;
 private title: string;
 private nextStack: string[] = [];
-private previousStack: string[] = [];
 
 public nextStack$: BehaviorSubject<string[]> = new BehaviorSubject(this.nextStack);
-public previousStack$: BehaviorSubject<string[]> = new BehaviorSubject(this.previousStack);
 public title$: BehaviorSubject<string> = new BehaviorSubject(this.title);
-
+public previousUrl$: BehaviorSubject<string> = new BehaviorSubject(this.previousUrl);
 
 public nextStackState$: Subject<string[]> = new Subject();
-public nextPreviousState$: Subject<string[]> = new Subject();
 public titleCurrentPage$: Subject<string> = new Subject();
+public previousUrlState$: Subject<string> = new Subject();
 
   constructor(private router: Router) {
     router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
-          this.previousUrl = this.currentUrl;
           this.currentUrl = event.url;
-
         }
       });
   }
 
   previous() {
+      console.log(this.previousUrl);
       if (this.previousUrl !== undefined) {
-      this.router.navigate([this.previousUrl]);
-      this.addToNextStack();
+        this.addToNextStack(this.currentUrl);
+        this.router.navigate([this.previousUrl]);
+
       }
   }
+
+  setPreviousUrl(urlPath: string[]) {
+    let url = '';
+    for (let i = 0; i < urlPath.length; i++) {
+        if (i !== urlPath.length - 1) {
+            url += urlPath[i] + '/';
+        } else {
+            url += urlPath[i];
+        }
+    }
+    this.previousUrl = url;
+    this.previousUrl$.next(this.previousUrl);
+  }
+
   next() {
         if (this.nextStack.length > 0) {
-            this.router.navigate([this.currentUrl]);
+            console.log(this.nextStack);
+            this.router.navigate([this.nextStack.pop()]);
             this.nextStackState$.next(this.nextStack);
         }
   }
 
-  addToNextStack() {
-        this.nextStack.push(this.currentUrl);
+  addToNextStack(url: string) {
+        this.nextStack.push(url);
         this.nextStackState$.next(this.nextStack);
   }
 
-  isThereNextUrl() {
-        if (this.nextStack.length > 0) {
-            return true;
-        }
-        return false;
-  }
+
 
   setTitle(str: string) {
       this.title = str;

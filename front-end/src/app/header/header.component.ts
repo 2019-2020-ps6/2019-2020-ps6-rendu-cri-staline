@@ -10,20 +10,27 @@ import { NavigationService } from 'src/services/navigation.service';
 export class HeaderComponent implements OnInit {
 
   public nextStack: string[] = [];
-
+  public previousUrl = '';
   public title: string;
   constructor( private rightsService: RightsService, private navigation: NavigationService ) {
-    this.navigation.nextStackState$.subscribe((stack) => {
+    this.navigation.nextStack$.subscribe((stack) => {
       this.nextStack = stack;
       console.log(this.nextStack);
+
     });
     console.log(this.nextStack);
     this.navigation.titleCurrentPage$.subscribe((newTitle) => {
         this.title = newTitle;
     });
+    this.navigation.previousUrl$.subscribe((url) => {
+      this.previousUrl = this.navigation.previousUrl;
+      console.log(this.previousUrl);
+    });
+
   }
 
   ngOnInit() {
+
   }
 
   workspace() {

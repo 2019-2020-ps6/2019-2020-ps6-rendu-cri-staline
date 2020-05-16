@@ -35,8 +35,10 @@ export class QuizEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.quizService.setSelectedQuiz(id);
+    const quizId = this.route.snapshot.paramMap.get('quizId');
+    const themeId = this.route.snapshot.paramMap.get('themeId');
+    this.quizService.setSelectedQuiz(quizId);
+    this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', quizId, 'questions-list']);
   }
 
   updateQuiz() {

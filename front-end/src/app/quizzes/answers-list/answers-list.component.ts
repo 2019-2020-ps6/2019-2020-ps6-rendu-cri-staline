@@ -11,10 +11,11 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class AnswersListComponent implements OnInit {
 
-  public answersList: Answer[] = [];
+  private answersList: Answer[] = [];
   private questionId: string;
   private quizId: string;
-
+  private themeId: string;
+  private question: Question;
   constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService,
               private navigationService: NavigationService) {
     this.quizService.answersSelected$.subscribe((answers) => {
@@ -26,18 +27,19 @@ export class AnswersListComponent implements OnInit {
       this.navigationService.setTitle('Question - ' + this.question.label);
     });
   }
-  private question: Question;
+
 
   ngOnInit(): void {
     this.questionId = this.route.snapshot.paramMap.get('questionId');
     this.quizId = this.route.snapshot.paramMap.get('quizId');
+    this.themeId = this.route.snapshot.paramMap.get('themeId');
     this.quizService.setSelectedAnswers(this.quizId, this.questionId);
     this.quizService.setSelectedQuestion(this.quizId, this.questionId);
-
+    this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list']);
   }
 
   addAnswer() {
-    this.router.navigate(['quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list', 'answer-add']);
+    this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list', 'add']);
   }
 
   deleteAnswer(answer: Answer) {
@@ -48,7 +50,7 @@ export class AnswersListComponent implements OnInit {
     this.router.navigate(['quiz-list', this.quizId, 'questions-list']);
   }
   editQuestion() {
-    this.router.navigate(['quiz-list', this.quizId, 'questions-list', 'edit', this.quizId]);
+    this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list', this.questionId, 'edit']);
   }
 
 }

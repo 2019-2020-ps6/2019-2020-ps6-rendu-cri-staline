@@ -13,9 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule  } from '@ng-bootstrap/ng-bootstrap';
 
 import { AnswerComponent } from './quizzes/answer/answer.component';
-import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
+import { QuizAddComponent } from './quizzes/quiz-add/quiz-add.component';
 import { QuestioningComponent } from './quizzes/questioning/questioning.component';
-import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuizComponent } from './quizzes/quiz/quiz.component';
 import { QuizEditComponent } from './quizzes/quiz-edit/quiz-edit.component';
 
@@ -34,7 +33,7 @@ import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
 import {ThemeComponent} from './themes/theme/theme.component';
 import { ThemeEditComponent } from './themes/theme-edit/theme-edit.component';
 import {ThemesListComponent} from './themes/themes-list/themes-list.component';
-import {ThemeQuizListComponent} from './themes/theme-quiz-list/theme-quiz-list.component';
+import {QuizListComponent} from './quizzes/quiz-list/quiz-list.component';
 
 import { QuestionComponent } from './quizzes/question/question.component';
 import { QuestionsListComponent } from './quizzes/questions-list/questions-list.component';
@@ -50,11 +49,10 @@ import { QuestionAnswerComponent } from './quizzes/question-answer/question-answ
 @NgModule({
   declarations: [
     AppComponent,
-    QuizListComponent,
     QuestionAnswerComponent,
     QuizComponent,
     HeaderComponent,
-    QuizFormComponent,
+    QuizAddComponent,
     QuestioningComponent,
     UserAddComponent,
     AnswerComponent,
@@ -68,7 +66,7 @@ import { QuestionAnswerComponent } from './quizzes/question-answer/question-answ
     ThemeComponent,
     ThemeEditComponent,
     ThemesListComponent,
-    ThemeQuizListComponent,
+    QuizListComponent,
     ResultComponent,
     QuestionComponent,
     QuestionsListComponent,

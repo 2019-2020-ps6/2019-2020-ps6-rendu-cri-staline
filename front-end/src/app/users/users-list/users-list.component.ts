@@ -3,6 +3,7 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import {User} from '../../../models/user.model';
 import {RightsService} from '../../../services/rights.service';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-users-list',
@@ -15,17 +16,19 @@ export class UsersListComponent implements OnInit {
 
   public usersList: User[] = [];
 
-  constructor(private router: Router, public userService: UserService, private rightsService: RightsService) {
+  constructor(private router: Router, public userService: UserService,
+              private rightsService: RightsService, private navigationService: NavigationService) {
     this.userService.users$.subscribe((user) => {
       this.usersList = user;
     });
     console.log(this.usersList);
     this.rightsService.enableAdmin$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
-
+    this.navigationService.setPreviousUrl(['workspace']);
   }
 
   ngOnInit(): void {
+    this.navigationService.setTitle('Acceuillis');
     if (this.enableAdmin === undefined && this.router.url !== 'users-list') {
       this.router.navigate(['home']);
     }
@@ -43,7 +46,7 @@ export class UsersListComponent implements OnInit {
   }
 
   addUser() {
-    this.router.navigate(['user-add']);
+    this.router.navigate(['users-list', 'add']);
   }
 
   goBackInGame() {

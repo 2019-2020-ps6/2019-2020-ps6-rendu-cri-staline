@@ -4,20 +4,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
 import { Theme } from '../../../models/theme.model';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { ThemeService } from '../../../services/theme.service';
 import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
-  selector: 'app-quiz-form',
-  templateUrl: './quiz-form.component.html',
-  styleUrls: ['./quiz-form.component.scss']
+  selector: 'app-quiz-add',
+  templateUrl: './quiz-add.component.html',
+  styleUrls: ['./quiz-add.component.scss']
 })
-export class QuizFormComponent implements OnInit {
+export class QuizAddComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService,
               private router: Router, private themeService: ThemeService,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService , private route: ActivatedRoute) {
     // Form creation
     this.quizForm = this.formBuilder.group({
       name: [''],
@@ -44,8 +44,11 @@ export class QuizFormComponent implements OnInit {
   public errors: string[] = [];
   public haveErrors = false;
 
+  public themeId: string;
   ngOnInit() {
+    this.themeId = this.route.snapshot.paramMap.get('themeId');
     this.themeService.setThemesFromUrl();
+    this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list']);
   }
 
   addQuiz() {

@@ -16,6 +16,7 @@ export class WorkspaceComponent implements OnInit {
   constructor(private router: Router, private quizService: QuizService,
               private navigationService: NavigationService) {
         this.navigationService.setTitle('Gestion du jeu');
+        this.navigationService.setPreviousUrl(['home']);
 
   }
 

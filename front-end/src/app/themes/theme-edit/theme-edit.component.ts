@@ -29,8 +29,9 @@ export class ThemeEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.themeService.setSelectedTheme(id);
+    const themeId = this.route.snapshot.paramMap.get('themeId');
+    this.themeService.setSelectedTheme(themeId);
+    this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list']);
   }
   updateTheme() {
     let themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
@@ -50,6 +51,7 @@ export class ThemeEditComponent implements OnInit {
     }
     this.navigationService.previous();
   }
+
   cancel() {
     this.navigationService.previous();
   }

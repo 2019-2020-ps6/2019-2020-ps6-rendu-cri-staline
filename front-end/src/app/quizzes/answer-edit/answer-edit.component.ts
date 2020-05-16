@@ -11,14 +11,15 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['./answer-edit.component.scss']
 })
 export class AnswerEditComponent implements OnInit {
-  public answerForm: FormGroup;
-  public answer: Answer;
-  public answerList: Answer[] = [];
-  public quizId: string;
-  public questionId: string;
-  public answerId: string;
+  private answerForm: FormGroup;
+  private answer: Answer;
+  private answerList: Answer[] = [];
+  private quizId: string;
+  private questionId: string;
+  private answerId: string;
+  private themeId: string;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService,
+  constructor(private formBuilder: FormBuilder, private quizService: QuizService,
               private router: Router, private route: ActivatedRoute,
               private navigationService: NavigationService) {
     this.answerForm = this.formBuilder.group({
@@ -37,11 +38,14 @@ export class AnswerEditComponent implements OnInit {
   ngOnInit(): void {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     this.questionId = this.route.snapshot.paramMap.get('questionId');
-    this.answerId = this.route.snapshot.paramMap.get('id');
+    this.answerId = this.route.snapshot.paramMap.get('answerId');
+    this.themeId = this.route.snapshot.paramMap.get('themeId');
+    this.navigationService.setPreviousUrl(['themes-list', this.themeId,
+    'quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list']);
     this.quizService.setSelectedQuestion(this.quizId, this.questionId);
     this.quizService.setSelectedAnswers(this.quizId, this.questionId);
     this.quizService.setSelectedAnswer(this.quizId, this.questionId, this.answerId);
-  }
+    }
 
   updateAnswer() {
     let answerToAdd: Answer = this.answerForm.getRawValue() as Answer;

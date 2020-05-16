@@ -13,7 +13,7 @@ import { NavigationService } from 'src/services/navigation.service';
 export class QuestionEditComponent implements OnInit {
   public questionForm: FormGroup;
   public question: Question;
-  public id: string;
+  public quizId: string;
   public questionId: string;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService,
@@ -29,10 +29,12 @@ export class QuestionEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('quizId');
+    this.quizId = this.route.snapshot.paramMap.get('quizId');
+    const themeId = this.route.snapshot.paramMap.get('themeId');
     this.questionId = this.route.snapshot.paramMap.get('id');
-    this.quizService.setSelectedQuiz(this.id);
-    this.quizService.setSelectedQuestion(this.id, this.questionId);
+    this.quizService.setSelectedQuiz(this.quizId);
+    this.quizService.setSelectedQuestion(this.quizId, this.questionId);
+    this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', this.quizId, 'questions-list']);
   }
 
   updateQuestion() {
@@ -40,7 +42,7 @@ export class QuestionEditComponent implements OnInit {
     if (questionToAdd.label === '') {
       questionToAdd.label = this.question.label;
     }
-    this.quizService.updateQuestion(this.id, this.question.id, questionToAdd);
+    this.quizService.updateQuestion(this.quizId, this.question.id, questionToAdd);
     this.navigationService.previous();
   }
 

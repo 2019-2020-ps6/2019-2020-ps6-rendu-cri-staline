@@ -19,6 +19,11 @@
     </div>
   </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ng-container *ngIf="(this.previousUrl!=='') && (this.previousUrl!==undefined)">
       <a class="nav-link clickable" style="color: black; font-size:50px;" (click)="previous()"><</a>
+      </ng-container>
+      <ng-container *ngIf="nextStack.length>0">
+      <a  class="nav-link clickable" style="color: black; font-size:50px;" (click)="next()">></a>
+      </ng-container>
       <a class="navbar-brand clickable" style="font-size:50px;"   > {{title}}</a>
     </nav>

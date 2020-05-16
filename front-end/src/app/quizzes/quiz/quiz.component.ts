@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
-import {Router } from '@angular/router';
+import {Router, ActivatedRoute } from '@angular/router';
 import { RefereeService } from 'src/services/referee.service';
 import { RightsService } from 'src/services/rights.service';
 import { QuizService } from 'src/services/quiz.service';
@@ -15,7 +15,9 @@ export class QuizComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
-  enableAdmin: boolean;
+  private enableAdmin: boolean;
+
+  private themeId: string;
 
   @Output()
   quizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
@@ -27,6 +29,7 @@ export class QuizComponent implements OnInit {
   questionsQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private rightsService: RightsService,
               private quizService: QuizService,
               private navigationService: NavigationService) {
@@ -34,15 +37,18 @@ export class QuizComponent implements OnInit {
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }
 
+
   ngOnInit() {
     if (this.enableAdmin === undefined && this.router.url !== 'quiz-list') {
       this.router.navigate(['home']);
     }
+    this.themeId = this.route.snapshot.paramMap.get('themeId');
   }
 
   play() {
-    this.router.navigate(['quiz-list', this.quiz.id], {fragment: 'question'});
+    this.router.navigate(['quiz', this.quiz.id], {fragment: 'question'});
     this.quizService.setSelectedQuiz( this.quiz.id);
+    this.navigationService.setTitle('Quiz ' + this.quiz.name);
   }
 
   delete() {
@@ -53,7 +59,7 @@ export class QuizComponent implements OnInit {
   }
 
   questions() {
-    this.router.navigate(['quiz-list', this.quiz.id, 'questions-list']);
+    this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quiz.id, 'questions-list']);
     this.navigationService.setTitle('Quiz ' + this.quiz.name);
   }
 

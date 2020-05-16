@@ -3,6 +3,7 @@ import { Theme } from '../../../models/theme.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ThemeService} from '../../../services/theme.service';
 import {Router} from '@angular/router';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-theme-add',
@@ -12,17 +13,21 @@ import {Router} from '@angular/router';
 
 export class ThemeAddComponent implements OnInit {
 
-  constructor(public formBuilder: FormBuilder, public themeService: ThemeService, private router: Router) {
+  constructor(public formBuilder: FormBuilder,
+              public themeService: ThemeService,
+              private router: Router,
+              private navigationService: NavigationService) {
     this.themeForm = this.formBuilder.group({
       themeName: [''],
       themeImage: [null, Validators.required],
     });
+    this.navigationService.setPreviousUrl(['themes-list']);
   }
-  public themeForm: FormGroup;
-  public selectedFile: File;
+  private themeForm: FormGroup;
+  private selectedFile: File;
 
-public errors: string[] = [];
-public haveErrors = false;
+  private errors: string[] = [];
+  private haveErrors = false;
 
   ngOnInit() {
   }
@@ -54,6 +59,10 @@ valid(themeToAdd) {
     this.haveErrors = true;
   }
 
+}
+
+cancel() {
+  this.navigationService.previous();
 }
 checkValue() {
   const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;

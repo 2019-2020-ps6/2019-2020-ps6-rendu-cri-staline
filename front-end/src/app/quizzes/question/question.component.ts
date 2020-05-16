@@ -12,24 +12,28 @@ export class QuestionComponent implements OnInit {
   @Input()
   question: Question;
 
+  private themeId: string;
+  private quizId: string;
   @Output()
   deleteQuestion: EventEmitter<Question> = new EventEmitter<Question>();
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    this.themeId =  this.route.snapshot.paramMap.get('themeId');
+    this.quizId = this.route.snapshot.paramMap.get('quizId');
   }
 
+
   delete() {
-    if (window.confirm('Etes-vous sûr de vouloir supprimer cette question ?')) {
-      this.deleteQuestion.emit(this.question);
-    }
   }
 
   goToAnswers() {
-    this.router.navigate(['quiz-list', this.question.quizId, 'questions-list', this.question.id, 'answers-list']);
+    this.router.navigate(['themes-list', this.themeId, 'quiz-list',
+    this.question.quizId, 'questions-list', this.question.id, 'answers-list']);
   }
 
   edit() {

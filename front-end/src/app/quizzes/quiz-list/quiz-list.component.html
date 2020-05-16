@@ -1,32 +1,30 @@
 
-
 <div *ngIf="enableAdmin===true">
-  <div class="row quit-button">
-
-    <div class="col-md-12 ">
-      <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;margin-top: 10px;display: flex;" (click)="goBack()">Retour à l'espace accompagnateur</button>
-    </div>
+  <button class="button-card" style="margin: 35px;" (click)="editTheme()">Modifier nom du thème</button>  
+  <button class="button-card" style="margin: 35px;" (click)="addQuiz()">Ajouter un quiz</button>
+  
   </div>
-  <button class="button-card" style="margin: 35px;" (click)="selectAddQuiz()">Ajouter un quiz</button>
-    
-  </div>
-
 <div *ngIf="enableAdmin===false">
-  <div class="row quit-button">
-   <div class="col-md-12 ">
-      <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;" (click)="goBack()">Retour</button>
-    </div>
-  </div>
-  <h1>Choisissez un quiz</h1>
-</div>
-
-
-
+   Choisissez un quiz
   <div class="quiz-list">
+
       <div class="quiz" *ngFor="let quiz of quizList">
           <!--Inputs & Output allow communication between parent & child components.-->
           <!--More information: https://angular.io/guide/component-interaction-->
-
-          <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (deleteQuiz)="deleteQuiz($event)"></app-quiz>
+          <ng-container *ngIf="quiz.questions.length>0">
+            <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (deleteQuiz)="deleteQuiz($event)"></app-quiz>
+          </ng-container>
         </div>
+
+  </div>
+</div>
+
+<div *ngIf="enableAdmin===true">
+  <div class="quiz-list">
+    <div class="quiz" *ngFor="let quiz of quizList">
+        <!--Inputs & Output allow communication between parent & child components.-->
+        <!--More information: https://angular.io/guide/component-interaction-->
+        <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (deleteQuiz)="deleteQuiz($event)"></app-quiz>
     </div>
+  </div>
+</div>
