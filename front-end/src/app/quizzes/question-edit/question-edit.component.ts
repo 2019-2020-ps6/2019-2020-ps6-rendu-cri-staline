@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Question} from '../../../models/question.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-question-edit',
@@ -15,8 +16,10 @@ export class QuestionEditComponent implements OnInit {
   public id: string;
   public questionId: string;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private route: ActivatedRoute) {
-    this.quizService.questionsSelected$.subscribe((question) => {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService,
+              private router: Router, private route: ActivatedRoute,
+              private navigationService: NavigationService) {
+    this.quizService.questionSelected$.subscribe((question) => {
       this.question = question;
       console.log(this.question);
     });
@@ -38,11 +41,11 @@ export class QuestionEditComponent implements OnInit {
       questionToAdd.label = this.question.label;
     }
     this.quizService.updateQuestion(this.id, this.question.id, questionToAdd);
-    this.router.navigate(['quiz-list', this.id, 'questions-list']);
+    this.navigationService.previous();
   }
 
   cancel() {
-    this.router.navigate(['quiz-list', this.id, 'questions-list']);
+    this.navigationService.previous();
   }
 
 }

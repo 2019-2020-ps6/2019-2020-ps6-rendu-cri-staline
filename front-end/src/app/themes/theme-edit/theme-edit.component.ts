@@ -3,6 +3,7 @@ import { Theme } from '../../../models/theme.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ThemeService} from '../../../services/theme.service';
 import {Router , ActivatedRoute} from '@angular/router';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-theme-edit',
@@ -16,7 +17,7 @@ export class ThemeEditComponent implements OnInit {
   public theme: Theme;
 
   constructor(public formBuilder: FormBuilder, public themeService: ThemeService, private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private navigationService: NavigationService) {
       this.themeService.themeSelected$.subscribe((theme) => {
         this.theme = theme;
         console.log(this.theme);
@@ -47,10 +48,10 @@ export class ThemeEditComponent implements OnInit {
     } else {
       this.themeService.updateTheme(this.theme.id, themeToAdd);
     }
-    this.router.navigate(['themes-list']);
+    this.navigationService.previous();
   }
   cancel() {
-    this.router.navigate(['themes-list']);
+    this.navigationService.previous();
   }
 
   onFileChange(event) {

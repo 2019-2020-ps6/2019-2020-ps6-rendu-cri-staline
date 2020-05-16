@@ -4,6 +4,7 @@ import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {Question} from '../../../models/question.model';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-question-add',
@@ -15,7 +16,9 @@ export class QuestionAddComponent implements OnInit {
   public quiz: Quiz;
   public id: string;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private route: ActivatedRoute) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService,
+              private router: Router, private route: ActivatedRoute,
+              private navigationService: NavigationService) {
     this.questionForm = this.formBuilder.group({
       label: ['']
     });
@@ -33,7 +36,7 @@ export class QuestionAddComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['quiz-list', this.id, 'questions-list']);
+    this.navigationService.previous();
   }
 
 }

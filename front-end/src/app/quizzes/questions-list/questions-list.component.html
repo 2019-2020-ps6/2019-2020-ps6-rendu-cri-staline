@@ -1,14 +1,10 @@
 <div class="row quit-button">
-  <div class="col-md-12 ">
-    <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;margin-top: 10px;" (click)="goBack()">Retour à la liste des quiz</button>
-  </div>
+  <button class="button-card" style="margin: 35px;" (click)="editQuestion()">Modifier nom du quiz</button>
+  <button class="button-card" style="margin: 35px;" (click)="selectAddQuestion()">Ajouter une question</button>
+    
 </div>
-
-<div>Questions du quiz "{{quiz.name}}"</div>
-
 <div class="questions-list">
   
-    <button class="button-card" style="margin: 35px;" (click)="selectAddQuestion()">Ajouter une question</button>
     
   <div class="question" *ngFor="let question of questionsList">
     <!--Inputs & Output allow communication between parent & child components.-->

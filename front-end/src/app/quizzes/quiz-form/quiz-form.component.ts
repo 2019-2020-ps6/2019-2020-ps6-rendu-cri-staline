@@ -6,6 +6,7 @@ import { Quiz } from '../../../models/quiz.model';
 import { Theme } from '../../../models/theme.model';
 import {Router} from '@angular/router';
 import { ThemeService } from '../../../services/theme.service';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-quiz-form',
@@ -15,7 +16,8 @@ import { ThemeService } from '../../../services/theme.service';
 export class QuizFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService,
-              private router: Router, private themeService: ThemeService) {
+              private router: Router, private themeService: ThemeService,
+              private navigationService: NavigationService) {
     // Form creation
     this.quizForm = this.formBuilder.group({
       name: [''],
@@ -73,7 +75,7 @@ export class QuizFormComponent implements OnInit {
     this.valid(quizToCreate);
   }
   cancel() {
-    this.router.navigate(['workspace']);
+    this.navigationService.previous();
   }
 
 }

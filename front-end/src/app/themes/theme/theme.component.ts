@@ -6,6 +6,7 @@ import { RightsService } from 'src/services/rights.service';
 import { ThemeService } from '../../../services/theme.service';
 import { RefereeService } from '../../../services/referee.service';
 import { QuizService } from 'src/services/quiz.service';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-theme',
@@ -28,7 +29,8 @@ export class ThemeComponent implements OnInit {
   public imageUrl  = '';
 
   constructor(private router: Router, private rightsService: RightsService,
-              private refereeService: RefereeService, private themeService: ThemeService) {
+              private refereeService: RefereeService, private themeService: ThemeService,
+              private navigationService: NavigationService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }
@@ -49,7 +51,7 @@ export class ThemeComponent implements OnInit {
 
   quizzes() {
     this.router.navigate(['themes-list', this.theme.id, 'quiz-list']);
-
+    this.themeService.setSelectedTheme(this.theme.id);
   }
 
   play() {

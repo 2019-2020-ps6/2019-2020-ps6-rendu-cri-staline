@@ -5,6 +5,7 @@ import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ThemeService} from '../../../services/theme.service';
 import {Theme} from '../../../models/theme.model';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-quiz-edit',
@@ -17,7 +18,8 @@ export class QuizEditComponent implements OnInit {
   public themeList: Theme[] = [];
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router,
-              private route: ActivatedRoute, private themeService: ThemeService) {
+              private route: ActivatedRoute, private themeService: ThemeService,
+              private navigationService: NavigationService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       console.log(this.quiz);
@@ -45,11 +47,11 @@ export class QuizEditComponent implements OnInit {
     }
 
     this.quizService.updateQuiz(this.quiz.id, quizToEdit);
-    this.router.navigate(['quiz-list']);
+    this.navigationService.previous();
   }
 
   cancel() {
-    this.router.navigate(['quiz-list']);
+    this.navigationService.previous();
   }
 
 }

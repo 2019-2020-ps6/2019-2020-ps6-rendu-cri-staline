@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Answer} from '../../../models/question.model';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-answer-add',
@@ -17,7 +18,9 @@ export class AnswerAddComponent implements OnInit {
   private alert = false;
   public answersList: Answer[] = [];
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router, private route: ActivatedRoute) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService,
+              private router: Router, private route: ActivatedRoute,
+              private navigationService: NavigationService) {
     this.answerForm = this.formBuilder.group({
       value: [''],
       isCorrect: ['']
@@ -59,7 +62,7 @@ export class AnswerAddComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list']);
+   this.navigationService.previous();
   }
 
 }

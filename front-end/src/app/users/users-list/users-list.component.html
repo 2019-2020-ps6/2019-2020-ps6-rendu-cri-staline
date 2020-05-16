@@ -1,10 +1,8 @@
 
 <div *ngIf="enableAdmin===true">
-<div class="row quit-button">
-  <div class="col-md-12 ">
-    <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;margin-top: 10px;" (click)="goBack()">Retour à l'espace accompagnateur</button>
-  </div>
-</div>
+
+<button class="button-card" style="margin: 35px;" (click)="addUser()">Ajouter un acceuilli</button>
+  
 </div>
 
 <div *ngIf="enableAdmin===false">

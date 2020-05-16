@@ -8,6 +8,8 @@ export class RightsService {
 
   bEnableAdmin: boolean;
 
+  public enableAdmin$: BehaviorSubject<boolean> = new BehaviorSubject(this.bEnableAdmin);
+
   public rightsSelected$: Subject<boolean> = new Subject();
   constructor() {
   }

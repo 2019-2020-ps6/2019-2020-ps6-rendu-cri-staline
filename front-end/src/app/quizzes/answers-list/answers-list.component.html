@@ -1,14 +1,12 @@
 <div class="row quit-button">
-  <div class="col-md-12 ">
-    <button class="btn btn-primary btn-lg active" style="margin-bottom: 15px;margin-top: 10px;" (click)="goBack()">Retour à la liste des questions</button>
-  </div>
+  <button class="button-card" style="margin: 35px;" (click)="editQuestion()">Modifier label</button>
+  <button class="button-card" style="margin: 35px;" (click)="addAnswer()">Ajouter une réponse</button>
+    
 </div>
 
-<div>Liste des réponses</div>
 
 <div class="answers-list">
   
-    <button class="button-card" style="margin: 35px;" (click)="addAnswer()">Ajouter une réponse</button>
     
   <div class="answer" *ngFor="let answer of answersList">
     <!--Inputs & Output allow communication between parent & child components.-->

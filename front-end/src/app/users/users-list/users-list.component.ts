@@ -20,7 +20,7 @@ export class UsersListComponent implements OnInit {
       this.usersList = user;
     });
     console.log(this.usersList);
-    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
+    this.rightsService.enableAdmin$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
 
   }
@@ -39,6 +39,14 @@ export class UsersListComponent implements OnInit {
     this.userService.deleteUser(user);
   }
   goBack() {
+    this.router.navigate(['workspace']);
+  }
+
+  addUser() {
+    this.router.navigate(['user-add']);
+  }
+
+  goBackInGame() {
     this.router.navigate(['workspace']);
   }
 

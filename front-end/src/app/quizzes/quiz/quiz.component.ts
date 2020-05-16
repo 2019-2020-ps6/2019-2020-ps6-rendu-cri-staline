@@ -4,6 +4,7 @@ import {Router } from '@angular/router';
 import { RefereeService } from 'src/services/referee.service';
 import { RightsService } from 'src/services/rights.service';
 import { QuizService } from 'src/services/quiz.service';
+import { NavigationService } from 'src/services/navigation.service';
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -27,7 +28,8 @@ export class QuizComponent implements OnInit {
 
   constructor(private router: Router,
               private rightsService: RightsService,
-              private quizService: QuizService) {
+              private quizService: QuizService,
+              private navigationService: NavigationService) {
     this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
     this.enableAdmin = this.rightsService.bEnableAdmin;
   }
@@ -52,9 +54,8 @@ export class QuizComponent implements OnInit {
 
   questions() {
     this.router.navigate(['quiz-list', this.quiz.id, 'questions-list']);
+    this.navigationService.setTitle('Quiz ' + this.quiz.name);
   }
 
-  edit() {
 
-  }
 }

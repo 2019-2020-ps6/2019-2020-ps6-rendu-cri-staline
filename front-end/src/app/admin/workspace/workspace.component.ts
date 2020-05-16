@@ -3,6 +3,7 @@ import { User } from '../../../models/user.model';
 import { Quiz } from '../../../models/quiz.model';
 import { Router } from '@angular/router';
 import { QuizService } from 'src/services/quiz.service';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-workspace',
@@ -12,25 +13,22 @@ import { QuizService } from 'src/services/quiz.service';
 export class WorkspaceComponent implements OnInit {
 
 
-  constructor(private router: Router, private quizService: QuizService) {
+  constructor(private router: Router, private quizService: QuizService,
+              private navigationService: NavigationService) {
+        this.navigationService.setTitle('Gestion du jeu');
 
   }
 
   ngOnInit() {
-
   }
 
-  addUser() {
-    this.router.navigate(['user-add']);
-  }
 
   usersList() {
     this.router.navigate(['users-list']);
+    this.navigationService.setTitle('Acceuillis');
   }
 
-  addTheme() {
-    this.router.navigate(['theme-add']);
-  }
+
   addQuiz() {
     this.router.navigate(['quiz-form']);
   }
@@ -42,6 +40,7 @@ export class WorkspaceComponent implements OnInit {
 
   themesList() {
     this.router.navigate(['themes-list']);
+    this.navigationService.setTitle('Thèmes');
   }
 
   parameters() {

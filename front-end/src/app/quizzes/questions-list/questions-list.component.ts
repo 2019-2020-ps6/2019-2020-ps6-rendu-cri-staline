@@ -3,6 +3,7 @@ import {Question} from '../../../models/question.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
+import { NavigationService } from 'src/services/navigation.service';
 
 @Component({
   selector: 'app-questions-list',
@@ -16,10 +17,12 @@ export class QuestionsListComponent implements OnInit {
   private id: string;
   private previousUrl: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {
+  constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService,
+              private navigationService: NavigationService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       this.questionsList = quiz.questions;
+      navigationService.setTitle('Quiz - ' + quiz.name);
       console.log(this.quiz);
     });
   }
@@ -40,6 +43,11 @@ export class QuestionsListComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['quiz-list']);
+  }
+
+  editQuestion() {
+    this.router.navigate(['quiz-list', 'edit', this.quiz.id]);
+
   }
 
 }
