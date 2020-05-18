@@ -57,7 +57,9 @@ export class QuizAddComponent implements OnInit {
     this.valid(quizToCreate);
     if (!this.haveErrors) {
     this.quizService.addQuiz(quizToCreate);
-    this.router.navigate(['quiz-list']);
+    // this.router.navigate(['quiz-list']);
+    this.navigationService.previous();
+
     }
   }
   valid(quizToCreate) {

@@ -24,7 +24,7 @@ export class ThemeService {
   }
   addThemeImageFile(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
-    formData.append('themeName', JSON.stringify(theme));
+    formData.append('themeObject', JSON.stringify(theme));
     formData.append('themeFile', imageFile);
     const options = {
       params: new HttpParams(),

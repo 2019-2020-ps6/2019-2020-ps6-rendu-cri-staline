@@ -33,19 +33,20 @@ export class ThemeAddComponent implements OnInit {
   }
 
   addTheme() {
+    console.log('add thm is callED');
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     themeToAdd.themeImage = this.selectedFile;
     console.log(themeToAdd);
     this.valid(themeToAdd);
     if (!this.haveErrors) {
-      /*this.themeService.addTheme(themeToAdd).subscribe((event) => {
+      this.themeService.addThemeImageFile(themeToAdd, themeToAdd.themeImage).subscribe((event) => {
         console.log(event);
         this.router.navigate(['themes-list']);
       }, error => {
         console.error(error);
-      });*/
-      this.themeService.addTheme(themeToAdd);
-      this.router.navigate(['themes-list']);
+      });
+      // this.themeService.addTheme(themeToAdd);
+      // this.router.navigate(['themes-list']);
     }
   }
 onFileChange(event) {
