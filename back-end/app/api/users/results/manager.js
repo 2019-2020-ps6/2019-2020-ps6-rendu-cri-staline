@@ -1,5 +1,5 @@
 const { Result, User } = require('../../../models')
-const { buildQuizz } = require('../../quizzes/manager')
+const { buildQuizz } = require('../../themes/quizzes/manager')
 const NotFoundError = require('../../../utils/errors/not-found-error')
 /**
  * Results Manager.

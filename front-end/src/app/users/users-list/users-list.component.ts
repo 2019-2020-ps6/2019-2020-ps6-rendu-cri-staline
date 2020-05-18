@@ -12,45 +12,38 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class UsersListComponent implements OnInit {
 
-  enableAdmin: boolean;
+  private enableAdmin: boolean;
 
-  public usersList: User[] = [];
+  private usersList: User[] = [];
 
-  constructor(private router: Router, public userService: UserService,
-              private rightsService: RightsService, private navigationService: NavigationService) {
+  constructor(private router: Router,
+              public userService: UserService,
+              private rightsService: RightsService,
+              private navigationService: NavigationService) {
     this.userService.users$.subscribe((user) => {
       this.usersList = user;
     });
-    console.log(this.usersList);
-    this.rightsService.enableAdmin$.subscribe((rights) => this.enableAdmin = rights);
-    this.enableAdmin = this.rightsService.bEnableAdmin;
-    this.navigationService.setPreviousUrl(['workspace']);
+    this.rightsService.enableAdmin$.subscribe(admin => {
+      this.enableAdmin = admin;
+    });
+
   }
 
   ngOnInit(): void {
     this.navigationService.setTitle('Acceuillis');
-    if (this.enableAdmin === undefined && this.router.url !== 'users-list') {
-      this.router.navigate(['home']);
+    if (this.enableAdmin === true) {
+      this.navigationService.setPreviousUrl(['workspace']);
+    } else {
+      this.navigationService.setPreviousUrl(['home']);
     }
-  }
-
-  userSelected(user: User) {
-    console.log('userSelect() users-list');
   }
 
   deleteUser(user: User) {
     this.userService.deleteUser(user);
   }
-  goBack() {
-    this.router.navigate(['workspace']);
-  }
 
   addUser() {
     this.router.navigate(['users-list', 'add']);
-  }
-
-  goBackInGame() {
-    this.router.navigate(['workspace']);
   }
 
 }

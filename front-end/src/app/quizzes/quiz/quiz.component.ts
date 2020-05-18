@@ -33,8 +33,7 @@ export class QuizComponent implements OnInit {
               private rightsService: RightsService,
               private quizService: QuizService,
               private navigationService: NavigationService) {
-    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
-    this.enableAdmin = this.rightsService.bEnableAdmin;
+      this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
   }
 
 
@@ -47,20 +46,21 @@ export class QuizComponent implements OnInit {
 
   play() {
     this.router.navigate(['quiz', this.quiz.id], {fragment: 'question'});
-    this.quizService.setSelectedQuiz( this.quiz.id);
+    this.quizService.setSelectedQuiz(  this.themeId, this.quiz.id);
     this.navigationService.setTitle('Quiz ' + this.quiz.name);
   }
 
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer ce quiz ?')) {
-      this.deleteQuiz.emit(this.quiz);
-      this.router.navigate(['quiz-list']);
+      this.quizService.deleteQuiz( this.themeId, this.quiz);
+      this.router.navigate(['themes-list', this.themeId, 'quiz-list']);
     }
   }
 
   questions() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quiz.id, 'questions-list']);
     this.navigationService.setTitle('Quiz ' + this.quiz.name);
+    this.rightsService.enableAdmin();
   }
 
 

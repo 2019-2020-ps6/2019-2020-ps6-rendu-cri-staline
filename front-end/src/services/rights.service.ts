@@ -6,20 +6,17 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class RightsService {
 
-  bEnableAdmin: boolean;
+  private bEnableAdmin: boolean;
 
   public enableAdmin$: BehaviorSubject<boolean> = new BehaviorSubject(this.bEnableAdmin);
 
-  public rightsSelected$: Subject<boolean> = new Subject();
   constructor() {
   }
   enableAdmin() {
-    this.bEnableAdmin = true;
-    this.rightsSelected$.next(this.bEnableAdmin);
+    this.enableAdmin$.next(true);
   }
   disableAdmin() {
-    this.bEnableAdmin = false;
-    this.rightsSelected$.next(this.bEnableAdmin);
+    this.enableAdmin$.next(false);
   }
 
 

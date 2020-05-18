@@ -13,7 +13,8 @@ import { NavigationService } from 'src/services/navigation.service';
 export class WorkspaceComponent implements OnInit {
 
 
-  constructor(private router: Router, private quizService: QuizService,
+  constructor(private router: Router,
+              private quizService: QuizService,
               private navigationService: NavigationService) {
         this.navigationService.setTitle('Gestion du jeu');
         this.navigationService.setPreviousUrl(['home']);
@@ -34,18 +35,11 @@ export class WorkspaceComponent implements OnInit {
     this.router.navigate(['quiz-form']);
   }
 
-  quizzeslist() {
-    this.quizService.setQuizzesFromUrl();
-    this.router.navigate(['quiz-list']);
-  }
-
-  themesList() {
-    this.router.navigate(['themes-list']);
+  themeslist() {
+    this.quizService.setThemesFromUrl();
     this.navigationService.setTitle('Thèmes');
+    this.router.navigate(['themes-list']);
   }
 
-  parameters() {
-
-  }
 
 }

@@ -4,11 +4,14 @@ const multer = require('multer')
 const bodyParser = require('body-parser')
 const path = require('path')
 const { Theme } = require('../../models')
+const QuizzesRouter=require('./quizzes')
 const manageAllErrors = require('../../utils/routes/error-management')
 const { buildTheme, buildThemes } = require('./manager')
-const { deleteQuizzesOfTheme } = require('../quizzes/manager')
+const { deleteQuizzesOfTheme } = require('./quizzes/manager')
 
 const router = new Router()
+
+router.use('/:themeId/quizzes', QuizzesRouter)
 
 
 const storage = multer.diskStorage({
@@ -87,8 +90,8 @@ router.put('/updateFile/:themeId', upload.single('themeFile'), (req, res) => {
 
 router.put('/:themeId', (req, res) => {
   try {
-    const themeObject = { ...req.body, themeId: parseInt(req.body.themeId, 10) }
-    const theme = Theme.update(req.body.themeId, themeObject)
+    const themeObject = { ...req.body }
+    const theme = Theme.update(req.params.themeId, themeObject)
     res.status(200).json(theme)
   } catch (err) {
     console.log(err)
@@ -96,7 +99,7 @@ router.put('/:themeId', (req, res) => {
   }
 })
 
-router
+
 
 router.delete('/:themeId', (req, res) => {
   try {
@@ -110,4 +113,4 @@ router.delete('/:themeId', (req, res) => {
 })
 
 
-module.exports = router
+module.exports = router;

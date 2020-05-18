@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Theme } from '../../../models/theme.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ThemeService} from '../../../services/theme.service';
 import {Router , ActivatedRoute} from '@angular/router';
 import { NavigationService } from 'src/services/navigation.service';
+import { QuizService } from 'src/services/quiz.service';
 
 @Component({
   selector: 'app-theme-edit',
@@ -12,13 +12,16 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 
 export class ThemeEditComponent implements OnInit {
-  public themeForm: FormGroup;
+  private themeForm: FormGroup;
 
-  public theme: Theme;
+  private theme: Theme;
 
-  constructor(public formBuilder: FormBuilder, public themeService: ThemeService, private router: Router,
-              private route: ActivatedRoute, private navigationService: NavigationService) {
-      this.themeService.themeSelected$.subscribe((theme) => {
+  constructor(private formBuilder: FormBuilder,
+              private quizService: QuizService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private navigationService: NavigationService) {
+      this.quizService.themeSelected$.subscribe((theme) => {
         this.theme = theme;
         console.log(this.theme);
       });
@@ -30,7 +33,7 @@ export class ThemeEditComponent implements OnInit {
 
   ngOnInit() {
     const themeId = this.route.snapshot.paramMap.get('themeId');
-    this.themeService.setSelectedTheme(themeId);
+    this.quizService.setSelectedTheme(themeId);
     this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list']);
   }
   updateTheme() {
@@ -39,15 +42,14 @@ export class ThemeEditComponent implements OnInit {
       themeToAdd.themeName = this.theme.themeName;
     }
     themeToAdd = {...themeToAdd, id: this.theme.id};
-    console.log(themeToAdd);
     if (themeToAdd.themeImage !== undefined) {
-      this.themeService.updateThemeImageFile(this.theme.id, { themeName: themeToAdd.themeName
+      this.quizService.updateThemeImageFile(this.theme.id, { themeName: themeToAdd.themeName
       }, this.theme.themeImage).subscribe((result) => {
       }, error => {
         console.error('Error', error);
       });
     } else {
-      this.themeService.updateTheme(this.theme.id, themeToAdd);
+      this.quizService.updateTheme(this.theme.id, themeToAdd);
     }
     this.navigationService.previous();
   }

@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ThemeService} from '../../../services/theme.service';
 import {Theme} from '../../../models/theme.model';
 import { NavigationService } from 'src/services/navigation.service';
 
@@ -13,18 +12,21 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['./quiz-edit.component.scss']
 })
 export class QuizEditComponent implements OnInit {
-  public quizForm: FormGroup;
-  public quiz: Quiz;
-  public themeList: Theme[] = [];
+  private quizForm: FormGroup;
+  private quiz: Quiz;
+  private themeList: Theme[] = [];
+  private themeId: string;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private router: Router,
-              private route: ActivatedRoute, private themeService: ThemeService,
+  constructor(private formBuilder: FormBuilder,
+              private quizService: QuizService,
+              private router: Router,
+              private route: ActivatedRoute,
               private navigationService: NavigationService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
       console.log(this.quiz);
     });
-    themeService.themes$.subscribe(themes => {
+    quizService.themes$.subscribe(themes => {
       this.themeList = themes;
     });
 
@@ -36,9 +38,9 @@ export class QuizEditComponent implements OnInit {
 
   ngOnInit(): void {
     const quizId = this.route.snapshot.paramMap.get('quizId');
-    const themeId = this.route.snapshot.paramMap.get('themeId');
-    this.quizService.setSelectedQuiz(quizId);
-    this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', quizId, 'questions-list']);
+    this.themeId = this.route.snapshot.paramMap.get('themeId');
+    this.quizService.setSelectedQuiz(this.themeId, quizId);
+    this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list', quizId, 'questions-list']);
   }
 
   updateQuiz() {
@@ -46,9 +48,10 @@ export class QuizEditComponent implements OnInit {
     console.log(quizToEdit);
     if (quizToEdit.name === '') {
       quizToEdit.name = this.quiz.name;
+      console.log('Ok');
     }
 
-    this.quizService.updateQuiz(this.quiz.id, quizToEdit);
+    this.quizService.updateQuiz(this.themeId, this.quiz.id, quizToEdit);
     this.navigationService.previous();
   }
 

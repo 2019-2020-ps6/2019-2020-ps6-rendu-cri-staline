@@ -18,7 +18,6 @@ import {QuizListComponent} from './quizzes/quiz-list/quiz-list.component';
 
 import { HomeComponent } from './home/home.component';
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
-import { ParametersComponent } from './admin/parameters/parameters.component';
 import { QuestionsListComponent} from './quizzes/questions-list/questions-list.component';
 import { QuestionAddComponent } from './quizzes/question-add/question-add.component';
 

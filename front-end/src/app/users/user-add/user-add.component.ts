@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
 import {Router} from '@angular/router';
 import { NavigationService } from 'src/services/navigation.service';
+import { RightsService } from 'src/services/rights.service';
 
 @Component({
   selector: 'app-user-add',
@@ -14,13 +15,15 @@ import { NavigationService } from 'src/services/navigation.service';
 export class UserAddComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, public userService: UserService,
-              private router: Router, private navigationService: NavigationService) {
+              private router: Router, private navigationService: NavigationService,
+              private rightsService: RightsService) {
     this.userForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
       imageFile: [null, Validators.required],
     });
     this.navigationService.setPreviousUrl(['users-list']);
+    this.rightsService.enableAdmin();
   }
   public userForm: FormGroup;
   public selectedFile: File;

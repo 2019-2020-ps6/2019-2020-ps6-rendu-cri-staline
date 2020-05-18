@@ -1,5 +1,4 @@
 import { Component, OnInit , Input} from '@angular/core';
-import { ThemeService } from '../../../services/theme.service';
 import { Router } from '@angular/router';
 import {Theme} from '../../../models/theme.model';
 import {RightsService} from '../../../services/rights.service';
@@ -14,44 +13,34 @@ import { Quiz } from 'src/models/quiz.model';
 })
 export class ThemesListComponent implements OnInit {
 
-  public themesList: Theme[] = [];
-  public quizList: Quiz[];
-  public enableAdmin: boolean;
+  private themesList: Theme[] = [];
+  private quizList: Quiz[];
+  private enableAdmin: boolean;
 
-  constructor(private router: Router, public themeService: ThemeService, private rightsService: RightsService,
-              private navigationService: NavigationService, private quizService: QuizService) {
+  constructor(private router: Router,
+              private quizService: QuizService,
+              private rightsService: RightsService,
+              private navigationService: NavigationService) {
 
-    this.themeService.themes$.subscribe((theme) => this.themesList = theme);
-    console.log(this.themesList);
-    this.rightsService.enableAdmin$.subscribe((rights) => this.enableAdmin = rights);
-    this.enableAdmin = this.rightsService.bEnableAdmin;
+    this.quizService.themes$.subscribe((theme) => this.themesList = theme);
+    this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
     this.navigationService.setTitle('Thèmes');
-    this.navigationService.setPreviousUrl(['workspace']);
   }
 
   ngOnInit(): void {
-    console.log(this.enableAdmin);
-
+    if (this.enableAdmin === true) {
+      this.navigationService.setPreviousUrl(['workspace']);
+    } else {
+      this.navigationService.setPreviousUrl(['users-list']);
+    }
   }
 
-  themeSelected(theme: Theme) {
-    console.log('themeSelect() themes-list');
-  }
 
   deleteTheme(theme: Theme) {
-    console.log('deleting theme...');
-    this.themeService.deleteTheme(theme);
-  }
-
-  goBack() {
-    this.router.navigate(['workspace']);
+    this.quizService.deleteTheme(theme);
   }
 
   addTheme() {
     this.router.navigate(['themes-list', 'add']);
-  }
-
-  goBackInGame() {
-    this.router.navigate(['users-list']);
   }
 }

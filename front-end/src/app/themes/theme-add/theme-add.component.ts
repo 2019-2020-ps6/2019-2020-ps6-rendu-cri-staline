@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Theme } from '../../../models/theme.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ThemeService} from '../../../services/theme.service';
 import {Router} from '@angular/router';
 import { NavigationService } from 'src/services/navigation.service';
+import { QuizService } from 'src/services/quiz.service';
 
 @Component({
   selector: 'app-theme-add',
@@ -14,7 +14,7 @@ import { NavigationService } from 'src/services/navigation.service';
 export class ThemeAddComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
-              public themeService: ThemeService,
+              public quizService: QuizService,
               private router: Router,
               private navigationService: NavigationService) {
     this.themeForm = this.formBuilder.group({
@@ -44,7 +44,7 @@ export class ThemeAddComponent implements OnInit {
       }, error => {
         console.error(error);
       });*/
-      this.themeService.addTheme(themeToAdd);
+      this.quizService.addTheme(themeToAdd);
       this.router.navigate(['themes-list']);
     }
   }

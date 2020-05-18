@@ -8,8 +8,8 @@
   </ng-container>
 
   <ng-container *ngIf="this.enableAdmin===true">
-    <button class="button-card" (click)="select()" routerLink="{{user.id}}">Informations</button>
-    <button class="button-card" (click)="edit()" routerLink="edit/{{user.id}}">Modifier</button>
-    <button class="button-card" (click)="delete()" routerLink="/">Supprimer</button>
+    <button class="button-card" (click)="seeMore()" >Voir</button>
+    <button class="button-card" (click)="edit()" >Modifier</button>
+    <button class="button-card" (click)="delete()">Supprimer</button>
   </ng-container>
 </div>

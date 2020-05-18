@@ -11,13 +11,15 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['./question-edit.component.scss']
 })
 export class QuestionEditComponent implements OnInit {
-  public questionForm: FormGroup;
-  public question: Question;
-  public quizId: string;
-  public questionId: string;
-
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService,
-              private router: Router, private route: ActivatedRoute,
+  private questionForm: FormGroup;
+  private question: Question;
+  private quizId: string;
+  private questionId: string;
+  private themeId: string;
+  constructor(private formBuilder: FormBuilder,
+              private quizService: QuizService,
+              private router: Router,
+              private route: ActivatedRoute,
               private navigationService: NavigationService) {
     this.quizService.questionSelected$.subscribe((question) => {
       this.question = question;
@@ -30,11 +32,12 @@ export class QuestionEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
-    const themeId = this.route.snapshot.paramMap.get('themeId');
-    this.questionId = this.route.snapshot.paramMap.get('id');
-    this.quizService.setSelectedQuiz(this.quizId);
-    this.quizService.setSelectedQuestion(this.quizId, this.questionId);
-    this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', this.quizId, 'questions-list']);
+    this.themeId = this.route.snapshot.paramMap.get('themeId');
+    this.questionId = this.route.snapshot.paramMap.get('questionId');
+    this.quizService.setSelectedQuiz( this.themeId, this.quizId);
+    this.quizService.setSelectedQuestion( this.themeId, this.quizId, this.questionId);
+    this.navigationService.setPreviousUrl(['themes-list',  this.themeId, 'quiz-list',
+    this.quizId, 'questions-list', this.question.id, 'answers-list']);
   }
 
   updateQuestion() {
@@ -42,7 +45,8 @@ export class QuestionEditComponent implements OnInit {
     if (questionToAdd.label === '') {
       questionToAdd.label = this.question.label;
     }
-    this.quizService.updateQuestion(this.quizId, this.question.id, questionToAdd);
+    this.quizService.updateQuestion( this.themeId, this.quizId, this.question.id,
+       questionToAdd);
     this.navigationService.previous();
   }
 

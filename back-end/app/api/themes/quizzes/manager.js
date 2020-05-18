@@ -1,7 +1,8 @@
-const { Quiz } = require('../../models')
+const { Quiz } = require('../../../models')
 const { filterQuestionsFromQuizz } = require('./questions/manager')
+const { deleteQuestionAndAnswers} = require('./questions/manager')
 const { filterAnswersFromQuestion } = require('./questions/answers/manager')
-const { buildTheme } = require('../themes/manager')
+const { buildTheme } = require('../manager')
 
 /**
  * Function buildQuizz.
@@ -33,9 +34,18 @@ const buildQuizzes = () => {
   return quizzes.map((quiz) => buildQuizz(quiz.id))
 }
 
+const deleteQuizAndQuestions=(quizId)=>{
+    const quiz = buildQuizz(quizId);
+    const questions = filterQuestionsFromQuizz(quiz.id)
+    questions.forEach((question)=>{
+      deleteQuestionAndAnswers(question.id);
+    })
+    Quiz.delete(quizId);
+}
+
 const deleteQuizzesOfTheme = (themeId) => {
   const quizzes = buildQuizzesByThemeId(themeId)
-  quizzes.forEach((quiz) => Quiz.delete(quiz.id))
+  quizzes.forEach((quiz) => deleteQuizAndQuestions(quiz.id))
 }
 
 module.exports = {
@@ -43,4 +53,5 @@ module.exports = {
   buildQuizzes,
   buildQuizzesByThemeId,
   deleteQuizzesOfTheme,
+  deleteQuizAndQuestions
 }

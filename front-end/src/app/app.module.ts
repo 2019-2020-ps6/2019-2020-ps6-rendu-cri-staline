@@ -26,7 +26,6 @@ import {UserDetailsComponent} from './users/user-details/user-details.component'
 import {ResultComponent} from './users/result/result.component';
 
 import { WorkspaceComponent } from './admin/workspace/workspace.component';
-import { ParametersComponent } from './admin/parameters/parameters.component';
 import { HomeComponent } from './home/home.component';
 
 import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
@@ -78,7 +77,6 @@ import { QuestionAnswerComponent } from './quizzes/question-answer/question-answ
     QuizEditComponent,
     QuestionEditComponent,
     AnswerEditComponent,
-    ParametersComponent,
     ResultDetailsComponent,
 
   ],

@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { Answer } = require('../../../../models')
+const { Answer } = require('../../../../../models')
 
 const { getQuestionFromQuiz } = require('../manager')
 const { filterAnswersFromQuestion, getAnswerFromQuestion } = require('./manager')
@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
     const answers = filterAnswersFromQuestion(question.id)
     res.status(200).json(answers)
   } catch (err) {
+    console.log(err);
     if (err.name === 'NotFoundError') {
       res.status(404).end()
     } else {
@@ -26,6 +27,7 @@ router.get('/:answerId', (req, res) => {
     res.status(200).json(answer)
   } catch (err) {
     if (err.name === 'NotFoundError') {
+      console.log(err);
       res.status(404).end()
     } else {
       res.status(500).json(err)
@@ -56,6 +58,7 @@ router.put('/:answerId', (req, res) => {
     res.status(200).json(updatedAnswer)
   } catch (err) {
     if (err.name === 'NotFoundError') {
+      console.log(err);
       res.status(404).end()
     } else if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
@@ -67,10 +70,10 @@ router.put('/:answerId', (req, res) => {
 
 router.delete('/:answerId', (req, res) => {
   try {
-    getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId)
-    Answer.delete(req.params.answerId)
+    Answer.delete(parseInt(req.params.answerId,10))
     res.status(204).end()
   } catch (err) {
+    console.log(err);
     if (err.name === 'NotFoundError') {
       res.status(404).end()
     } else {
@@ -95,4 +98,4 @@ router.delete('/', (req, res) => {
   }
 })
 
-module.exports = router
+module.exports = router;

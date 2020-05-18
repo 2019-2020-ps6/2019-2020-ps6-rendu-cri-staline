@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
 import {Router , ActivatedRoute} from '@angular/router';
 import { NavigationService } from 'src/services/navigation.service';
+import { RightsService } from 'src/services/rights.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -18,7 +19,8 @@ export class UserEditComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, public userService: UserService,
               private router: Router, private route: ActivatedRoute,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService,
+              private rightService: RightsService) {
       this.userService.userSelected$.subscribe((user) => {
         this.user = user;
         console.log(this.user);
@@ -28,11 +30,12 @@ export class UserEditComponent implements OnInit {
       lastName: ['']
     });
       this.navigationService.setPreviousUrl(['users-list']);
+      this.rightService.enableAdmin();
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.userService.setSelectedUser(id);
+    const userId = this.route.snapshot.paramMap.get('userId');
+    this.userService.setSelectedUser(userId);
   }
   updateUser() {
     const userToAdd: User = this.userForm.getRawValue() as User;

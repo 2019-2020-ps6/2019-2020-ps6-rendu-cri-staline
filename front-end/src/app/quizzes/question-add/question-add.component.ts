@@ -12,12 +12,14 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['question-add.component.scss']
 })
 export class QuestionAddComponent implements OnInit {
-  public questionForm: FormGroup;
-  public quiz: Quiz;
-  public quizId: string;
-
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService,
-              private router: Router, private route: ActivatedRoute,
+  private questionForm: FormGroup;
+  private quiz: Quiz;
+  private quizId: string;
+  private themeId: string;
+  constructor(private formBuilder: FormBuilder,
+              private quizService: QuizService,
+              private router: Router,
+              private route: ActivatedRoute,
               private navigationService: NavigationService) {
     this.questionForm = this.formBuilder.group({
       label: ['']
@@ -27,13 +29,13 @@ export class QuestionAddComponent implements OnInit {
   ngOnInit(): void {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     const themeId = this.route.snapshot.paramMap.get('themeId');
-    this.quizService.setSelectedQuiz(this.quizId);
+    this.quizService.setSelectedQuiz(this.themeId, this.quizId);
     this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', this.quizId, 'questions-list']);
   }
 
   addQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
-    this.quizService.addQuestion(this.quizId, questionToAdd);
+    this.quizService.addQuestion(this.themeId, this.quizId, questionToAdd);
     this.navigationService.previous();
   }
 

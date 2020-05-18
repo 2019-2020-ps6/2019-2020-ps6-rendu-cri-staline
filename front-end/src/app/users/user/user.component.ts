@@ -25,8 +25,9 @@ export class UserComponent implements OnInit {
   constructor(private router: Router, private rightsService: RightsService,
               private userService: UserService,
               private refereeService: RefereeService) {
-    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
-    this.enableAdmin = this.rightsService.bEnableAdmin;
+                this.rightsService.enableAdmin$.subscribe(admin => {
+                  this.enableAdmin = admin;
+                });
 
   }
 
@@ -36,9 +37,10 @@ export class UserComponent implements OnInit {
     }
   }
 
-  select() {
+  seeMore() {
     this.refereeService.setUser(this.user);
     this.userSelected.emit(this.user);
+    this.router.navigate(['users-list', this.user.id]);
   }
 
   delete() {
@@ -47,12 +49,12 @@ export class UserComponent implements OnInit {
   }
 
   addUser() {
-    this.router.navigate(['user-add']);
+    this.router.navigate(['users-list', 'add']);
   }
 
 
   edit() {
-
+    this.router.navigate(['users-list', this.user.id, 'edit']);
   }
 
   play() {

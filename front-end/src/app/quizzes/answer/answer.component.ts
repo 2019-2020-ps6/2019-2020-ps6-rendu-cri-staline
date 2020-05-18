@@ -33,8 +33,7 @@ export class AnswerComponent implements OnInit {
                private router: Router,
                private route: ActivatedRoute,
                private quizService: QuizService) {
-    this.rightsService.rightsSelected$.subscribe((rights) => this.enableAdmin = rights);
-    this.enableAdmin = this.rightsService.bEnableAdmin;
+      this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
   }
 
   ngOnInit() {
@@ -50,15 +49,17 @@ export class AnswerComponent implements OnInit {
   }
 
   edit() {
-      this.quizService.setSelectedAnswer(this.quizId, this.questionId, this.answer.id);
+      this.quizService.setSelectedAnswer(this.themeId , this.quizId, this.questionId, this.answer.id);
       this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId,
       'questions-list', this.questionId, 'answers-list', this.answer.id, 'edit']);
   }
 
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer cette réponse ?')) {
-      this.deleteAnswer.emit(this.answer);
+      this.quizService.deleteAnswer(this.themeId , this.quizId, this.questionId, this.answer);
+      this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId,
+      'questions-list', this.questionId, 'answers-list']);
     }
-    this.router.navigate(['./answers-list']);
+
   }
 }

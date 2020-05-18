@@ -1,11 +1,12 @@
 const { Router } = require('express')
 
-const { Quiz, Question, Answer } = require('../../../models')
-const manageAllErrors = require('../../../utils/routes/error-management')
+const { Quiz, Question, Answer } = require('../../../../models')
+const manageAllErrors = require('../../../../utils/routes/error-management')
 const AnswersRouter = require('./answers')
-const { filterQuestionsFromQuizz, getQuestionFromQuiz } = require('./manager')
+const { filterQuestionsFromQuizz, getQuestionFromQuiz,deleteQuestionAndAnswers } = require('./manager')
 
 const router = new Router({ mergeParams: true })
+router.use('/:questionId/answers', AnswersRouter)
 
 router.get('/', (req, res) => {
   try {
@@ -53,6 +54,7 @@ router.post('/', (req, res) => {
     }
     res.status(201).json(question)
   } catch (err) {
+    console.log(err)
     manageAllErrors(res, err)
   }
 })
@@ -69,11 +71,11 @@ router.put('/:questionId', (req, res) => {
 
 router.delete('/:questionId', (req, res) => {
   try {
-    // Check if the question id exists & if the question has the same quizId as the one provided in the url.
-    getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    Question.delete(req.params.questionId)
+
+    deleteQuestionAndAnswers(req.params.questionId)
     res.status(204).end()
   } catch (err) {
+    console.log(err)
     manageAllErrors(res, err)
   }
 })
@@ -92,6 +94,5 @@ router.delete('/', (req, res) => {
   }
 })
 
-router.use('/:questionId/answers', AnswersRouter)
 
 module.exports = router
