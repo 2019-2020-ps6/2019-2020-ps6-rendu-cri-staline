@@ -41,16 +41,17 @@ router.post('/createFile', upload.single('themeFile'), (req, res, next) => {
 
   res.status(200).json(theme)
 })
-router.post('/', (req, res, next) => {
-  let themeObject = { ...req.body }
+router.post('/', upload.single('themeFile'), (req, res, next) => {
+  console.log('req.body:', req.body)
+  let themeObject =  JSON.parse(req.body.themeObject) 
   if (req.file != undefined) {
-    themeObject = { ...req.body, themeImage: req.file.filename }
+    themeObject = { ...JSON.parse(req.body.themeObject), themeImage: req.file.filename }
   }
   console.log('req.file:', req.file)
   console.log('req.data:', req.data)
-
+ 
+  console.log('themeObject',themeObject)
   const theme = Theme.create(themeObject)
-
   res.status(200).json(theme)
 })
 
