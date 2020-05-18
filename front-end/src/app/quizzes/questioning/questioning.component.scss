@@ -1,3 +1,5 @@
+@import '../../../styles/card.scss';
+
 .question{
     background-color: #666;
   padding: 30px;
@@ -74,9 +76,6 @@
 }
 
 .info{
-  border-style: solid;
-  border-width: 3px;
-  background-color:#D2D1E8 ;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
@@ -120,6 +119,10 @@
   border-width: 1px;
   border-color: black;
   background-color: #D2D1E8;
+}
+
+.colored{
+  background-color: #D2D1E8; 
 }
 
 .block{
