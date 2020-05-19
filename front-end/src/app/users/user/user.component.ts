@@ -17,9 +17,6 @@ export class UserComponent implements OnInit {
   enableAdmin: boolean;
 
   @Output()
-  userSelected: EventEmitter<User> = new EventEmitter<User>();
-
-  @Output()
   deleteUser: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private router: Router, private rightsService: RightsService,
@@ -39,7 +36,6 @@ export class UserComponent implements OnInit {
 
   seeMore() {
     this.refereeService.setUser(this.user);
-    this.userSelected.emit(this.user);
     this.router.navigate(['users-list', this.user.id]);
   }
 

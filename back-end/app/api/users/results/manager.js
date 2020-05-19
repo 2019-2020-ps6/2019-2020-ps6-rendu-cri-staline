@@ -26,8 +26,7 @@ const filterResultsFromUser = (userId) => {
   const results = Result.get()
   const resultsFromUser = results.filter((result) => result.userId === parseInt(userId, 10))
   const resultsFromUserBuild = []
-  console.log(resultsFromUser)
-  if (resultsFromUser != undefined) {
+  if (resultsFromUser !== undefined) {
     resultsFromUser.forEach((result) => {
       resultsFromUserBuild.push(buildResult(result.id))
     })

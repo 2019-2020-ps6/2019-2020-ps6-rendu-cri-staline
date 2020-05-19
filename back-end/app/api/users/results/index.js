@@ -10,7 +10,7 @@ const router = new Router({ mergeParams: true })
 
 router.get('/:resultId', (req, res) => {
   try {
-    const result = getResultFromUser(parseInt(req.params.userId), parseInt(req.params.resultId))
+    const result = getResultFromUser(parseInt(req.params.userId, 10), parseInt(req.params.resultId, 10))
     res.status(200).json(result)
   } catch (err) {
     manageAllErrors(res, err)
@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
     const result = Result.create(resultBody)
     res.status(201).json(result)
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })

@@ -3,7 +3,7 @@ const { Router } = require('express')
 const { Quiz } = require('../../../models')
 const manageAllErrors = require('../../../utils/routes/error-management')
 const QuestionsRouter = require('./questions')
-const { buildQuizz, buildQuizzesByThemeId,deleteQuizAndQuestions } = require('./manager')
+const { buildQuizz, buildQuizzesByThemeId, deleteQuizAndQuestions } = require('./manager')
 
 
 const router = new Router({ mergeParams: true })
@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
     const quizzes = buildQuizzesByThemeId(parseInt(req.params.themeId, 10))
     res.status(200).json(quizzes)
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })
@@ -31,7 +30,7 @@ router.get('/:quizId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    const quiz = Quiz.create({ ...req.body, themeId: parseInt(req.body.themeId,10) })
+    const quiz = Quiz.create({ ...req.body, themeId: parseInt(req.body.themeId, 10) })
     res.status(201).json(quiz)
   } catch (err) {
     manageAllErrors(res, err)
@@ -42,7 +41,6 @@ router.put('/:quizId', (req, res) => {
   try {
     res.status(200).json(Quiz.update(req.params.quizId, req.body))
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })
@@ -56,4 +54,4 @@ router.delete('/:quizId', (req, res) => {
   }
 })
 
-module.exports = router;
+module.exports = router

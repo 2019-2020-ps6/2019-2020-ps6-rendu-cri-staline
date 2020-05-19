@@ -3,7 +3,7 @@ const { Router } = require('express')
 const { Quiz, Question, Answer } = require('../../../../models')
 const manageAllErrors = require('../../../../utils/routes/error-management')
 const AnswersRouter = require('./answers')
-const { filterQuestionsFromQuizz, getQuestionFromQuiz,deleteQuestionAndAnswers } = require('./manager')
+const { filterQuestionsFromQuizz, getTheQuestionFromQuiz, deleteQuestionAndAnswers } = require('./manager')
 
 const router = new Router({ mergeParams: true })
 router.use('/:questionId/answers', AnswersRouter)
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 router.get('/:questionId', (req, res) => {
   try {
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
+    const question = getTheQuestionFromQuiz(req.params.quizId, req.params.questionId)
     res.status(200).json(question)
   } catch (err) {
     manageAllErrors(res, err)
@@ -54,14 +54,13 @@ router.post('/', (req, res) => {
     }
     res.status(201).json(question)
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })
 
 router.put('/:questionId', (req, res) => {
   try {
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
+    const question = getTheQuestionFromQuiz(req.params.quizId, req.params.questionId)
     const updatedQuestion = Question.update(req.params.questionId, { label: req.body.label, quizId: question.quizId })
     res.status(200).json(updatedQuestion)
   } catch (err) {
@@ -71,11 +70,9 @@ router.put('/:questionId', (req, res) => {
 
 router.delete('/:questionId', (req, res) => {
   try {
-
     deleteQuestionAndAnswers(req.params.questionId)
     res.status(204).end()
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })

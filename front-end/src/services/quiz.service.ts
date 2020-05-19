@@ -31,13 +31,8 @@ export class QuizService {
 
 
   public themes$: BehaviorSubject<Theme[]> = new BehaviorSubject(this.themes);
-
-
-
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
-
   public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
-
   public answers$: BehaviorSubject<Answer[]> = new BehaviorSubject(this.answers);
 
   public quizSelected$: Subject<Quiz> = new Subject();

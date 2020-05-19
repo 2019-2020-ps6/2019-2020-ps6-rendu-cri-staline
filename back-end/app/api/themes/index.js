@@ -1,10 +1,9 @@
 const { Router } = require('express')
-const express = require('express')
 const multer = require('multer')
 const bodyParser = require('body-parser')
 const path = require('path')
 const { Theme } = require('../../models')
-const QuizzesRouter=require('./quizzes')
+const QuizzesRouter = require('./quizzes')
 const manageAllErrors = require('../../utils/routes/error-management')
 const { buildTheme, buildThemes } = require('./manager')
 const { deleteQuizzesOfTheme } = require('./quizzes/manager')
@@ -29,20 +28,13 @@ router.use(bodyParser.json({ limit: '50mb' }))
 router.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
 
 
-router.post('/', upload.single('themeFile'), (req, res, next) => {
-  console.log('req.body:', req.body)
-  let themeObject =  req.body.themeObject;
-  console.log(themeObject)
+router.post('/', upload.single('themeFile'), (req, res) => {
+  let { themeObject } = req.body
   if (req.file !== undefined) {
-    themeObject = { themeName:req.body.themeName, themeImage: req.file.filename }
+    themeObject = { themeName: req.body.themeName, themeImage: req.file.filename }
+  } else {
+    themeObject = { themeName: req.body.themeName, themeImage: '' }
   }
-  else{
-    themeObject ={themeName:req.body.themeName,themeImage:''};
-  }
-  console.log('req.file:', req.file)
-  console.log('req.data:', req.data)
- 
-  console.log('themeObject',themeObject)
   const theme = Theme.create(themeObject)
   res.status(200).json(theme)
 })
@@ -69,19 +61,16 @@ router.get('/:themeId', (req, res) => {
 // edit route
 router.put('/:themeId', upload.single('themeFile'), (req, res) => {
   try {
-    let themeObject =  req.body.themeObject;
-    
+    let { themeObject } = req.body
+
     if (req.file !== undefined) {
-      themeObject = { themeName:req.body.themeName, themeImage: req.file.filename }
+      themeObject = { themeName: req.body.themeName, themeImage: req.file.filename }
+    } else {
+      themeObject = { themeName: req.body.themeName, themeImage: '' }
     }
-    else{
-      themeObject ={themeName:req.body.themeName,themeImage:''};
-    }
-    console.log(themeObject)
     const theme = Theme.update(req.params.themeId, themeObject)
     res.status(200).json(theme)
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })
@@ -92,23 +81,20 @@ router.put('/:themeId', (req, res) => {
     const theme = Theme.update(req.params.themeId, themeObject)
     res.status(200).json(theme)
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })
-
 
 
 router.delete('/:themeId', (req, res) => {
   try {
-    deleteQuizzesOfTheme(parseInt(req.params.themeId,10))
+    deleteQuizzesOfTheme(parseInt(req.params.themeId, 10))
     Theme.delete(req.params.themeId)
     res.status(204).end()
   } catch (err) {
-    console.log(err)
     manageAllErrors(res, err)
   }
 })
 
 
-module.exports = router;
+module.exports = router

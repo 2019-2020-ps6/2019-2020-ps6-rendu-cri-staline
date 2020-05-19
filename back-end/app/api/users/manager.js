@@ -1,4 +1,4 @@
-const { User, Result } = require('../../models')
+const { User } = require('../../models')
 const { filterResultsFromUser } = require('./results/manager')
 
 /**

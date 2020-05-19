@@ -1,9 +1,9 @@
 
 <div *ngIf="enableAdmin===true">
-  <h1 style="font-size:50px;"> Liste des quiz </h1>
+  
   <button class="button-card" style="margin: 35px;" (click)="editTheme()">Modifier nom du thème</button>
   <button class="button-card" style="margin: 35px;" (click)="addQuiz()">Ajouter un quiz</button>
-
+  <h1 style="font-size:50px;"> Quizzes </h1>
   </div>
 <div *ngIf="enableAdmin===false">
    Choisissez un quiz

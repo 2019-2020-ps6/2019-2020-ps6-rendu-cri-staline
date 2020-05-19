@@ -26,6 +26,7 @@ export class AnswersListComponent implements OnInit {
     });
     this.quizService.questionSelected$.subscribe((question) => {
       this.question = question;
+      console.log(this.question);
       this.navigationService.setTitle('Question - ' + this.question.label);
     });
   }
