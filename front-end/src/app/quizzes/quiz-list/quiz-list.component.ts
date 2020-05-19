@@ -44,6 +44,7 @@ export class QuizListComponent implements OnInit {
   ngOnInit() {
     this.themeId = this.route.snapshot.paramMap.get('themeId');
     this.quizService.setQuizzesFromUrl(this.themeId);
+    this.quizService.setSelectedTheme(this.themeId);
   }
   editTheme() {
     this.router.navigate(['themes-list', this.themeId, 'edit']);

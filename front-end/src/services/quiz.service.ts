@@ -56,7 +56,7 @@ export class QuizService {
 
   addTheme(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
-    formData.append('themeName', JSON.stringify(theme));
+    formData.append('themeName', theme.themeName);
     formData.append('themeFile', imageFile);
     const options = {
       params: new HttpParams(),
@@ -68,10 +68,10 @@ export class QuizService {
 
   }
 
-  updateThemeImageFile(themeId: string, theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
+  updateTheme(themeId: string, theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
     console.log('imageFile before edit:', imageFile);
-    formData.append('themeObject', JSON.stringify(theme));
+    formData.append('themeName', theme.themeName);
     formData.append('themeFile', imageFile);
     const options = {
       params: new HttpParams(),
@@ -81,13 +81,6 @@ export class QuizService {
     const req = new HttpRequest('PUT', url, formData, options);
     return this.http.request(req);
 
-  }
-  updateTheme(themeId: string, theme: Theme) {
-    const url = this.themeUrl + '/' + themeId;
-    console.log('OK ' + url);
-    this.http.put<Theme>(url, theme).subscribe((newTheme) => {
-      this.themeSelected$.next(newTheme);
-    });
   }
   setThemesFromUrl() {
     this.http.get<Theme[]>(this.themeUrl).subscribe((themeList) => {

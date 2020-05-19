@@ -34,10 +34,10 @@ router.post('/', upload.single('themeFile'), (req, res, next) => {
   let themeObject =  req.body.themeObject;
   console.log(themeObject)
   if (req.file !== undefined) {
-    themeObject = { ...JSON.parse(req.body.themeObject), themeImage: req.file.filename }
+    themeObject = { themeName:req.body.themeName, themeImage: req.file.filename }
   }
   else{
-    themeObject ={...req.body,themeImage:''};
+    themeObject ={themeName:req.body.themeName,themeImage:''};
   }
   console.log('req.file:', req.file)
   console.log('req.data:', req.data)
@@ -67,13 +67,18 @@ router.get('/:themeId', (req, res) => {
 
 
 // edit route
-router.put('/updateFile/:themeId', upload.single('themeFile'), (req, res) => {
+router.put('/:themeId', upload.single('themeFile'), (req, res) => {
   try {
-    let themeObject = { ...JSON.parse(req.body.themeObject) }
-    if (req.file.filename != undefined) {
-      themeObject = { ...JSON.parse(req.body.themeObject), themeImage: req.file.filename }
+    let themeObject =  req.body.themeObject;
+    
+    if (req.file !== undefined) {
+      themeObject = { themeName:req.body.themeName, themeImage: req.file.filename }
     }
-    const theme = Theme.update(req.body.themeId, themeObject)
+    else{
+      themeObject ={themeName:req.body.themeName,themeImage:''};
+    }
+    console.log(themeObject)
+    const theme = Theme.update(req.params.themeId, themeObject)
     res.status(200).json(theme)
   } catch (err) {
     console.log(err)

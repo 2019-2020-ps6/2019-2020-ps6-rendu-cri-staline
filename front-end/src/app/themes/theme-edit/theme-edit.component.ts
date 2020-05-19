@@ -42,15 +42,13 @@ export class ThemeEditComponent implements OnInit {
       themeToAdd.themeName = this.theme.themeName;
     }
     themeToAdd = {...themeToAdd, id: this.theme.id};
-    if (themeToAdd.themeImage !== undefined) {
-      this.quizService.updateThemeImageFile(this.theme.id, { themeName: themeToAdd.themeName
+    this.quizService.updateTheme(this.theme.id, { themeName: themeToAdd.themeName
       }, this.theme.themeImage).subscribe((result) => {
       }, error => {
         console.error('Error', error);
       });
-    } else {
-      this.quizService.updateTheme(this.theme.id, themeToAdd);
-    }
+    // this.quizService.setQuizzesFromUrl(this.theme.id)
+    // this.quizService.setSelectedTheme(this.theme.id)
     this.navigationService.previous();
   }
 
