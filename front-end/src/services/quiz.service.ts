@@ -134,7 +134,7 @@ export class QuizService {
   }
 
   deleteQuiz(themeId: string, quiz: Quiz) {
-    const urlWithId = this.themeUrl  + '/' + themeId +  '/quizzes/';
+    const urlWithId = this.themeUrl  + '/' + themeId +  '/quizzes/' + quiz.id;
     this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() =>
     this.setQuizzesFromUrl(themeId));
   }

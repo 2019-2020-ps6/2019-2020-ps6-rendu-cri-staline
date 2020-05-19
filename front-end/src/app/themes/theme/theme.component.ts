@@ -41,7 +41,12 @@ export class ThemeComponent implements OnInit {
   }
 
   delete() {
-    this.deleteTheme.emit(this.theme);
+    if (window.confirm('Etes-vous sur de vouloir supprimer ce theme ?')) {
+      this.deleteTheme.emit(this.theme);
+      this.router.navigate(['themes-list']);
+    } else {
+      this.router.navigate(['themes-list']);
+    }
   }
 
   quizzes() {

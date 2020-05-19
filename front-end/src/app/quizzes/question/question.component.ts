@@ -38,9 +38,11 @@ export class QuestionComponent implements OnInit {
 
 
   delete() {
-   this.quizService.deleteQuestion(this.themeId , this.quizId, this.question);
-   this.router.navigate(['themes-list', this.themeId, 'quiz-list',
-    this.question.quizId, 'questions-list']);
+    if (window.confirm('Etes-vous sur de vouloir supprimer cette question ?')) {
+      this.quizService.deleteQuestion(this.themeId , this.quizId, this.question);
+      this.router.navigate(['themes-list', this.themeId, 'quiz-list',
+        this.quizId, 'questions-list']);
+    }
   }
 
   answers() {

@@ -1,13 +1,16 @@
+<div>
+  <h1 style="font-size:50px;"> Liste des réponses </h1>
+</div>
 <div class="row quit-button">
   <button class="button-card" style="margin: 35px;" (click)="editQuestion()">Modifier label</button>
   <button class="button-card" style="margin: 35px;" (click)="addAnswer()">Ajouter une réponse</button>
-    
+
 </div>
 
 
 <div class="answers-list">
-  
-    
+
+
   <div class="answer" *ngFor="let answer of answersList">
     <!--Inputs & Output allow communication between parent & child components.-->
     <!--More information: https://angular.io/guide/component-interaction-->
