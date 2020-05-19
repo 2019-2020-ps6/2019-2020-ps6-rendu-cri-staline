@@ -54,7 +54,7 @@ export class QuizService {
     this.setThemesFromUrl();
   }
 
-  addThemeImageFile(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
+  addTheme(theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
     formData.append('themeName', JSON.stringify(theme));
     formData.append('themeFile', imageFile);
@@ -67,15 +67,12 @@ export class QuizService {
     return this.http.request(req);
 
   }
-  addTheme(theme: Theme) {
-    this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
-  }
 
   updateThemeImageFile(themeId: string, theme: Theme, imageFile: File): Observable<HttpEvent<any>> {
     const formData = new FormData();
     console.log('imageFile before edit:', imageFile);
-    formData.append('themeFile', imageFile);
     formData.append('themeObject', JSON.stringify(theme));
+    formData.append('themeFile', imageFile);
     const options = {
       params: new HttpParams(),
       reportProgress: true,

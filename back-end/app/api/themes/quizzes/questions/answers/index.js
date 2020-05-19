@@ -1,14 +1,14 @@
 const { Router } = require('express')
 const { Answer } = require('../../../../../models')
 
-const { getQuestionFromQuiz } = require('../manager')
+const { getTheQuestionFromQuiz } = require('../manager')
 const { filterAnswersFromQuestion, getAnswerFromQuestion } = require('./manager')
 
 const router = new Router({ mergeParams: true })
 
 router.get('/', (req, res) => {
   try {
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
+    const question = getTheQuestionFromQuiz(req.params.quizId, req.params.questionId)
     const answers = filterAnswersFromQuestion(question.id)
     res.status(200).json(answers)
   } catch (err) {
@@ -26,8 +26,9 @@ router.get('/:answerId', (req, res) => {
     const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId)
     res.status(200).json(answer)
   } catch (err) {
+    console.log(err);
     if (err.name === 'NotFoundError') {
-      console.log(err);
+      
       res.status(404).end()
     } else {
       res.status(500).json(err)

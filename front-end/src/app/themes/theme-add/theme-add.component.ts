@@ -39,14 +39,14 @@ export class ThemeAddComponent implements OnInit {
     console.log(themeToAdd);
     this.valid(themeToAdd);
     if (!this.haveErrors) {
-     /* this.themeService.addThemeImageFile(themeToAdd, themeToAdd.themeImage).subscribe((event) => {
+     this.quizService.addTheme(themeToAdd, themeToAdd.themeImage).subscribe((event) => {
         console.log(event);
-        this.router.navigate(['themes-list']);
+        this.navigationService.previous();
       }, error => {
         console.error(error);
-      });*/
-      this.quizService.addTheme(themeToAdd);
-      this.navigationService.previous();
+      });
+     // this.quizService.addTheme(themeToAdd);
+     // this.navigationService.previous();
     }
   }
 onFileChange(event) {

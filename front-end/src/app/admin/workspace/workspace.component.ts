@@ -4,6 +4,7 @@ import { Quiz } from '../../../models/quiz.model';
 import { Router } from '@angular/router';
 import { QuizService } from 'src/services/quiz.service';
 import { NavigationService } from 'src/services/navigation.service';
+import { RightsService } from 'src/services/rights.service';
 
 @Component({
   selector: 'app-workspace',
@@ -15,7 +16,8 @@ export class WorkspaceComponent implements OnInit {
 
   constructor(private router: Router,
               private quizService: QuizService,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService,
+              private rightsService: RightsService) {
         this.navigationService.setTitle('Gestion du jeu');
         this.navigationService.setPreviousUrl(['home']);
 
@@ -36,6 +38,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   themeslist() {
+    this.rightsService.enableAdmin();
     this.quizService.setThemesFromUrl();
     this.navigationService.setTitle('Thèmes');
     this.router.navigate(['themes-list']);

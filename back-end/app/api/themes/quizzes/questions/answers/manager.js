@@ -1,6 +1,6 @@
-const { Answer } = require('../../../../../models')
-const { getQuestionFromQuiz } = require('../manager')
-const { NotFoundError } = require('../../../../../utils/errors/not-found-error')
+const { Answer ,Question,Quiz} = require('../../../../../models')
+const  NotFoundError  = require('../../../../../utils/errors/not-found-error')
+const {getTheQuestionFromQuiz}  = require('../manager')
 /**
  * filterAnswersFromQuestion.
  * This function filters among the questions to return only the question linked with the given quizId.
@@ -16,7 +16,12 @@ const filterAnswersFromQuestion = (questionId) => Answer.get().filter((answer) =
  * @param answerId
  */
 const getAnswerFromQuestion = (quizId, questionId, answerId) => {
-  const question = getQuestionFromQuiz(quizId, questionId)
+  const quiz = Quiz.getById(quizId)
+  const quizIdInt = parseInt(quizId, 10)
+  const question = Question.getById(questionId)
+  if (question.quizId !== quizIdInt){ 
+    throw new NotFoundError(`${question.name} id=${questionId} was not found for ${quiz.name} id=${quiz.id} : not found`)
+  }
   const answer = Answer.getById(answerId)
   if (answer.questionId !== question.id) throw new NotFoundError(`${answer.name} id=${answerId} was not found for ${question.name} id=${question.id} : not found`)
   return answer

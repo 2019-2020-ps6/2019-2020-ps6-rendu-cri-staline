@@ -3,6 +3,11 @@
     <i class="fab fa-leanpub"></i>
     {{question.label}}
   </h2>
+  <ng-container *ngIf="this.haveErrors===true">
+    <div class="alert alert-danger" *ngFor="let error of this.errors"  role="alert">
+      {{error}}
+    </div>
+  </ng-container>
   <button class="button-card" (click)="answers()" >Editer</button>
   <button class="button-card" (click)="delete()">Supprimer</button>
 

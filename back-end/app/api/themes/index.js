@@ -28,24 +28,16 @@ const upload = multer({ storage })
 router.use(bodyParser.json({ limit: '50mb' }))
 router.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
 
-router.post('/createFile', upload.single('themeFile'), (req, res, next) => {
-  console.log('req body:', req.body)
-  let themeObject = { ...JSON.parse(...req.body) }
-  if (req.file != undefined) {
-    themeObject = { ...JSON.parse(...req.body), themeImage: req.file.filename }
-  }
-  console.log('req.file:', req.file)
-  console.log('req.data:', req.data)
 
-  const theme = Theme.create(themeObject)
-
-  res.status(200).json(theme)
-})
 router.post('/', upload.single('themeFile'), (req, res, next) => {
   console.log('req.body:', req.body)
-  let themeObject =  JSON.parse(req.body.themeObject) 
-  if (req.file != undefined) {
+  let themeObject =  req.body.themeObject;
+  console.log(themeObject)
+  if (req.file !== undefined) {
     themeObject = { ...JSON.parse(req.body.themeObject), themeImage: req.file.filename }
+  }
+  else{
+    themeObject ={...req.body,themeImage:''};
   }
   console.log('req.file:', req.file)
   console.log('req.data:', req.data)

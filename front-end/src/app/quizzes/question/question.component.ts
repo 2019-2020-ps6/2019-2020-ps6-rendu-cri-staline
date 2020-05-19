@@ -17,6 +17,9 @@ export class QuestionComponent implements OnInit {
 
   private themeId: string;
   private quizId: string;
+  private errors: string[] = [];
+  private haveErrors = false;
+
   @Output()
   deleteQuestion: EventEmitter<Question> = new EventEmitter<Question>();
 
@@ -29,7 +32,8 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.themeId =  this.route.snapshot.paramMap.get('themeId');
-    this.quizId = this.route.snapshot.paramMap.get('quizId');
+    this.quizId =   this.route.snapshot.paramMap.get('quizId');
+    this.check();
   }
 
 
@@ -43,6 +47,24 @@ export class QuestionComponent implements OnInit {
     this.rightsService.enableAdmin();
     this.router.navigate(['themes-list', this.themeId, 'quiz-list',
     this.question.quizId, 'questions-list', this.question.id, 'answers-list']);
+  }
+
+  check() {
+    this.haveErrors = false;
+    this.errors = [];
+
+    if (this.question.answers.length === 0) {
+              this.errors.push('Question(s) sans réponses!');
+              this.haveErrors = true;
+    }
+    let haveOneAnswerTrue = false;
+    this.question.answers.forEach((answer) => {
+      if (answer.isCorrect) {haveOneAnswerTrue = true; }
+    });
+    if (haveOneAnswerTrue === false) {
+      this.errors.push('Question(s) sans réponses justes!');
+      this.haveErrors = true;
+    }
   }
 
 }

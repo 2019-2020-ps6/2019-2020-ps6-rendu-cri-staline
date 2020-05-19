@@ -26,6 +26,9 @@ export class QuizListComponent implements OnInit {
     this.quizService.quizzes$.subscribe((quizzes) => {
         this.quizList = quizzes;
         console.log(this.quizList);
+        if (this.quizList !== undefined && this.enableAdmin === false) {
+          this.deleteBadQuizzes();
+        }
     });
     this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
 
@@ -47,6 +50,28 @@ export class QuizListComponent implements OnInit {
   }
   addQuiz() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', 'add']);
+
+  }
+
+  deleteBadQuizzes() {
+      const badQuizzes = [];
+      for ( let i = 0; i < this.quizList.length; i++) {
+        if (this.quizList[i].questions.length === 0) {
+          badQuizzes.push(i);
+        } else {
+          this.quizList[i].questions.forEach((question) => {
+              let haveOneAnswerTrue = false;
+              question.answers.forEach((answer) => {
+                  if (answer.isCorrect) {
+                    haveOneAnswerTrue = true;
+                  }
+              });
+              if (haveOneAnswerTrue === false) { badQuizzes.push(i); }
+            });
+        }
+      }
+
+      badQuizzes.forEach((badQuiz) => {this.quizList.splice(badQuiz, 1); });
 
   }
 }

@@ -13,8 +13,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./result-details.component.scss']
 })
 export class ResultDetailsComponent implements OnInit {
+
+
+
+  private result: Result;
+  private user: User;
+
+  private value: number;
+  private rest: number;
+
+  private userId: string;
+
   constructor(private quizService: QuizService,
-              private refereeService: RefereeService, private route: ActivatedRoute,
+              private refereeService: RefereeService,
+              private route: ActivatedRoute,
               private router: Router) {
       refereeService.resultSelected$.subscribe((rslt) => {
         this.result = rslt;
@@ -22,18 +34,9 @@ export class ResultDetailsComponent implements OnInit {
       });
   }
 
-
-  public result: Result;
-  public user: User;
-
-  private value: number;
-  private rest: number;
-
-  userId: string;
-
   ngOnInit() {
     this.user = this.refereeService.user;
-    this.userId = this.route.snapshot.paramMap.get('id');
+    this.userId = this.route.snapshot.paramMap.get('userId');
   }
 
 

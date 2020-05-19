@@ -19,6 +19,9 @@ export class QuizComponent implements OnInit {
 
   private themeId: string;
 
+  private errors: string[] = [];
+  private haveErrors = false;
+
   @Output()
   quizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
@@ -40,8 +43,11 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     if (this.enableAdmin === undefined && this.router.url !== 'quiz-list') {
       this.router.navigate(['home']);
+    } else if (this.enableAdmin === true) {
+      this.check();
     }
     this.themeId = this.route.snapshot.paramMap.get('themeId');
+
   }
 
   play() {
@@ -63,5 +69,32 @@ export class QuizComponent implements OnInit {
     this.rightsService.enableAdmin();
   }
 
+  check() {
+    this.haveErrors = false;
+    this.errors = [];
+
+    if (this.quiz.questions.length === 0) {
+        this.errors.push('Pas de questions!');
+        this.haveErrors = true;
+      } else {
+        this.quiz.questions.forEach((question) => {
+            let haveOneAnswerTrue = false;
+            if (question.answers.length === 0) {
+              this.errors.push('Question(s) sans réponses!');
+              this.haveErrors = true;
+            }
+            question.answers.forEach((answer) => {
+                if (answer.isCorrect) {
+                  haveOneAnswerTrue = true;
+                }
+            });
+            if (haveOneAnswerTrue === false) {
+              this.errors.push('Question(s) sans réponses justes!');
+              this.haveErrors = true;
+            }
+          });
+    }
+
+  }
 
 }

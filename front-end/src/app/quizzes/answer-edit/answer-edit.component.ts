@@ -46,8 +46,6 @@ export class AnswerEditComponent implements OnInit {
     this.themeId = this.route.snapshot.paramMap.get('themeId');
     this.navigationService.setPreviousUrl(['themes-list', this.themeId,
     'quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list']);
-    this.quizService.setSelectedQuestion(this.themeId , this.quizId, this.questionId);
-    this.quizService.setSelectedAnswers(this.themeId , this.quizId, this.questionId);
     this.quizService.setSelectedAnswer(this.themeId , this.quizId, this.questionId, this.answerId);
     }
 

@@ -14,7 +14,6 @@ import { Quiz } from 'src/models/quiz.model';
 export class ThemesListComponent implements OnInit {
 
   private themesList: Theme[] = [];
-  private quizList: Quiz[];
   private enableAdmin: boolean;
 
   constructor(private router: Router,
@@ -22,7 +21,9 @@ export class ThemesListComponent implements OnInit {
               private rightsService: RightsService,
               private navigationService: NavigationService) {
 
-    this.quizService.themes$.subscribe((theme) => this.themesList = theme);
+    this.quizService.themes$.subscribe((theme) => {
+     this.themesList = theme;
+    });
     this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
     this.navigationService.setTitle('Thèmes');
   }

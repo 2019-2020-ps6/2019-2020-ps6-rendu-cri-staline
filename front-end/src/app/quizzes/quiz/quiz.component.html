@@ -13,6 +13,11 @@
   </ng-container>
 
   <ng-container *ngIf="this.enableAdmin===true">
+    <ng-container *ngIf="this.haveErrors===true">
+      <div class="alert alert-danger" *ngFor="let error of this.errors"  role="alert">
+        {{error}}
+      </div>
+    </ng-container>
     <button class="button-card" (click)="questions()">Editer</button>
     <button class="button-card" (click)="delete()">Supprimer</button>
   </ng-container>

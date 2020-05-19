@@ -49,7 +49,6 @@ export class AnswerComponent implements OnInit {
   }
 
   edit() {
-      this.quizService.setSelectedAnswer(this.themeId , this.quizId, this.questionId, this.answer.id);
       this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId,
       'questions-list', this.questionId, 'answers-list', this.answer.id, 'edit']);
   }
