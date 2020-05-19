@@ -8,6 +8,10 @@
    -   Sana DIBE  
 
 ## Installation
+### Using scripts
+
+You can find scrpits (for Windows and Unix) in the root path of the project to install and launch the application.
+
 ### [ng2-charts](https://valor-software.com/ng2-charts/#/GeneralInfo)
 
 1.Install ng2-charts using npm
