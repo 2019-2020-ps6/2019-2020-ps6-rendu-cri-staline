@@ -15,8 +15,9 @@ Install [NodeJS Installer](https://nodejs.org/en/download/)
 
 ### Use scripts
 
-1.Run install.bat for Windows( install.sh for Unix).
-2.Run launch.bat for Windows (launch.sh for Unix).
+1.Run install.bat for Windows( install.sh for Unix) to install the application.
+
+2.Run launch.bat for Windows (launch.sh for Unix) to run the application.
 
 ### Or not using scripts
 
