@@ -33,9 +33,16 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  /**
+   * Active les droits d'administrateur (espace accompagnateur)
+   */
   workspace() {
     this.rightsService.enableAdmin();
   }
+
+  /**
+   * Desactive les droits d'administrateur (espace jeu)
+   */
   game() {
     this.rightsService.disableAdmin();
   }

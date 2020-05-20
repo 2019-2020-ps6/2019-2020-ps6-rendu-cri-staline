@@ -33,12 +33,18 @@ export class QuestionAddComponent implements OnInit {
     this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list', this.quizId, 'questions-list']);
   }
 
+  /**
+   * Ajout de la question et renvoie a la liste des questions
+   */
   addQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
     this.quizService.addQuestion(this.themeId, this.quizId, questionToAdd);
     this.navigationService.previous();
   }
 
+  /**
+   * Annule la creation de la question et renvoie a la liste des questions
+   */
   cancel() {
     this.navigationService.previous();
   }

@@ -47,14 +47,25 @@ export class QuizListComponent implements OnInit {
     this.quizService.setQuizzesFromUrl(this.themeId);
     this.quizService.setSelectedTheme(this.themeId);
   }
+
+  /**
+   * Redirige vers la page de modification du theme dont sont issus les quiz
+   */
   editTheme() {
     this.router.navigate(['themes-list', this.themeId, 'edit']);
   }
+
+  /**
+   * Redirige vers la page de creation de quiz
+   */
   addQuiz() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', 'add']);
 
   }
 
+  /**
+   * "Cache" les quiz n'ayant pas de questions ou ayant des questions sans reponses correctes (dans l'espace jeu)
+   */
   deleteBadQuizzes() {
       const badQuizzes = [];
       for ( let i = 0; i < this.quizList.length; i++) {

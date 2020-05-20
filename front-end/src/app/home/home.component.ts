@@ -19,12 +19,18 @@ import { NavigationService } from 'src/services/navigation.service';
     ngOnInit() {
     }
 
-    workspace() {
+  /**
+   * Redirige vers l'espace accompagnateur en activant les droits d'administrateur
+   */
+  workspace() {
       this.rightService.enableAdmin();
       this.router.navigate(['workspace']);
     }
 
-    game() {
+  /**
+   * Redirige vers l'espace jeu (page de selection du joueur plus precisement) en desactivant les droits d'administrateur
+   */
+  game() {
       this.rightService.disableAdmin();
       this.router.navigate(['users-list']);
     }

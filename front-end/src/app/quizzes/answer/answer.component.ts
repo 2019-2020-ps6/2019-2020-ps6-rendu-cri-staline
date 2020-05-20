@@ -48,11 +48,17 @@ export class AnswerComponent implements OnInit {
    this.answerSelected.emit(this.answer);
   }
 
+  /**
+   * Redirige vers la page de modification de la reponse
+   */
   edit() {
       this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId,
       'questions-list', this.questionId, 'answers-list', this.answer.id, 'edit']);
   }
 
+  /**
+   * Methode de suppression d'une reponse avec un message de confirmation
+   */
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer cette réponse ?')) {
       this.quizService.deleteAnswer(this.themeId , this.quizId, this.questionId, this.answer);

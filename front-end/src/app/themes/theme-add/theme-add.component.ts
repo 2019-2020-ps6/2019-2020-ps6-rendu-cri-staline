@@ -32,6 +32,9 @@ export class ThemeAddComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Ajoute un theme
+   */
   addTheme() {
     console.log('add thm is callED');
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
@@ -52,7 +55,13 @@ export class ThemeAddComponent implements OnInit {
 onFileChange(event) {
   this.selectedFile = event.target.files[0] as File;
 }
-valid(themeToAdd) {
+
+  /**
+   * Verifie qu'il y ait bien nom entré
+   * @param le theme que l'on veut ajouter
+   * Affiche un message d'erreur s'il n'y a pas de nom
+   */
+  valid(themeToAdd) {
   this.haveErrors = false;
   this.errors = [];
   if (themeToAdd.themeName === '') {
@@ -62,12 +71,16 @@ valid(themeToAdd) {
 
 }
 
-cancel() {
-  this.navigationService.previous();
-}
-checkValue() {
-  const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
-  this.valid(themeToAdd);
-}
+  /**
+   * Annule la creation du theme et renvoie a la liste des themes
+   */
+  cancel() {
+    this.navigationService.previous();
+  }
+
+  checkValue() {
+    const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
+    this.valid(themeToAdd);
+  }
 
 }

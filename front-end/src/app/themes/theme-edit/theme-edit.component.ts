@@ -36,6 +36,10 @@ export class ThemeEditComponent implements OnInit {
     this.quizService.setSelectedTheme(themeId);
     this.navigationService.setPreviousUrl(['themes-list', themeId, 'quiz-list']);
   }
+
+  /**
+   * Modifie un theme
+   */
   updateTheme() {
     let themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     if (themeToAdd.themeName === '') {

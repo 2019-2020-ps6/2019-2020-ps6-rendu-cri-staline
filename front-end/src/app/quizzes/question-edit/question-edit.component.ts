@@ -40,6 +40,9 @@ export class QuestionEditComponent implements OnInit {
     this.quizId, 'questions-list', this.question.id, 'answers-list']);
   }
 
+  /**
+   * Modifie la question en vérifiant qu'il y ait bien un label entré
+   */
   updateQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
     if (questionToAdd.label === '') {
@@ -50,6 +53,9 @@ export class QuestionEditComponent implements OnInit {
     this.navigationService.previous();
   }
 
+  /**
+   * Annule la modification de la question et renvoie a la liste des questions
+   */
   cancel() {
     this.navigationService.previous();
   }

@@ -51,6 +51,12 @@ export class UserAddComponent implements OnInit {
   cancel() {
     this.router.navigate(['workspace']);
   }
+
+  /**
+   * Verifie qu'on a bien entré un nom et prénom
+   * @param l'utiliseur que l'on veut ajouter
+   * Affiche des messages d'erreur s'il manque un nom et prenom
+   */
   valid(userToAdd) {
     this.haveErrors = false;
     this.errors = [];

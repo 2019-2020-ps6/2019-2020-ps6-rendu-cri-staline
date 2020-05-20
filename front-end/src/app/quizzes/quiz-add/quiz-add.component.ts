@@ -42,6 +42,9 @@ export class QuizAddComponent implements OnInit {
     this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list']);
   }
 
+  /**
+   * Ajoute un quiz et renvoie a la liste des quiz
+   */
   addQuiz() {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
     console.log(quizToCreate);
@@ -51,6 +54,12 @@ export class QuizAddComponent implements OnInit {
     this.navigationService.previous();
     }
   }
+
+  /**
+   * Verifie qu'il y ait bien un nom et un theme selectionné
+   * @param un quiz que l'on veut qjouter
+   * Affiche des messages d'erreur s'il manque un nom ou le theme
+   */
   valid(quizToCreate) {
     this.haveErrors = false;
     this.errors = [];

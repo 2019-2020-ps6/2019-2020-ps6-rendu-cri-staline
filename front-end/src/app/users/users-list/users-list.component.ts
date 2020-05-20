@@ -42,6 +42,9 @@ export class UsersListComponent implements OnInit {
     this.userService.deleteUser(user);
   }
 
+  /**
+   * Redirige vers la page d'ajout d'un accueilli
+   */
   addUser() {
     this.router.navigate(['users-list', 'add']);
   }

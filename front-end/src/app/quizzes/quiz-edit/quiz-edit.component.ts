@@ -43,6 +43,9 @@ export class QuizEditComponent implements OnInit {
     this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list', quizId, 'questions-list']);
   }
 
+  /**
+   * Modifie un quiz en verifiant qu'un nom est bien entré
+   */
   updateQuiz() {
     const quizToEdit: Quiz = this.quizForm.getRawValue() as Quiz;
     console.log(quizToEdit);
@@ -55,6 +58,9 @@ export class QuizEditComponent implements OnInit {
     this.navigationService.previous();
   }
 
+  /**
+   * Annule la modification du quiz et renvoie a la liste des questions du quiz
+   */
   cancel() {
     this.navigationService.previous();
   }

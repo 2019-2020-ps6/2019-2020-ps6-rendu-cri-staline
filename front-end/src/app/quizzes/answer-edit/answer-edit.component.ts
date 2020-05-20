@@ -49,7 +49,10 @@ export class AnswerEditComponent implements OnInit {
     this.quizService.setSelectedAnswer(this.themeId , this.quizId, this.questionId, this.answerId);
     }
 
-  updateAnswer() {
+  /**
+   * Modifie la reponse et renvoie a la liste des reponses
+   */
+    updateAnswer() {
     let answerToAdd: Answer = this.answerForm.getRawValue() as Answer;
     answerToAdd = {type: 'text', ...answerToAdd};
     this.quizService.updateAnswer(this.themeId , this.quizId, this.questionId, this.answerId, answerToAdd);
@@ -57,6 +60,9 @@ export class AnswerEditComponent implements OnInit {
     this.rightsService.enableAdmin();
   }
 
+  /**
+   * Annule la modification de la reponse et renvoie a la liste des reponses
+   */
   cancel() {
     this.navigationService.previous();
     this.rightsService.enableAdmin();

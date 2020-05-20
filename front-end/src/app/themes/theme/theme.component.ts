@@ -40,6 +40,9 @@ export class ThemeComponent implements OnInit {
     this.imageUrl = this.quizService.themeImageUrl + '/' + this.theme.themeImage;
   }
 
+  /**
+   * Supprime un theme avec un message de confirmation
+   */
   delete() {
     if (window.confirm('Etes-vous sur de vouloir supprimer ce theme ?')) {
       this.deleteTheme.emit(this.theme);
@@ -49,6 +52,9 @@ export class ThemeComponent implements OnInit {
     }
   }
 
+  /**
+   * Redirige vers la liste des quiz du theme
+   */
   quizzes() {
     this.router.navigate(['themes-list', this.theme.id, 'quiz-list']);
     this.quizService.setSelectedTheme(this.theme.id);

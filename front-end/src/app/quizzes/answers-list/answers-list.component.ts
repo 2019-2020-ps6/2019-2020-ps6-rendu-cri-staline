@@ -41,10 +41,16 @@ export class AnswersListComponent implements OnInit {
     this.navigationService.setPreviousUrl(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list']);
   }
 
+  /**
+   * Redirige vers la page de creation d'une reponse
+   */
   addAnswer() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list', 'add']);
   }
 
+  /**
+   * Redirige vers la page de modification de la question dont sont issues les reponses
+   */
   editQuestion() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list', this.questionId, 'edit']);
   }

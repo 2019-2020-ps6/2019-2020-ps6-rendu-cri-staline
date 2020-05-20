@@ -85,6 +85,11 @@ export class QuestioningComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+  /**
+   * Vérifie si une réponse n'est pas déjà cochée, sinon ajoute la réponse à la liste des réponses séléctionnées
+   * @param une reponse cochée
+   */
   answerSelected(newAnswer: Answer) {
     let bAlreadySelect = false;
     this.answersSelected.forEach((answer) => {
@@ -101,6 +106,10 @@ export class QuestioningComponent implements OnInit {
     this.setTextHelp();
   }
 
+  /**
+   * Valide la question si toutes les réponses justes sont cochées, et passe à la question suivante ou termine le quiz
+   * Supprime les mauvaises reponses cochees
+   */
   validAnswer(content) {
     const allAnswersCheckedCorrect = this.isAllAnswersCheckedCorrect();
 
@@ -123,6 +132,9 @@ export class QuestioningComponent implements OnInit {
     this.setTextHelp();
   }
 
+  /**
+   * @return le nombre de reponses justes pour une question
+   */
   getNbAnswersCorrect() {
     let nbAnswersCorrect = 0;
     this.answers.forEach((answer) => {
@@ -132,6 +144,10 @@ export class QuestioningComponent implements OnInit {
     });
     return nbAnswersCorrect;
   }
+
+  /**
+   * Termine le quiz et permet la redirection vers le menu principal, la liste des quiz ou de recommencer le quiz
+   */
   endQuiz(content) {
     this.setAnswersCorrect();
     const modalRef = this.open(content);
@@ -184,6 +200,10 @@ export class QuestioningComponent implements OnInit {
     this.answers = this.questions[this.currentQuestion].answers;
   }
 
+  /**
+   * Verifie que toutes les reponses correctes sont cochees
+   * @return Vrai si le nombre de reponse cochees justes est egale au nombre de reponses justes de la question
+   */
   isAllAnswersCheckedCorrect() {
     const nbAnswersCorrect = this.getNbAnswersCorrect();
     let nbAnswersCorrectChecked = 0;
@@ -201,6 +221,9 @@ export class QuestioningComponent implements OnInit {
     return nbAnswersCorrect === nbAnswersCorrectChecked;
   }
 
+  /**
+   * Supprime les mauvaises reponses cochees
+   */
   deleteBadAnswers() {
 
     const answersToDelete = this.answersSelected.filter((answer) => !answer.isCorrect);
@@ -211,6 +234,10 @@ export class QuestioningComponent implements OnInit {
       this.answersSelected = newArrayAnswersSelected;
     });
   }
+
+  /**
+   * Ajoute les reponses correctes d'une question dans un array
+   */
   setAnswersCorrect() {
     this.answersCorrect = [];
     if (this.questions !== undefined) {
@@ -222,6 +249,9 @@ export class QuestioningComponent implements OnInit {
   }
   }
 
+  /**
+   * Quitte le quiz et renvoie a la liste des quiz avec un message de confirmation
+   */
   quitQuiz() {
     if (window.confirm('Êtes-vous sûr de vouloir quitter ?')) {
       this.router.navigate(['quiz-list']);
@@ -238,6 +268,9 @@ export class QuestioningComponent implements OnInit {
     return a;
 }
 
+  /**
+   * Recommence le quiz avec les questions dans un ordre different
+   */
   retry() {
     console.log('Retrying...');
     this.score = 0;
@@ -255,7 +288,9 @@ export class QuestioningComponent implements OnInit {
 
   }
 
-
+  /**
+   * Donne des consignes lors du deroulement du quiz
+   */
   setTextHelp() {
     if (this.answersSelected.length === 0) {
       this.help = 'Choisir une ou plusieurs réponses en cochant la ou les cases.';
@@ -268,6 +303,9 @@ export class QuestioningComponent implements OnInit {
     }
   }
 
+  /**
+   * Renvoie au menu principal
+   */
   goToHomePage() {
     this.router.navigate(['home']);
   }

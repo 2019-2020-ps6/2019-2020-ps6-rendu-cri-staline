@@ -26,17 +26,24 @@ export class WorkspaceComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  /**
+   * Redirige vers la liste des acceuillis
+   */
   usersList() {
     this.router.navigate(['users-list']);
     this.navigationService.setTitle('Acceuillis');
   }
 
-
+  /**
+   * Redirige vers la page de creation de quiz
+   */
   addQuiz() {
     this.router.navigate(['quiz-form']);
   }
 
+  /**
+   * Redirige vers la liste des themes
+   */
   themeslist() {
     this.rightsService.enableAdmin();
     this.quizService.setThemesFromUrl();

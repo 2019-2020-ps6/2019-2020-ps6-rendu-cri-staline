@@ -46,6 +46,9 @@ export class AnswerAddComponent implements OnInit {
 
   }
 
+  /**
+   * Ajout d'une reponse et renvoie a la liste des reponses
+   */
   addAnswer() {
     let answerToAdd: Answer = this.answerForm.getRawValue() as Answer;
     answerToAdd = {type: 'text', ...answerToAdd};
@@ -57,6 +60,10 @@ export class AnswerAddComponent implements OnInit {
     }
   }
 
+  /**
+   * Vérifie qu'il y ait au moins une bonne réponse parmi les réponses d'une question
+   * @return Vrai s'il y a au moins une bonne reponse
+   */
   checkForm() {
    let atLeastOneGoodAnswer = false;
    this.answersList.forEach(answer => {
@@ -72,6 +79,9 @@ export class AnswerAddComponent implements OnInit {
    return atLeastOneGoodAnswer;
   }
 
+  /**
+   * Annule la creation d'une reponse et renvoie a la page precedente
+   */
   cancel() {
    this.navigationService.previous();
    this.rightsService.enableAdmin();

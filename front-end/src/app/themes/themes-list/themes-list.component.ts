@@ -36,11 +36,17 @@ export class ThemesListComponent implements OnInit {
     }
   }
 
-
+  /**
+   * Supprime un theme
+   * @param le theme que l'on veut supprimer
+   */
   deleteTheme(theme: Theme) {
     this.quizService.deleteTheme(theme);
   }
 
+  /**
+   * Redirige vers la page de creation de theme
+   */
   addTheme() {
     this.router.navigate(['themes-list', 'add']);
   }

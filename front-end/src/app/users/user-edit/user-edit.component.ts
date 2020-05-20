@@ -37,6 +37,10 @@ export class UserEditComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('userId');
     this.userService.setSelectedUser(userId);
   }
+
+  /**
+   * Modifie un utilisateur en verifiant qu'on a bien entré un nom et prénom
+   */
   updateUser() {
     const userToAdd: User = this.userForm.getRawValue() as User;
     if (userToAdd.lastName === '') {
@@ -48,6 +52,10 @@ export class UserEditComponent implements OnInit {
     this.userService.updateUser(this.user.id, userToAdd);
     this.router.navigate(['users-list']);
   }
+
+  /**
+   * Annule la modification d'un accueilli et renvoie a la liste des accueillies
+   */
   cancel() {
     this.router.navigate(['users-list']);
   }

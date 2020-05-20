@@ -36,7 +36,9 @@ export class QuestionComponent implements OnInit {
     this.check();
   }
 
-
+  /**
+   * Suppression de la question avec un message de confirmation
+   */
   delete() {
     if (window.confirm('Etes-vous sur de vouloir supprimer cette question ?')) {
       this.quizService.deleteQuestion(this.themeId , this.quizId, this.question);
@@ -45,12 +47,18 @@ export class QuestionComponent implements OnInit {
     }
   }
 
+  /**
+   * Redirige vers la liste des réponses de la question
+   */
   answers() {
     this.rightsService.enableAdmin();
     this.router.navigate(['themes-list', this.themeId, 'quiz-list',
     this.question.quizId, 'questions-list', this.question.id, 'answers-list']);
   }
 
+  /**
+   * Vérifie qu'il y ait au moins une réponse et au moins une réponse juste, affiche des messages si ce n'est pas le cas
+   */
   check() {
     this.haveErrors = false;
     this.errors = [];

@@ -34,6 +34,9 @@ export class UserComponent implements OnInit {
     }
   }
 
+  /**
+   * Ramene a la page des details de l'utilisateur
+   */
   seeMore() {
     this.refereeService.setUser(this.user);
     this.router.navigate(['users-list', this.user.id]);
@@ -44,15 +47,23 @@ export class UserComponent implements OnInit {
     this.router.navigate(['users-list']);
   }
 
+  /**
+   * Redirige vers la page d'ajout d'un accueilli
+   */
   addUser() {
     this.router.navigate(['users-list', 'add']);
   }
 
-
+  /**
+   * Redirige vers la page de modification d'un accueilli
+   */
   edit() {
     this.router.navigate(['users-list', this.user.id, 'edit']);
   }
 
+  /**
+   * Selectionne l'utilisateur en tant que joueur
+   */
   play() {
     this.userService.setSelectedUser(this.user.id);
     this.refereeService.setUser(this.user);

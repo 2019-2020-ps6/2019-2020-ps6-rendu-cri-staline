@@ -50,12 +50,18 @@ export class QuizComponent implements OnInit {
 
   }
 
+  /**
+   * Ramene a la page de jeu du quiz
+   */
   play() {
     this.router.navigate(['quiz', this.quiz.id], {fragment: 'question'});
     this.quizService.setSelectedQuiz(  this.themeId, this.quiz.id);
     this.navigationService.setTitle('Quiz ' + this.quiz.name);
   }
 
+  /**
+   * Supprime un quiz avec un message de confirmation
+   */
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer ce quiz ?')) {
       this.quizService.deleteQuiz( this.themeId, this.quiz);
@@ -63,12 +69,19 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  /**
+   * Ramene a la liste des questions du quiz dans l'espace accompagnateur
+   */
   questions() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quiz.id, 'questions-list']);
     this.navigationService.setTitle('Quiz ' + this.quiz.name);
     this.rightsService.enableAdmin();
   }
 
+  /**
+   * Verifie qu'il y ait au moins une question avec au moins une reponse juste
+   * Affiche des messages si ce n'est pas le cas
+   */
   check() {
     this.haveErrors = false;
     this.errors = [];
