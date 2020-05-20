@@ -78,6 +78,7 @@ export class QuizComponent implements OnInit {
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer ce quiz ?')) {
       this.quizService.deleteQuiz( this.themeId, this.quiz);
+      this.quizService.setQuizzesFromUrl(this.themeId);
       this.router.navigate(['themes-list', this.themeId, 'quiz-list']);
     }
   }

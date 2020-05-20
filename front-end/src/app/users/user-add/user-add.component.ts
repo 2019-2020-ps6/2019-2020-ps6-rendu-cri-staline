@@ -5,6 +5,7 @@ import {UserService} from '../../../services/user.service';
 import {Router} from '@angular/router';
 import { NavigationService } from 'src/services/navigation.service';
 import { RightsService } from 'src/services/rights.service';
+import { QuizService } from 'src/services/quiz.service';
 
 @Component({
   selector: 'app-user-add',
@@ -34,9 +35,12 @@ export class UserAddComponent implements OnInit {
    */
   public haveErrors = false;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService,
-              private router: Router, private navigationService: NavigationService,
-              private rightsService: RightsService) {
+  constructor(public formBuilder: FormBuilder,
+              public userService: UserService,
+              private router: Router,
+              private navigationService: NavigationService,
+              private rightsService: RightsService,
+              private quizService: QuizService) {
     this.userForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],

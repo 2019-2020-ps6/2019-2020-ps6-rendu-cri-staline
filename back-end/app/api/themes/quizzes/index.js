@@ -39,6 +39,9 @@ router.post('/', (req, res) => {
 
 router.put('/:quizId', (req, res) => {
   try {
+    if (req.body.themeId !== undefined) {
+      req.body = { ...req.body, themeId: parseInt(req.params.themeId, 10) }
+    }
     res.status(200).json(Quiz.update(req.params.quizId, req.body))
   } catch (err) {
     manageAllErrors(res, err)

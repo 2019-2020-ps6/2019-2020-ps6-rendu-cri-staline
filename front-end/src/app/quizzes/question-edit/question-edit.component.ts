@@ -66,6 +66,9 @@ export class QuestionEditComponent implements OnInit {
     if (questionToAdd.label === '') {
       questionToAdd.label = this.question.label;
     }
+    if (questionToAdd.id === '') {
+      questionToAdd.id = this.question.id;
+    }
     this.quizService.updateQuestion( this.themeId, this.quizId, this.question.id,
        questionToAdd);
     this.navigationService.previous();

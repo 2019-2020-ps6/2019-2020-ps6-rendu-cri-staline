@@ -110,7 +110,7 @@ export class QuizService {
 
   }
 
-    /**
+  /**
    * Ajouter un theme.
    * @param theme Theme
    * @param imageFile Image
@@ -149,7 +149,7 @@ export class QuizService {
     });
   }
 
-    /**
+  /**
    * Recupere un quiz.
    * @param themeId Identifiant du theme.
    * @param quizId Identifiant d'un quiz.
@@ -162,7 +162,7 @@ export class QuizService {
 
   }
 
-    /**
+  /**
    * Ajoute un quiz.
    * @param themeId Identifiant du theme.
    * @param quiz Quiz.
@@ -198,7 +198,7 @@ export class QuizService {
     });
   }
 
-    /**
+  /**
    * Récupère une question.
    * @param themeId Idnetifiant du theme.
    * @param quizId Identifiant du quiz.
@@ -226,7 +226,7 @@ export class QuizService {
   }
 
 
-    /**
+  /**
    * Mettre à jour un quiz.
    * @param themeId Identifiant du theme.
    * @param quizId Identifiant du quiz.
@@ -326,13 +326,13 @@ export class QuizService {
   }
 
  /**
- * Mettre à jour une réponse.
- * @param themeId Identifiant du theme.
- * @param quizId Identifiant du quiz.
- * @param questionId Identifiant de la question.
- * @param answerId Identifiant de la réponse.
- * @param answer Réponse.
- */
+  * Mettre à jour une réponse.
+  * @param themeId Identifiant du theme.
+  * @param quizId Identifiant du quiz.
+  * @param questionId Identifiant de la question.
+  * @param answerId Identifiant de la réponse.
+  * @param answer Réponse.
+  */
   updateAnswer(themeId: string, quizId: string, questionId: string, answerId: string, answer: Answer) {
     const urlWithId = this.themeUrl  + '/' + themeId +  '/quizzes/' + quizId
     + '/questions' + '/' + questionId + '/answers' + '/' + answerId;

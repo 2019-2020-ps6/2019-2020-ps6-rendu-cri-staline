@@ -63,7 +63,6 @@ export class AnswerEditComponent implements OnInit {
     });
     this.quizService.answerSelected$.subscribe((answerTmp) => {
         this.answer = answerTmp;
-        console.log(this.answer);
     });
   }
 
@@ -82,6 +81,13 @@ export class AnswerEditComponent implements OnInit {
    */
     updateAnswer() {
     let answerToAdd: Answer = this.answerForm.getRawValue() as Answer;
+    if (answerToAdd.value === '' ) {
+      answerToAdd.value = this.answer.value;
+    }
+    if ((answerToAdd.isCorrect !== false) && (answerToAdd.isCorrect !== true)) {
+
+      answerToAdd.isCorrect = this.answer.isCorrect;
+    }
     answerToAdd = {type: 'text', ...answerToAdd};
     this.quizService.updateAnswer(this.themeId , this.quizId, this.questionId, this.answerId, answerToAdd);
     this.navigationService.previous();

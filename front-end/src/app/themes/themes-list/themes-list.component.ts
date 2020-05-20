@@ -36,6 +36,7 @@ export class ThemesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.quizService.setThemesFromUrl();
     if (this.enableAdmin === true) {
       this.navigationService.setPreviousUrl(['workspace']);
     } else {

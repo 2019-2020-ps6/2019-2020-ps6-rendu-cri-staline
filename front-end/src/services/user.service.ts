@@ -66,9 +66,9 @@ export class UserService {
   }
 
  /**
- * Supprimer un utilisateur.
- * @param user Utilisateur.
- */
+  * Supprimer un utilisateur.
+  * @param user Utilisateur.
+  */
   deleteUser(user: User) {
     const urlWithId = this.userUrl + '/' + user.id;
     this.http.delete<User>(urlWithId, this.httpOptions).subscribe(() => this.setUsersFromUrl());
