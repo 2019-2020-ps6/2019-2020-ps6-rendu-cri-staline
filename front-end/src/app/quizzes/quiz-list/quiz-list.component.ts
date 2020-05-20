@@ -25,10 +25,11 @@ export class QuizListComponent implements OnInit {
               private navigationService: NavigationService) {
     this.quizService.quizzes$.subscribe((quizzes) => {
         this.quizList = quizzes;
-        console.log(this.quizList);
+
         if (this.quizList !== undefined && this.enableAdmin === false) {
-          this.deleteBadQuizzes();
+          // this.deleteBadQuizzes();
         }
+        console.log(this.quizList);
     });
     this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
 

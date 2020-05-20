@@ -25,7 +25,6 @@ export class QuestionsListComponent implements OnInit {
       this.quiz = quiz;
       this.questionsList = quiz.questions;
       navigationService.setTitle('Quiz - ' + quiz.name);
-      console.log(this.quiz);
     });
   }
 
