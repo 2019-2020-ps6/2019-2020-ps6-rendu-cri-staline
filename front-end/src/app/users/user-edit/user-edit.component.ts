@@ -11,24 +11,30 @@ import { RightsService } from 'src/services/rights.service';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
-
 export class UserEditComponent implements OnInit {
+
+  /**
+   * Formulaire utilisateur.
+   */
   public userForm: FormGroup;
 
+  /**
+   * L'utilisateur.
+   */
   public user: User;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService,
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService,
               private router: Router, private route: ActivatedRoute,
               private navigationService: NavigationService,
               private rightService: RightsService) {
       this.userService.userSelected$.subscribe((user) => {
         this.user = user;
-        console.log(this.user);
       });
       this.userForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: ['']
-    });
+          firstName: [''],
+          lastName: ['']
+        });
       this.navigationService.setPreviousUrl(['users-list']);
       this.rightService.enableAdmin();
   }
@@ -39,7 +45,7 @@ export class UserEditComponent implements OnInit {
   }
 
   /**
-   * Modifie un utilisateur en verifiant qu'on a bien entré un nom et prénom
+   * Modifie un utilisateur en verifiant qu'on a bien entré un nom et prénom.
    */
   updateUser() {
     const userToAdd: User = this.userForm.getRawValue() as User;
@@ -54,7 +60,7 @@ export class UserEditComponent implements OnInit {
   }
 
   /**
-   * Annule la modification d'un accueilli et renvoie a la liste des accueillies
+   * Annule la modification d'un utilisateur et renvoie a la liste des utilisateurs.
    */
   cancel() {
     this.router.navigate(['users-list']);

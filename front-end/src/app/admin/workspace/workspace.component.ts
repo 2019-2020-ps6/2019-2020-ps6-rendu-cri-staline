@@ -27,22 +27,23 @@ export class WorkspaceComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la liste des acceuillis
+   * Redirige vers la liste des acceuillis.
    */
   usersList() {
+    this.rightsService.enableAdmin();
     this.router.navigate(['users-list']);
     this.navigationService.setTitle('Acceuillis');
   }
 
   /**
-   * Redirige vers la page de creation de quiz
+   * Redirige vers la creation de quiz.
    */
   addQuiz() {
     this.router.navigate(['quiz-form']);
   }
 
   /**
-   * Redirige vers la liste des themes
+   * Redirige vers la liste des themes.
    */
   themeslist() {
     this.rightsService.enableAdmin();

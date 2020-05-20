@@ -8,26 +8,25 @@ import { serverUrl, httpOptionsBase } from '../configs/server.config';
   providedIn: 'root'
 })
 export class UserService {
-  /**
-   * Services Documentation:
-   * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
-   */
+
 
   /**
-   * The list of users.
-   * The list is retrieved from the mock.
+   * La liste des utilisateurs.
    */
   private users: User[];
 
   /**
-   * Observable which contains the list of the quiz.
-   * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
+   * Observable qui contient la liste des utilisateurs.
    */
   public users$: BehaviorSubject<User[]>
     = new BehaviorSubject(this.users);
 
+
   public userSelected$: Subject<User> = new Subject();
 
+  /**
+   * Url serveur pour les utilisateurs.
+   */
   private userUrl = serverUrl + '/users';
 
   private httpOptions = httpOptionsBase;
@@ -36,6 +35,9 @@ export class UserService {
     this.setUsersFromUrl();
   }
 
+  /**
+   * Récupère les utilisateurs.
+   */
   setUsersFromUrl() {
     this.http.get<User[]>(this.userUrl).subscribe((userList) => {
       this.users = userList;
@@ -43,10 +45,18 @@ export class UserService {
     });
   }
 
+  /**
+   * Ajoute un utilisateur.
+   * @param user Utilisateur
+   */
   addQuiz(user: User) {
     this.http.post<User>(this.userUrl, user, this.httpOptions).subscribe(() => this.setUsersFromUrl());
   }
 
+  /**
+   * Récupère un utilisateur.
+   * @param userId Identifiant de l'utilisateur
+   */
   setSelectedUser(userId: string) {
     const urlWithId = this.userUrl + '/' + userId;
     this.http.get<User>(urlWithId).subscribe((user) => {
@@ -55,11 +65,20 @@ export class UserService {
 
   }
 
+ /**
+ * Supprimer un utilisateur.
+ * @param user Utilisateur.
+ */
   deleteUser(user: User) {
     const urlWithId = this.userUrl + '/' + user.id;
     this.http.delete<User>(urlWithId, this.httpOptions).subscribe(() => this.setUsersFromUrl());
   }
 
+  /**
+   * Mettre à jour l'utilisateur.
+   * @param index Identifiant utilisateur.
+   * @param user Utilisateur.
+   */
   updateUser(index: string, user: User) {
     const urlWithId = this.userUrl + '/' + index;
     this.http.put<User>(urlWithId, user, this.httpOptions).subscribe(() => {this.setUsersFromUrl(); });

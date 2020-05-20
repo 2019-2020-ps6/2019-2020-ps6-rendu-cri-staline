@@ -15,6 +15,40 @@ import { User } from 'src/models/user.model';
   styleUrls: ['./questioning.component.scss']
 })
 export class QuestioningComponent implements OnInit {
+
+  private user: User;
+  private questions: Question[];
+  private currentQuestion: number;
+  private answers: Answer[];
+  private quiz: Quiz ;
+  private answersSelected: Answer[];
+  private answersFirstTry: number[];
+  private firstTry: boolean;
+  private mEndQuiz: boolean;
+  private score: number;
+  private timeStart: string;
+  private closeResult = '';
+  private currentRate: number;
+  private help = '';
+
+  private answersCorrect: string[] = [];
+
+  // displayRating(contentRating) {
+  //  this.open(contentRating);
+  // }
+
+  private styleBtnValid: any = {
+      margin: '20px',
+      color: 'black'
+  };
+  private styleCheckBox: any = {};
+
+  private styleAnimation = {
+    animation : 'bigsmall 1s infinite',
+    'animation-direction': 'alternate-reverse',
+    'font-size': '30px'
+  };
+
   constructor(private route: ActivatedRoute,
               private quizService: QuizService,
               private router: Router,
@@ -28,38 +62,6 @@ export class QuestioningComponent implements OnInit {
     });
 
   }
-  public user: User;
-  public questions: Question[];
-  public currentQuestion: number;
-  public answers: Answer[];
-  public quiz: Quiz ;
-  public answersSelected: Answer[];
-  public answersFirstTry: number[];
-  public firstTry: boolean;
-  public mEndQuiz: boolean;
-  public score: number;
-  public timeStart: string;
-  public closeResult = '';
-  public currentRate: number;
-  public help = '';
-
-  public answersCorrect: string[] = [];
-
-  // displayRating(contentRating) {
-  //  this.open(contentRating);
-  // }
-
-  public styleBtnValid: any = {
-      margin: '20px',
-      color: 'black'
-  };
-  public styleCheckBox: any = {};
-
-  public styleAnimation = {
-    animation : 'bigsmall 1s infinite',
-    'animation-direction': 'alternate-reverse',
-    'font-size': '30px'
-  };
 
   ngOnInit() {
     this.answersSelected = [];

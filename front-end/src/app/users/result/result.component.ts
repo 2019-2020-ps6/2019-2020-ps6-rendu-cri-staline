@@ -1,11 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Result } from '../../../models/result.model';
-import { QuizService } from 'src/services/quiz.service';
-import { Quiz } from 'src/models/quiz.model';
 import { Router } from '@angular/router';
 import { RefereeService } from 'src/services/referee.service';
-import { User } from 'src/models/user.model';
-import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-result',
@@ -13,34 +9,39 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-  constructor(private router: Router, private refereeService: RefereeService) {
+
+  constructor(private router: Router,
+              private refereeService: RefereeService) {
 
   }
 
   @Input()
   result: Result;
 
+  /**
+   * Valeur du score.
+   */
   private value: number;
+
+  /**
+   * Reste du score.
+   */
   private rest: number;
 
-  onLink = true;
-
   ngOnInit() {
-
-
     this.value = this.result.score * 100;
     this.rest = 100 - this.value;
 
   }
 
+  /**
+   * Redirige vers la page détaillé du résultat..
+   */
   display() {
 
     this.refereeService.setSelectedResult(this.result.id.toString());
     this.router.navigate(['users-list', this.result.userId, 'results', this.result.id]);
   }
-  show() {
-    this.onLink = false;
-    console.log('Ok');
-  }
+
 
 }

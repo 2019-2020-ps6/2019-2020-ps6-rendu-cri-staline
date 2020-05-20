@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {Question} from '../../../models/question.model';
 import { NavigationService } from 'src/services/navigation.service';
@@ -12,13 +12,29 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['question-add.component.scss']
 })
 export class QuestionAddComponent implements OnInit {
+
+  /**
+   * Formulaire question.
+   */
   private questionForm: FormGroup;
+
+  /**
+   * Quiz.
+   */
   private quiz: Quiz;
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
+
   constructor(private formBuilder: FormBuilder,
               private quizService: QuizService,
-              private router: Router,
               private route: ActivatedRoute,
               private navigationService: NavigationService) {
     this.questionForm = this.formBuilder.group({
@@ -34,7 +50,7 @@ export class QuestionAddComponent implements OnInit {
   }
 
   /**
-   * Ajout de la question et renvoie a la liste des questions
+   * Ajout de la question et renvoie a la liste des questions.
    */
   addQuestion() {
     const questionToAdd: Question = this.questionForm.getRawValue() as Question;
@@ -43,7 +59,7 @@ export class QuestionAddComponent implements OnInit {
   }
 
   /**
-   * Annule la creation de la question et renvoie a la liste des questions
+   * Annule la creation de la question et renvoie a la liste des questions.
    */
   cancel() {
     this.navigationService.previous();

@@ -35,6 +35,10 @@ const getTheQuestionFromQuiz = (quizId, questionId) => {
   return question
 }
 
+/**
+ * Supprimer une question et ses réponses.
+ * @param questionId
+ */
 const deleteQuestionAndAnswers = (questionId) => {
   const question = Question.getById(questionId)
   const answers = filterAnswersFromQuestion(question.id)

@@ -1,8 +1,7 @@
-const { Quiz } = require('../../../models')
+const { Quiz, Theme } = require('../../../models')
 const { filterQuestionsFromQuizz } = require('./questions/manager')
 const { deleteQuestionAndAnswers } = require('./questions/manager')
 const { filterAnswersFromQuestion } = require('./questions/answers/manager')
-const { buildTheme } = require('../manager')
 
 /**
  * Function buildQuizz.
@@ -12,7 +11,7 @@ const { buildTheme } = require('../manager')
 const buildQuizz = (quizId) => {
   const quiz = Quiz.getById(quizId)
   const questions = filterQuestionsFromQuizz(quiz.id)
-  const theme = buildTheme(quiz.themeId)
+  const theme = Theme.getById(quiz.themeId)
   const questionWithAnswers = questions.map((question) => {
     const answers = filterAnswersFromQuestion(question.id)
     return { ...question, answers }
@@ -29,12 +28,19 @@ const buildQuizzes = () => {
   return quizzes.map((quiz) => buildQuizz(quiz.id))
 }
 
+/**
+ * Récuperer les quizzes d'un theme.
+ * @param themeId Identifiant du theme.
+ */
 const buildQuizzesByThemeId = (themeId) => {
   const quizzes = buildQuizzes()
   return quizzes.filter((quiz) => quiz.themeId === themeId)
 }
 
-
+/**
+ * Supprimer un quiz et ses questions.
+ * @param quizId Identifiant du quiz.
+ */
 const deleteQuizAndQuestions = (quizId) => {
   const quiz = buildQuizz(quizId)
   const questions = filterQuestionsFromQuizz(quiz.id)
@@ -44,6 +50,10 @@ const deleteQuizAndQuestions = (quizId) => {
   Quiz.delete(quizId)
 }
 
+/**
+ * Supprimer les quizzes d'un theme.
+ * @param themeId Identifiant du theme.
+ */
 const deleteQuizzesOfTheme = (themeId) => {
   const quizzes = buildQuizzesByThemeId(themeId)
   quizzes.forEach((quiz) => deleteQuizAndQuestions(quiz.id))

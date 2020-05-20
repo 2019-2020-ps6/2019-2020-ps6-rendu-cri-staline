@@ -14,6 +14,26 @@ import { RightsService } from 'src/services/rights.service';
 
 export class UserAddComponent implements OnInit {
 
+  /**
+   * Formulaire utilisateur.
+   */
+  public userForm: FormGroup;
+
+  /**
+   * Image du profil.
+   */
+  public selectedFile: File;
+
+  /**
+   * Message d'erreurs.
+   */
+  public errors: string[] = [];
+
+  /**
+   * Le formualire comporte des erreurs.
+   */
+  public haveErrors = false;
+
   constructor(public formBuilder: FormBuilder, public userService: UserService,
               private router: Router, private navigationService: NavigationService,
               private rightsService: RightsService) {
@@ -25,11 +45,6 @@ export class UserAddComponent implements OnInit {
     this.navigationService.setPreviousUrl(['users-list']);
     this.rightsService.enableAdmin();
   }
-  public userForm: FormGroup;
-  public selectedFile: File;
-
-  public errors: string[] = [];
-  public haveErrors = false;
 
   ngOnInit() {
   }
@@ -70,6 +85,10 @@ export class UserAddComponent implements OnInit {
     }
 
   }
+
+  /**
+   * Vérifie les valeurs du formulaire.
+   */
   checkValue() {
     const userToAdd: User = this.userForm.getRawValue() as User;
     this.valid(userToAdd);

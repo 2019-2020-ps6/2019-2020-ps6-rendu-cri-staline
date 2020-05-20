@@ -15,13 +15,6 @@ export class QuizComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
-  private enableAdmin: boolean;
-
-  private themeId: string;
-
-  private errors: string[] = [];
-  private haveErrors = false;
-
   @Output()
   quizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
@@ -30,6 +23,26 @@ export class QuizComponent implements OnInit {
 
   @Output()
   questionsQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
+
+  /**
+   * Droit de modification.
+   */
+  private enableAdmin: boolean;
+
+  /**
+   * identifiant du theme.
+   */
+  private themeId: string;
+
+  /**
+   * Messages d'erreurs.
+   */
+  private errors: string[] = [];
+
+  /**
+   * Le quiz comporte des erreurs.
+   */
+  private haveErrors = false;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -51,7 +64,7 @@ export class QuizComponent implements OnInit {
   }
 
   /**
-   * Ramene a la page de jeu du quiz
+   * Redirection vers la page de jeu du quiz.
    */
   play() {
     this.router.navigate(['quiz', this.quiz.id], {fragment: 'question'});
@@ -60,7 +73,7 @@ export class QuizComponent implements OnInit {
   }
 
   /**
-   * Supprime un quiz avec un message de confirmation
+   * Supprime un quiz avec un message de confirmation.
    */
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer ce quiz ?')) {
@@ -70,7 +83,7 @@ export class QuizComponent implements OnInit {
   }
 
   /**
-   * Ramene a la liste des questions du quiz dans l'espace accompagnateur
+   * Ramene a la liste des questions du quiz dans l'espace accompagnateur.
    */
   questions() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quiz.id, 'questions-list']);
@@ -80,7 +93,7 @@ export class QuizComponent implements OnInit {
 
   /**
    * Verifie qu'il y ait au moins une question avec au moins une reponse juste
-   * Affiche des messages si ce n'est pas le cas
+   * Met à jour le(s) message(s) d'erreur(s).
    */
   check() {
     this.haveErrors = false;

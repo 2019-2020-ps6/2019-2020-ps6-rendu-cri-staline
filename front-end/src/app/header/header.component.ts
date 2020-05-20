@@ -9,22 +9,31 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class HeaderComponent implements OnInit {
 
+  /**
+   * Pile d'annulation.
+   */
   public nextStack: string[] = [];
+
+  /**
+   * Url précédente.
+   */
   public previousUrl = '';
+
+  /**
+   * Titre de la page.
+   */
   public title: string;
-  constructor( private rightsService: RightsService, private navigation: NavigationService ) {
+
+  constructor( private rightsService: RightsService,
+               private navigation: NavigationService ) {
     this.navigation.nextStack$.subscribe((stack) => {
       this.nextStack = stack;
-      console.log(this.nextStack);
-
     });
-    console.log(this.nextStack);
     this.navigation.titleCurrentPage$.subscribe((newTitle) => {
         this.title = newTitle;
     });
     this.navigation.previousUrl$.subscribe((url) => {
       this.previousUrl = this.navigation.previousUrl;
-      console.log(this.previousUrl);
     });
 
   }
@@ -34,23 +43,29 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Active les droits d'administrateur (espace accompagnateur)
+   * Active les droits d'administrateur.
    */
   workspace() {
     this.rightsService.enableAdmin();
   }
 
   /**
-   * Desactive les droits d'administrateur (espace jeu)
+   * Desactive les droits d'administrateur.
    */
   game() {
     this.rightsService.disableAdmin();
   }
 
+  /**
+   * Redirige vers l'url précédente.
+   */
   previous() {
       this.navigation.previous();
   }
 
+  /**
+   * Redirige vers l'url suivante.
+   */
   next() {
     this.navigation.next();
   }

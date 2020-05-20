@@ -14,17 +14,21 @@ export class UserComponent implements OnInit {
   @Input()
   user: User;
 
-  enableAdmin: boolean;
-
   @Output()
   deleteUser: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private router: Router, private rightsService: RightsService,
+  /**
+   * Droit de modification.
+   */
+  private enableAdmin: boolean;
+
+  constructor(private router: Router,
+              private rightsService: RightsService,
               private userService: UserService,
               private refereeService: RefereeService) {
-                this.rightsService.enableAdmin$.subscribe(admin => {
-                  this.enableAdmin = admin;
-                });
+    this.rightsService.enableAdmin$.subscribe(admin => {
+        this.enableAdmin = admin;
+      });
 
   }
 
@@ -35,7 +39,7 @@ export class UserComponent implements OnInit {
   }
 
   /**
-   * Ramene a la page des details de l'utilisateur
+   * Redirige vers la page des details de l'utilisateur.
    */
   seeMore() {
     this.refereeService.setUser(this.user);
@@ -48,21 +52,21 @@ export class UserComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la page d'ajout d'un accueilli
+   * Redirige vers la page d'ajout d'un accueilli.
    */
   addUser() {
     this.router.navigate(['users-list', 'add']);
   }
 
   /**
-   * Redirige vers la page de modification d'un accueilli
+   * Redirige vers la page de modification d'un accueilli.
    */
   edit() {
     this.router.navigate(['users-list', this.user.id, 'edit']);
   }
 
   /**
-   * Selectionne l'utilisateur en tant que joueur
+   * Selectionne l'utilisateur en tant que joueur.
    */
   play() {
     this.userService.setSelectedUser(this.user.id);

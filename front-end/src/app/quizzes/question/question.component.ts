@@ -15,9 +15,24 @@ export class QuestionComponent implements OnInit {
   @Input()
   question: Question;
 
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Messages d'erreurs.
+   */
   private errors: string[] = [];
+
+  /**
+   * La question comporte des erreurs.
+   */
   private haveErrors = false;
 
   @Output()
@@ -37,7 +52,7 @@ export class QuestionComponent implements OnInit {
   }
 
   /**
-   * Suppression de la question avec un message de confirmation
+   * Suppression de la question avec un message de confirmation.
    */
   delete() {
     if (window.confirm('Etes-vous sur de vouloir supprimer cette question ?')) {
@@ -48,7 +63,7 @@ export class QuestionComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la liste des réponses de la question
+   * Redirige vers la liste des réponses de la question.
    */
   answers() {
     this.rightsService.enableAdmin();
@@ -57,7 +72,8 @@ export class QuestionComponent implements OnInit {
   }
 
   /**
-   * Vérifie qu'il y ait au moins une réponse et au moins une réponse juste, affiche des messages si ce n'est pas le cas
+   * Vérifie qu'il y ait au moins une réponse et au moins une réponse juste,
+   * affiche des messages si ce n'est pas le cas.
    */
   check() {
     this.haveErrors = false;

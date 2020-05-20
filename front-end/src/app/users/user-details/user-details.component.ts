@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { User } from '../../../models/user.model';
 import {Router, ActivatedRoute } from '@angular/router';
 import {UserService} from '../../../services/user.service';
@@ -13,16 +13,44 @@ import { NavigationService } from 'src/services/navigation.service';
 export class UserDetailsComponent implements OnInit {
 
 
+  /**
+   * L'utilisateur.
+   */
+  private user: User;
+
+  /**
+   * Identifiant de l'utilisateur.
+   */
+  private userId: string;
+
+  /**
+   * Données score.
+   */
+  private data: number[] = [];
+
+  /**
+   * Les labels des donnees de score.
+   */
+  private labels: Label[] = [];
+
+  /**
+   * Résultats de l'utilisateur.
+   */
+  private results: Result[] = [];
+
+  /**
+   * Nombre de données affichees.
+   */
+  private nbLabels = 7;
+
+
+
   constructor(private route: ActivatedRoute, private router: Router,
               private userService: UserService, private navigationService: NavigationService) {
     this.userService.userSelected$.subscribe((user) => {
       this.user = user;
       this.results = this.user.results;
-      this.setNbPages();
-      this.changePage(this.currentPage);
-      console.log(this.results);
       if (this.results.length > 1) {
-        console.log('compute');
         this.compute();
       }
       this.navigationService.setTitle('Acceuilli ' + this.user.firstName + ' ' + this.user.lastName);
@@ -31,50 +59,17 @@ export class UserDetailsComponent implements OnInit {
     this.navigationService.setPreviousUrl(['users-list']);
   }
 
-
-  private user: User;
-
-  private url: any;
-
-  private data: number[] = [];
-  private results: Result[] = [];
-  private labels: Label[] = [];
-  private nbLabels = 7;
-
-  private resultsDisplayed: Result[] = [];
-  private nbResultsPage = 3;
-  private pages: number[] = [];
-  private currentPage = 1;
-
-  private userId: string;
   ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('userId');
-    this.userService.setSelectedUser(userId);
+    this.userId = this.route.snapshot.paramMap.get('userId');
+    this.userService.setSelectedUser(this.userId);
     this.navigationService.setTitle('Acceuilli ' + this.user.firstName + ' ' + this.user.lastName);
   }
 
-  setNbPages() {
-   for (let i = 0, j = 1; i < this.results.length; i++) {
-     if (i % this.nbResultsPage === 0) {
-       this.pages.push(j);
-       j++;
-     }
-   }
-  }
 
-  next() {
-    if (this.currentPage < this.nbResultsPage) {
-      this.currentPage++;
-    }
-  }
-
-  previous() {
-
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
-  }
-
+  /**
+   * Change l'ordre des résultats.
+   * Le plus récent est le premier affiché.
+   */
   changeOrderResults() {
     this.results = this.results.sort((a, b) => {
       const aTmp: Date = new Date(a.date);
@@ -83,14 +78,10 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
-  changePage(page) {
-    this.changeOrderResults();
-    this.resultsDisplayed = [];
-    for (let i = page - 1; i < page - 1 + this.nbResultsPage && i < this.results.length; i++) {
-      this.resultsDisplayed.push(this.results[i]);
-    }
-    console.log(this.resultsDisplayed);
-  }
+  /**
+   * Prépare les données pour le graphe.
+   * Le graphe a besoin d'au minimum deux résultats.
+   */
   compute() {
 
     let dates: Date[];
@@ -103,10 +94,6 @@ export class UserDetailsComponent implements OnInit {
     for (let i = 0; i < this.nbLabels; i++) {
       this.labels.push(dates[i].toUTCString());
     }
-  }
-
-  goBack() {
-    this.router.navigate(['users-list']);
   }
 
 

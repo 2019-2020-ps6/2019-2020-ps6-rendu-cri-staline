@@ -12,8 +12,15 @@ import { QuizService } from 'src/services/quiz.service';
 })
 
 export class ThemeEditComponent implements OnInit {
+
+  /**
+   * Formulaire theme.
+   */
   private themeForm: FormGroup;
 
+  /**
+   * Le theme à modifier.
+   */
   private theme: Theme;
 
   constructor(private formBuilder: FormBuilder,
@@ -51,8 +58,6 @@ export class ThemeEditComponent implements OnInit {
       }, error => {
         console.error('Error', error);
       });
-    // this.quizService.setQuizzesFromUrl(this.theme.id)
-    // this.quizService.setSelectedTheme(this.theme.id)
     this.navigationService.previous();
   }
 

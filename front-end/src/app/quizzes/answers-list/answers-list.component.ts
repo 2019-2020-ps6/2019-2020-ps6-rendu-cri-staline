@@ -11,11 +11,31 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class AnswersListComponent implements OnInit {
 
+  /**
+   * Réponses.
+   */
   private answersList: Answer[] = [];
+
+  /**
+   * Identifiant de la question.
+   */
   private questionId: string;
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Identifiant du thème.
+   */
   private themeId: string;
+
+  /**
+   * Idnetifiant de la question.
+   */
   private question: Question;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private quizService: QuizService,
@@ -42,14 +62,14 @@ export class AnswersListComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la page de creation d'une reponse
+   * Redirige vers la page de creation d'une reponse.
    */
   addAnswer() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list', this.questionId, 'answers-list', 'add']);
   }
 
   /**
-   * Redirige vers la page de modification de la question dont sont issues les reponses
+   * Redirige vers la page de modification de la question.
    */
   editQuestion() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId, 'questions-list', this.questionId, 'edit']);

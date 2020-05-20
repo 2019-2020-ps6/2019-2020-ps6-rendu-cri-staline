@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
+import {  Subject } from 'rxjs';
 import {User} from '../models/user.model';
 import {Result} from '../models/result.model';
-import {Quiz} from '../models/quiz.model';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 
 @Injectable({
@@ -11,10 +10,13 @@ import { serverUrl, httpOptionsBase } from '../configs/server.config';
 })
 export class RefereeService {
 
+  /**
+   * Utilisateur sélectionné.
+   */
   public user: User;
 
-  public resultSelected$: Subject<Result> = new Subject();
 
+  public resultSelected$: Subject<Result> = new Subject();
   private userUrl = serverUrl + '/users';
   private httpOptions = httpOptionsBase;
 
@@ -22,6 +24,10 @@ export class RefereeService {
 
   }
 
+  /**
+   * Récupère un résultat.
+   * @param resultId Identifiant du résultat
+   */
   setSelectedResult(resultId: string) {
     const urlWithId = serverUrl + '/users/' + this.user.id + '/results/' + resultId;
     this.http.get<Result>(urlWithId).subscribe((result) => {
@@ -30,14 +36,22 @@ export class RefereeService {
 
   }
 
+  /**
+   * Définit l'utilisateur sélectionné.
+   * @param user Utilisateur
+   */
   setUser(user) {
     this.user = user;
   }
 
+  /**
+   * Ajoute un résultat.
+   * @param result Le résultat sur le quiz.
+   * @param quizId L'identifiant du quiz.
+   */
   addResult(result: Result, quizId: number) {
     this.userUrl = serverUrl + '/users/' + result.userId + '/results';
     const req = {...result, quizId};
-    console.log(result);
     this.http.post<Result>(this.userUrl, req, this.httpOptions).subscribe();
   }
 

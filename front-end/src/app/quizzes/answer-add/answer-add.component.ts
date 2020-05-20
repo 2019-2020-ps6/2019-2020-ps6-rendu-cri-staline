@@ -12,12 +12,40 @@ import { RightsService } from 'src/services/rights.service';
   styleUrls: ['answer-add.component.scss']
 })
 export class AnswerAddComponent implements OnInit {
+
+  /**
+   * Formulaire d'une réponse.
+   */
   private answerForm: FormGroup;
+
+  /**
+   * Identifiant de la question.
+   */
   private questionId: string;
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
+
+  /**
+   * Message d'erreur.
+   */
   private err = '';
+
+  /**
+   * Affichage d'un message d'erreur.
+   */
   private alert = false;
+
+  /**
+   * Liste de réponses.
+   */
   private answersList: Answer[] = [];
 
   constructor(private formBuilder: FormBuilder,
@@ -47,7 +75,8 @@ export class AnswerAddComponent implements OnInit {
   }
 
   /**
-   * Ajout d'une reponse et renvoie a la liste des reponses
+   * Ajout d'une reponse.
+   * Redirige vers la liste des réponses.
    */
   addAnswer() {
     let answerToAdd: Answer = this.answerForm.getRawValue() as Answer;
@@ -62,7 +91,7 @@ export class AnswerAddComponent implements OnInit {
 
   /**
    * Vérifie qu'il y ait au moins une bonne réponse parmi les réponses d'une question
-   * @return Vrai s'il y a au moins une bonne reponse
+   * @return True s'il y a au moins une bonne reponse
    */
   checkForm() {
    let atLeastOneGoodAnswer = false;
@@ -80,7 +109,7 @@ export class AnswerAddComponent implements OnInit {
   }
 
   /**
-   * Annule la creation d'une reponse et renvoie a la page precedente
+   * Annule la creation d'une reponse et renvoie à la liste des réponses.
    */
   cancel() {
    this.navigationService.previous();

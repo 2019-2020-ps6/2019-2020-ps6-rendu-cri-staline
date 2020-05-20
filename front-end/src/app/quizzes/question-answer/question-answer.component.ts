@@ -2,12 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Question, Answer} from '../../../models/question.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import { RightsService } from 'src/services/rights.service';
+
 @Component({
   selector: 'app-question-answer',
   templateUrl: './question-answer.component.html',
   styleUrls: ['./question-answer.component.scss']
 })
-
 export class QuestionAnswerComponent implements OnInit {
 
   @Input()
@@ -16,23 +16,22 @@ export class QuestionAnswerComponent implements OnInit {
   @Input()
   answersCorrect: number[];
 
-  answers: Answer[];
+  /**
+   * Liste des reponses.
+   */
+  private answers: Answer[];
 
-  public styleCheckBox: any = {
-
+  /**
+   * Style checkbox réponse.
+   */
+  private styleCheckBox: any = {
     transform: 'scale(1)',
   };
 
+  constructor() {}
 
-
-  constructor(private router: Router, private rightsService: RightsService, private route: ActivatedRoute) {
-
-  }
-
-  public map = {};
+  private map = {};
   ngOnInit() {
-
-
     this.answers = this.question.answers;
     this.answers.forEach(answer => {
       this.map[answer.id] = false;
@@ -42,19 +41,6 @@ export class QuestionAnswerComponent implements OnInit {
         }
       });
     });
-    console.log(this.question);
-
   }
 
-
-  delete() {
-
-  }
-
-
-
-
-  edit() {
-
-  }
 }

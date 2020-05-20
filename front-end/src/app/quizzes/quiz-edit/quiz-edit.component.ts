@@ -44,7 +44,7 @@ export class QuizEditComponent implements OnInit {
   }
 
   /**
-   * Modifie un quiz en verifiant qu'un nom est bien entré
+   * Modifie le quiz avec les données du formulaire.
    */
   updateQuiz() {
     const quizToEdit: Quiz = this.quizForm.getRawValue() as Quiz;
@@ -59,7 +59,7 @@ export class QuizEditComponent implements OnInit {
   }
 
   /**
-   * Annule la modification du quiz et renvoie a la liste des questions du quiz
+   * Redirection vers la page du quiz.
    */
   cancel() {
     this.navigationService.previous();

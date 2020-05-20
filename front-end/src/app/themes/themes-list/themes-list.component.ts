@@ -13,7 +13,14 @@ import { Quiz } from 'src/models/quiz.model';
 })
 export class ThemesListComponent implements OnInit {
 
+  /**
+   * Liste des thèmes.
+   */
   private themesList: Theme[] = [];
+
+  /**
+   * Droit de modification.
+   */
   private enableAdmin: boolean;
 
   constructor(private router: Router,
@@ -37,15 +44,15 @@ export class ThemesListComponent implements OnInit {
   }
 
   /**
-   * Supprime un theme
-   * @param le theme que l'on veut supprimer
+   * Supprime un theme.
+   * @param theme theme que l'on veut supprimer
    */
   deleteTheme(theme: Theme) {
     this.quizService.deleteTheme(theme);
   }
 
   /**
-   * Redirige vers la page de creation de theme
+   * Redirige vers la page de creation de theme.
    */
   addTheme() {
     this.router.navigate(['themes-list', 'add']);

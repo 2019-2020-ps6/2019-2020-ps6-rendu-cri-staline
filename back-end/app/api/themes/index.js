@@ -5,7 +5,6 @@ const path = require('path')
 const { Theme } = require('../../models')
 const QuizzesRouter = require('./quizzes')
 const manageAllErrors = require('../../utils/routes/error-management')
-const { buildTheme, buildThemes } = require('./manager')
 const { deleteQuizzesOfTheme } = require('./quizzes/manager')
 
 const router = new Router()
@@ -42,7 +41,7 @@ router.post('/', upload.single('themeFile'), (req, res) => {
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(buildThemes())
+    res.status(200).json(Theme.get())
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -50,7 +49,7 @@ router.get('/', (req, res) => {
 
 router.get('/:themeId', (req, res) => {
   try {
-    const theme = buildTheme(req.params.themeId)
+    const theme = Theme.getById(req.params.themeId)
     res.status(200).json(theme)
   } catch (err) {
     manageAllErrors(res, err)

@@ -16,18 +16,32 @@ export class AnswerComponent implements OnInit {
   @Input()
   styleCheckBox: any;
 
-  private enableAdmin: boolean;
-
-  private themeId: string;
-  private quizId: string;
-  private questionId: string;
-
   @Output()
   answerSelected: EventEmitter<Answer> = new EventEmitter<Answer>();
 
 
   @Output()
   deleteAnswer: EventEmitter<Answer> = new EventEmitter<Answer>();
+
+  /**
+   * Droit de modification.
+   */
+  private enableAdmin: boolean;
+
+  /**
+   * Identifiant du theme.
+   */
+  private themeId: string;
+
+  /**
+   * Identifiant du quiz.
+   */
+  private quizId: string;
+
+  /**
+   * Identifiant de la question.
+   */
+  private questionId: string;
 
   constructor( private rightsService: RightsService,
                private router: Router,
@@ -49,7 +63,7 @@ export class AnswerComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la page de modification de la reponse
+   * Redirige vers la page de modification de la reponse.
    */
   edit() {
       this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quizId,
@@ -57,7 +71,7 @@ export class AnswerComponent implements OnInit {
   }
 
   /**
-   * Methode de suppression d'une reponse avec un message de confirmation
+   * Suppression d'une reponse avec un message de confirmation.
    */
   delete() {
     if (window.confirm('Etes-vous sûr de vouloir supprimer cette réponse ?')) {

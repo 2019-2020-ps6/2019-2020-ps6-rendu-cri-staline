@@ -1,20 +1,45 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
-import { RightsService } from './rights.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
 
+/**
+ * Url courante.
+ */
 private currentUrl: string;
+
+/**
+ * Url précédente.
+ */
 public previousUrl: string;
+
+/**
+ * Titre de la page actuelle.
+ */
 private title: string;
+
+/**
+ * Pile d'annulation.
+ */
 private nextStack: string[] = [];
 
+/**
+ * Observable qui contient la pile d'annulation.
+ */
 public nextStack$: BehaviorSubject<string[]> = new BehaviorSubject(this.nextStack);
+
+/**
+ * Observable qui contient le litre de la page.
+ */
 public title$: BehaviorSubject<string> = new BehaviorSubject(this.title);
+
+/**
+ * Observable qui contient l'url précédente.
+ */
 public previousUrl$: BehaviorSubject<string> = new BehaviorSubject(this.previousUrl);
 
 public nextStackState$: Subject<string[]> = new Subject();
@@ -29,8 +54,10 @@ public previousUrlState$: Subject<string> = new Subject();
       });
   }
 
+  /**
+   * Redirige vers la derniere page.
+   */
   previous() {
-      console.log(this.previousUrl);
       if (this.previousUrl !== undefined) {
         this.addToNextStack(this.currentUrl);
         this.router.navigate([this.previousUrl]);
@@ -38,6 +65,10 @@ public previousUrlState$: Subject<string> = new Subject();
       }
   }
 
+  /**
+   * Défini la page précédente.
+   * @param urlPath Url
+   */
   setPreviousUrl(urlPath: string[]) {
     let url = '';
     for (let i = 0; i < urlPath.length; i++) {
@@ -51,14 +82,20 @@ public previousUrlState$: Subject<string> = new Subject();
     this.previousUrl$.next(this.previousUrl);
   }
 
+  /**
+   * Redirige vers la page annulé.
+   */
   next() {
         if (this.nextStack.length > 0) {
-            console.log(this.nextStack);
             this.router.navigate([this.nextStack.pop()]);
             this.nextStackState$.next(this.nextStack);
         }
   }
 
+  /**
+   * Ajout une url à la pile.
+   * @param url Url
+   */
   addToNextStack(url: string) {
         this.nextStack.push(url);
         this.nextStackState$.next(this.nextStack);
@@ -66,6 +103,10 @@ public previousUrlState$: Subject<string> = new Subject();
 
 
 
+  /**
+   * Défini de nom de la page.
+   * @param str Nom de la page
+   */
   setTitle(str: string) {
       this.title = str;
       this.titleCurrentPage$.next(str);

@@ -12,9 +12,24 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class QuestionsListComponent implements OnInit {
 
+  /**
+   * Listes des questions.
+   */
   private questionsList: Question[] = [];
+
+  /**
+   * Quiz.
+   */
   private quiz: Quiz;
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
 
   constructor(private route: ActivatedRoute,
@@ -36,22 +51,22 @@ export class QuestionsListComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la page de creation de question
+   * Redirige vers la page de creation de question.
    */
   addQuestion() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', this.quiz.id.toString(), 'questions-list', 'add']);
   }
 
   /**
-   * Supprime une question en faisant appel au QuizService
-   * @param la question que l'on veut supprimer
+   * Supprime une question.
+   * @param question Question que l'on veut supprimer
    */
   deleteQuestion(question: Question) {
     this.quizService.deleteQuestion( this.themeId, question.id, question);
   }
 
   /**
-   * Redirige vers la page de modification du quiz dont sont issues les questions
+   * Redirige vers la page de modification du quiz.
    */
   editQuestion() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list',  this.quiz.id, 'edit']);

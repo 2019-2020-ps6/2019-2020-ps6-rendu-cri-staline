@@ -15,22 +15,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ResultDetailsComponent implements OnInit {
 
 
-
+  /**
+   * Résultat de l'utilisateur.
+   */
   private result: Result;
+
+  /**
+   * L'tilisateur.
+   */
   private user: User;
 
+  /**
+   * Valeur.
+   */
   private value: number;
-  private rest: number;
 
+  /**
+   * Identifiant de l'utilisateur.
+   */
   private userId: string;
 
-  constructor(private quizService: QuizService,
-              private refereeService: RefereeService,
+  constructor(private refereeService: RefereeService,
               private route: ActivatedRoute,
               private router: Router) {
       refereeService.resultSelected$.subscribe((rslt) => {
         this.result = rslt;
-        console.log(this.result);
       });
   }
 
@@ -40,16 +49,11 @@ export class ResultDetailsComponent implements OnInit {
   }
 
 
-  init() {
-    this.value = this.result.score * 100;
-    this.rest = 100 - this.value;
-  }
+  /**
+   * Redirige vers la page de l'utilisateur.
+   */
   back() {
     this.router.navigate(['users-list', this.userId]);
-  }
-
-  play() {
-
   }
 
 }

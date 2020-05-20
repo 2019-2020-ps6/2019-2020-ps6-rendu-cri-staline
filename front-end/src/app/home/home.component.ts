@@ -10,7 +10,8 @@ import { NavigationService } from 'src/services/navigation.service';
   export class HomeComponent implements OnInit {
 
 
-    constructor(private router: Router, private rightService: RightsService,
+    constructor(private router: Router,
+                private rightService: RightsService,
                 private navigationService: NavigationService) {
       this.navigationService.setTitle('Acceuil');
       this.navigationService.setPreviousUrl(['']);
@@ -20,7 +21,8 @@ import { NavigationService } from 'src/services/navigation.service';
     }
 
   /**
-   * Redirige vers l'espace accompagnateur en activant les droits d'administrateur
+   * Redirige vers l'espace accompagnateur.
+   * Active les droits d'administrateur.
    */
   workspace() {
       this.rightService.enableAdmin();
@@ -28,7 +30,8 @@ import { NavigationService } from 'src/services/navigation.service';
     }
 
   /**
-   * Redirige vers l'espace jeu (page de selection du joueur plus precisement) en desactivant les droits d'administrateur
+   * Redirige vers l'espace jeu.
+   * Desactive les droits d'administrateur.
    */
   game() {
       this.rightService.disableAdmin();

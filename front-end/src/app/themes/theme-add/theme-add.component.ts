@@ -13,9 +13,28 @@ import { QuizService } from 'src/services/quiz.service';
 
 export class ThemeAddComponent implements OnInit {
 
+  /**
+   * Formulaire theme.
+   */
+  private themeForm: FormGroup;
+
+  /**
+   * Image.
+   */
+  private selectedFile: File;
+
+  /**
+   * Messages d'erreur
+   */
+  private errors: string[] = [];
+
+  /**
+   * Le formulaire comporte une erreur.
+   */
+  private haveErrors = false;
+
   constructor(public formBuilder: FormBuilder,
               public quizService: QuizService,
-              private router: Router,
               private navigationService: NavigationService) {
     this.themeForm = this.formBuilder.group({
       themeName: [''],
@@ -23,43 +42,35 @@ export class ThemeAddComponent implements OnInit {
     });
     this.navigationService.setPreviousUrl(['themes-list']);
   }
-  private themeForm: FormGroup;
-  private selectedFile: File;
-
-  private errors: string[] = [];
-  private haveErrors = false;
 
   ngOnInit() {
   }
 
   /**
-   * Ajoute un theme
+   * Ajoute un theme.
    */
   addTheme() {
-    console.log('add thm is callED');
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     themeToAdd.themeImage = this.selectedFile;
-    console.log(themeToAdd);
     this.valid(themeToAdd);
     if (!this.haveErrors) {
      this.quizService.addTheme(themeToAdd, themeToAdd.themeImage).subscribe((event) => {
         console.log(event);
-        this.navigationService.previous();
       }, error => {
         console.error(error);
       });
-     // this.quizService.addTheme(themeToAdd);
-     // this.navigationService.previous();
     }
+    this.quizService.setThemesFromUrl();
+    this.navigationService.previous();
   }
 onFileChange(event) {
   this.selectedFile = event.target.files[0] as File;
 }
 
   /**
-   * Verifie qu'il y ait bien nom entré
-   * @param le theme que l'on veut ajouter
-   * Affiche un message d'erreur s'il n'y a pas de nom
+   * Verifie que les informations du thème sont renseignés.
+   * @param themeToAdd Theme que l'on veut ajouter
+   * Affiche un message d'erreur s'il n'y a pas de nom.
    */
   valid(themeToAdd) {
   this.haveErrors = false;
@@ -72,12 +83,15 @@ onFileChange(event) {
 }
 
   /**
-   * Annule la creation du theme et renvoie a la liste des themes
+   * Annule la creation du theme et renvoie a la liste des themes.
    */
   cancel() {
     this.navigationService.previous();
   }
 
+  /**
+   * Vérfie les valeurs du formulaire.
+   */
   checkValue() {
     const themeToAdd: Theme = this.themeForm.getRawValue() as Theme;
     this.valid(themeToAdd);

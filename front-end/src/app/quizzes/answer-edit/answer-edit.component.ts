@@ -12,12 +12,40 @@ import { RightsService } from 'src/services/rights.service';
   styleUrls: ['./answer-edit.component.scss']
 })
 export class AnswerEditComponent implements OnInit {
+
+  /**
+   * Formulaire de la réponse.
+   */
   private answerForm: FormGroup;
+
+  /**
+   * Réponse.
+   */
   private answer: Answer;
+
+  /**
+   * Liste des réponses.
+   */
   private answerList: Answer[] = [];
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Identifiant de la question.
+   */
   private questionId: string;
+
+  /**
+   * Identifiant de la réponse.
+   */
   private answerId: string;
+
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -50,7 +78,7 @@ export class AnswerEditComponent implements OnInit {
     }
 
   /**
-   * Modifie la reponse et renvoie a la liste des reponses
+   * Modifie la reponse et redirige vers la liste des réponses.
    */
     updateAnswer() {
     let answerToAdd: Answer = this.answerForm.getRawValue() as Answer;
@@ -61,7 +89,7 @@ export class AnswerEditComponent implements OnInit {
   }
 
   /**
-   * Annule la modification de la reponse et renvoie a la liste des reponses
+   * Annule la modification de la reponse et redirige vers la liste des réponses.
    */
   cancel() {
     this.navigationService.previous();

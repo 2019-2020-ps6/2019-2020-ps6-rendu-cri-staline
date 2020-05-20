@@ -12,10 +12,19 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class QuizListComponent implements OnInit {
 
+  /**
+   * Liste des quizs.
+   */
   private quizList: Quiz[];
 
+  /**
+   * Droit d'administrateur ou droit de modification.
+   */
   private enableAdmin: boolean;
 
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
 
   constructor(private route: ActivatedRoute,
@@ -27,15 +36,13 @@ export class QuizListComponent implements OnInit {
         this.quizList = quizzes;
 
         if (this.quizList !== undefined && this.enableAdmin === false) {
-          // this.deleteBadQuizzes();
+           this.deleteBadQuizzes();
         }
-        console.log(this.quizList);
     });
     this.rightsService.enableAdmin$.subscribe(admin => {this.enableAdmin = admin; });
 
 
     this.quizService.themeSelected$.subscribe((theme) => {
-      console.log(theme);
       this.navigationService.setTitle('Thème - ' + theme.themeName);
     });
     this.navigationService.setPreviousUrl(['themes-list']);
@@ -49,14 +56,14 @@ export class QuizListComponent implements OnInit {
   }
 
   /**
-   * Redirige vers la page de modification du theme dont sont issus les quiz
+   * Redirection vers la modification du theme.
    */
   editTheme() {
     this.router.navigate(['themes-list', this.themeId, 'edit']);
   }
 
   /**
-   * Redirige vers la page de creation de quiz
+   * Redirection vers la creation de quiz.
    */
   addQuiz() {
     this.router.navigate(['themes-list', this.themeId, 'quiz-list', 'add']);
@@ -64,7 +71,8 @@ export class QuizListComponent implements OnInit {
   }
 
   /**
-   * "Cache" les quiz n'ayant pas de questions ou ayant des questions sans reponses correctes (dans l'espace jeu)
+   * Masque les quizzes n'ayant pas de questions ou ayant des questions sans
+   * reponses correctes.
    */
   deleteBadQuizzes() {
       const badQuizzes = [];

@@ -14,10 +14,29 @@ import { NavigationService } from 'src/services/navigation.service';
 })
 export class QuizAddComponent implements OnInit {
 
+  /**
+   * Formulaire question.
+   */
   private quizForm: FormGroup;
+
+  /**
+   * Liste des themes.
+   */
   private themeList: Theme[];
+
+  /**
+   * Messages d'erreurs.
+   */
   private errors: string[] = [];
+
+  /**
+   * Le formulaire a des erreurs.
+   */
   private haveErrors = false;
+
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
 
   constructor(public formBuilder: FormBuilder,
@@ -43,7 +62,7 @@ export class QuizAddComponent implements OnInit {
   }
 
   /**
-   * Ajoute un quiz et renvoie a la liste des quiz
+   * Ajoute un quiz et renvoie a la liste des quizzes.
    */
   addQuiz() {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
@@ -56,9 +75,9 @@ export class QuizAddComponent implements OnInit {
   }
 
   /**
-   * Verifie qu'il y ait bien un nom et un theme selectionné
-   * @param un quiz que l'on veut qjouter
-   * Affiche des messages d'erreur s'il manque un nom ou le theme
+   * Verifie que les informations du quiz sont renseignés.
+   * Met à jour le(s) message(s) d'erreur(s).
+   * @param quizToCreate Quiz que l'on veut ajouter
    */
   valid(quizToCreate) {
     this.haveErrors = false;
@@ -73,10 +92,19 @@ export class QuizAddComponent implements OnInit {
     }
 
   }
+
+  /**
+   * Verifie l'état du formulaire àprès chaque modification
+   * @param quizToCreate Quiz que l'on veut ajouter
+   */
   checkValue() {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
     this.valid(quizToCreate);
   }
+
+  /**
+   * Redirige vers la page du quiz.
+   */
   cancel() {
     this.navigationService.previous();
   }

@@ -1,8 +1,6 @@
 const { Router } = require('express')
-
 const { Result } = require('../../../models')
 const manageAllErrors = require('../../../utils/routes/error-management')
-
 const { filterResultsFromUser, getResultFromUser } = require('./manager')
 
 const router = new Router({ mergeParams: true })

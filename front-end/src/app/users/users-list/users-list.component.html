@@ -7,8 +7,18 @@
 
 <div *ngIf="enableAdmin===false">
 
+  <ng-container *ngIf="haveUsers===true">
   Veuillez choisir une personne
+  </ng-container>
+
+  <div *ngIf="this.usersList.length===0">
+    <div class="alert alert-danger"  role="alert">
+      Veuillez créer un utilisateur dans <a href="workspace">l'espace de gestion du jeu</a>.
+    </div>
+  </div>
 </div>
+
+
 
 <div class="users-list">
   <div class="user" *ngFor="let user of usersList">

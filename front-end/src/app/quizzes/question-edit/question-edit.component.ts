@@ -11,19 +11,37 @@ import { NavigationService } from 'src/services/navigation.service';
   styleUrls: ['./question-edit.component.scss']
 })
 export class QuestionEditComponent implements OnInit {
+  /**
+   * Formulaire question.
+   */
   private questionForm: FormGroup;
+
+  /**
+   * Question.
+   */
   private question: Question;
+
+  /**
+   * Identifiant du quiz.
+   */
   private quizId: string;
+
+  /**
+   * Identifiant de la question.
+   */
   private questionId: string;
+
+  /**
+   * Identifiant du theme.
+   */
   private themeId: string;
+
   constructor(private formBuilder: FormBuilder,
               private quizService: QuizService,
-              private router: Router,
               private route: ActivatedRoute,
               private navigationService: NavigationService) {
     this.quizService.questionSelected$.subscribe((question) => {
       this.question = question;
-      console.log(this.question);
     });
     this.questionForm = this.formBuilder.group({
       label: ['']
