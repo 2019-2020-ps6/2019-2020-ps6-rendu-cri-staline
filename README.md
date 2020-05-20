@@ -7,8 +7,23 @@
    -   Alexandre Ngai
    -   Sana DIBE  
 
-## Installation
-### [ng2-charts](https://valor-software.com/ng2-charts/#/GeneralInfo)
+## Install & Run
+
+### Prerequisite
+
+Install [NodeJS Installer](https://nodejs.org/en/download/)
+
+### Use scripts
+
+1.Run install.bat for Windows( install.sh for Unix) to install the application.
+
+2.Run launch.bat for Windows (launch.sh for Unix) to run the application.
+
+### Or not using scripts
+
+1.Install the dependencies ```npm install```
+
+#### [ng2-charts](https://valor-software.com/ng2-charts/#/GeneralInfo)
 
 1.Install ng2-charts using npm
 
@@ -28,15 +43,13 @@ Installation of Schematics Package
 npm install --save-dev ng2-charts-schematics
 ```
 
-### [ng-bootstrap](https://ng-bootstrap.github.io/#/getting-started)
+#### [ng-bootstrap](https://ng-bootstrap.github.io/#/getting-started)
 
 1.Install nb-bootstrap using npm
 
 ```
 npm install bootstrap@~4.2.1 --save
 ```
-
-
 
 
 
